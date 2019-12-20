@@ -1,0 +1,98 @@
+{
+    "name": "Transifex",
+    "description": "Transifex is a proprietary, web-based translation platform; that is to say, it is a globalization management system.",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/11776-transifex.jpg",
+    "tags": [
+        "have api",
+        "target",
+        "translations",
+        "webhook implementations"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/transifex\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Transifex",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/11776-transifex.jpg",
+            "humanURL": "https:\/\/docs.transifex.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/transifex-postman-collection.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Blog",
+            "url": "https:\/\/www.transifex.com\/blog"
+        },
+        {
+            "type": "Blog RSS",
+            "url": "https:\/\/www.transifex.com\/feed\/"
+        },
+        {
+            "type": "Case Studies",
+            "url": "https:\/\/www.transifex.com\/customers\/casestudies\/"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/transifex"
+        },
+        {
+            "type": "Developers",
+            "url": "http:\/\/docs.transifex.com\/developer\/api\/"
+        },
+        {
+            "type": "Documentation",
+            "url": "http:\/\/docs.transifex.com\/"
+        },
+        {
+            "type": "Email",
+            "url": "privacy@transifex.com"
+        },
+        {
+            "type": "Github",
+            "url": "https:\/\/github.com\/transifex"
+        },
+        {
+            "type": "Pricing",
+            "url": "https:\/\/www.transifex.com\/pricing\/"
+        },
+        {
+            "type": "Privacy",
+            "url": "https:\/\/www.transifex.com\/legal\/privacy\/"
+        },
+        {
+            "type": "Status",
+            "url": "http:\/\/status.transifex.com\/"
+        },
+        {
+            "type": "Terms of Service",
+            "url": "https:\/\/www.transifex.com\/legal\/terms\/"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/transifex"
+        },
+        {
+            "type": "Webhooks",
+            "url": "https:\/\/docs.transifex.com\/integrations\/webhooks"
+        },
+        {
+            "type": "Website",
+            "url": "https:\/\/www.transifex.com\/"
+        },
+        {
+            "type": "Website",
+            "url": "https:\/\/docs.transifex.com"
+        }
+    ]
+}
