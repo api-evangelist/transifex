@@ -1,0 +1,82 @@
+name: Transifex FinOps
+description: >
+  FinOps Framework FOCUS-aligned cost and usage data for Transifex
+  localization management platform API consumption and subscription services.
+specificationVersion: "1.0"
+url: https://www.transifex.com/pricing
+provider: Transifex
+services:
+  - name: Transifex Subscription
+    description: Monthly or annual subscription to Transifex localization platform
+    serviceCategory: Software as a Service
+    billingModel: Subscription
+    tiers:
+      - tierName: Starter
+        unitPrice: 160.00
+        unit: per month (monthly billing)
+        unitPriceAnnual: 135.00
+        unitAnnual: per month (annual billing)
+        currency: USD
+        includes:
+          - collaborators: 10
+          - aiWords: 0
+          - projects: unlimited
+      - tierName: Growth
+        unitPrice: 236.00
+        unit: per month starting (monthly billing)
+        unitPriceAnnual: 200.00
+        unitAnnual: per month starting (annual billing)
+        currency: USD
+        includes:
+          - collaborators: 30
+          - aiWordsPerYear: 60000
+          - projects: unlimited
+      - tierName: Enterprise+
+        unitPrice: null
+        unit: custom
+        currency: USD
+        includes:
+          - collaborators: 100
+          - aiWordsPerYear: 300000
+          - projects: unlimited
+  - name: AI Words
+    description: >
+      AI-powered translation words consumed for AI translation, TQI quality
+      scoring, AI fill-up, and workflow automation features.
+    serviceCategory: AI/ML Processing
+    billingModel: Usage-based add-on
+    unit: words
+    pricing:
+      addonStartingPrice: 84.00
+      addonCurrency: USD
+      addonPeriod: month
+      notes:
+        - Volume discounts available for larger packages
+        - No overage penalties; purchase add-on packages as needed
+        - Included allocations reset annually
+costAllocation:
+  dimensions:
+    - name: Plan Tier
+      description: Cost center based on subscription plan (Starter/Growth/Enterprise+)
+    - name: Collaborators
+      description: Number of active translators and reviewers on the account
+    - name: AI Word Consumption
+      description: Volume of AI-processed words for translation and quality scoring
+    - name: Billing Cycle
+      description: Monthly vs annual billing (annual offers ~15% discount)
+  recommendations:
+    - Choose annual billing to save approximately 15% over monthly rates
+    - Monitor AI word consumption against included allocation before purchasing add-ons
+    - Right-size collaborator seats to active users to avoid paying for unused capacity
+    - Leverage included AI words in Growth and Enterprise+ plans before purchasing add-ons
+optimization:
+  strategies:
+    - name: Annual Commitment Discount
+      description: Switch from monthly to annual billing for ~15% savings
+      savingsEstimate: "~15%"
+    - name: AI Word Budget Management
+      description: Track AI word usage in dashboard; purchase add-on packages proactively at volume discount tiers
+    - name: Collaborator Seat Optimization
+      description: Audit active collaborators regularly; remove inactive users to stay in lower tier
+    - name: Plan Right-sizing
+      description: Evaluate actual collaborator count and AI word needs quarterly to select appropriate tier

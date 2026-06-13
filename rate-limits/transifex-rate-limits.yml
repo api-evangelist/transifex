@@ -1,0 +1,51 @@
+name: Transifex API Rate Limits
+description: Rate limiting policies for the Transifex REST API v3
+specificationVersion: "0.1"
+url: https://developers.transifex.com/reference/rate-limit
+updated: "2023-07-03"
+rateLimits:
+  - name: Standard API Rate Limit
+    description: >
+      General rate limit applied to all standard API endpoints. Requests
+      exceeding this limit receive a 429 Throttled response with a message
+      indicating when the next request will be available.
+    scope: per IP address
+    limits:
+      - period: minute
+        requests: 500
+      - period: hour
+        requests: 30000
+    responseCode: 429
+    responseMessage: "Request was throttled. Expected available in 60 seconds."
+    headers:
+      - name: Retry-After
+        description: Indicates how many seconds until the next request is allowed
+    notes:
+      - Rate limit applies per IP address
+      - Effective July 3, 2023 (changed from 30,000/hour rolling window to 500/minute)
+      - Contact support if rate limits impact legitimate use cases
+  - name: Polling Endpoints Rate Limit
+    description: >
+      Higher rate limit applied to async download polling endpoints, allowing
+      faster polling for long-running async operations.
+    scope: per IP address
+    endpoints:
+      - /resource_translations_async_downloads/{id}
+      - /resource_strings_async_downloads/{id}
+    limits:
+      - period: minute
+        requests: 1200
+    responseCode: 429
+    responseMessage: "Request was throttled."
+    notes:
+      - Applies specifically to async download polling endpoints
+      - Higher limit to support efficient polling of long-running operations
+pagination:
+  type: cursor
+  parameter: page[cursor]
+  defaultPageSize: 150
+  maxPageSize: 1000
+  minPageSize: 150
+  notes:
+    - Cursor value must be retrieved from pagination links in previous responses
+    - List endpoints use fixed page size

@@ -1,0 +1,97 @@
+name: Transifex Plans and Pricing
+description: Pricing plans for Transifex localization management platform
+specificationVersion: "0.1"
+url: https://www.transifex.com/pricing
+plans:
+  - name: Starter
+    description: >
+      Ideal for individuals and small teams beginning their localization
+      journey. Includes core platform features, API access, SDKs, and CLI
+      tools with up to 10 collaborators.
+    url: https://www.transifex.com/pricing
+    price:
+      monthly:
+        amount: 160
+        currency: USD
+        period: month
+      annual:
+        amount: 135
+        currency: USD
+        period: month
+        note: Billed annually
+    features:
+      - Unlimited projects and files
+      - Translation memory
+      - Machine translation support
+      - Online editor
+      - API, SDKs, and CLI access
+      - 10 collaborators included
+      - 46+ integrations (GitHub, GitLab, Slack, Jira, WordPress, Shopify)
+      - Community support
+    limits:
+      collaborators: 10
+      aiWords: 0
+  - name: Growth
+    description: >
+      Designed for growing teams that need advanced editing features, AI-powered
+      translation, and collaboration tools for managing larger localization
+      programs.
+    url: https://www.transifex.com/pricing
+    price:
+      monthly:
+        amount: 236
+        currency: USD
+        period: month
+        note: Starting price; scales with usage
+      annual:
+        amount: 200
+        currency: USD
+        period: month
+        note: Billed annually; starting price
+    features:
+      - All Starter features
+      - 60,000 AI words per year included
+      - Advanced editor
+      - Context screenshots
+      - Glossary management
+      - Search across projects
+      - Chat support
+      - 30 collaborators included
+    limits:
+      collaborators: 30
+      aiWordsPerYear: 60000
+  - name: Enterprise+
+    description: >
+      Custom enterprise plan for large organizations requiring enterprise-grade
+      translation memory, enhanced security controls, SAML SSO, and dedicated
+      business support.
+    url: https://www.transifex.com/pricing
+    price:
+      monthly:
+        amount: null
+        currency: USD
+        period: month
+        note: Custom pricing — contact sales
+    features:
+      - All Growth features
+      - 300,000 AI words per year included
+      - Enterprise TM suite
+      - Enhanced security
+      - SAML SSO and 2FA
+      - SOC 2 Type II certified
+      - Extended support and business reviews
+      - 100 collaborators included
+      - Priority support
+    limits:
+      collaborators: 100
+      aiWordsPerYear: 300000
+addons:
+  - name: AI Words Add-on
+    description: Additional AI words for AI translation, TQI quality scoring, AI fill-up, and workflow automation
+    url: https://www.transifex.com/pricing
+    price:
+      monthly:
+        amount: 84
+        currency: USD
+        period: month
+        note: Starting price; volume discounts available, no overage penalties
