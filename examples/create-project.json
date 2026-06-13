@@ -1,0 +1,31 @@
+{
+  "data": {
+    "type": "projects",
+    "attributes": {
+      "name": "My App Localization",
+      "slug": "my-app-localization",
+      "description": "Localization project for My App",
+      "private": false,
+      "tags": [
+        "mobile",
+        "production"
+      ],
+      "translation_memory_fillup": true,
+      "machine_translation_fillup": false
+    },
+    "relationships": {
+      "organization": {
+        "data": {
+          "type": "organizations",
+          "id": "o:mycompany"
+        }
+      },
+      "source_language": {
+        "data": {
+          "type": "languages",
+          "id": "l:en"
+        }
+      }
+    }
+  }
+}

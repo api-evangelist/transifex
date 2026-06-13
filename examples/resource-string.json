@@ -1,0 +1,22 @@
+{
+  "data": {
+    "id": "o:mycompany:p:my-app:r:messages:s:hello_world:c:",
+    "type": "resource_strings",
+    "attributes": {
+      "key": "hello_world",
+      "context": "",
+      "strings": {
+        "other": "Hello, World!"
+      },
+      "comment": "Main greeting string shown on homepage",
+      "tags": [
+        "homepage",
+        "greeting"
+      ],
+      "occurrences": "src/components/Home.js:42",
+      "character_limit": 50,
+      "datetime_created": "2026-01-15T10:00:00Z",
+      "datetime_modified": "2026-06-01T15:30:00Z"
+    }
+  }
+}

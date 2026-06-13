@@ -1,0 +1,593 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/transifex/main/json-schema/transifex-schema.json",
+  "title": "Transifex API",
+  "description": "JSON Schema for Transifex REST API v3 resources - localization management platform for projects, resources, translations, and language teams",
+  "definitions": {
+    "Project": {
+      "type": "object",
+      "description": "A Transifex localization project containing resources and language teams",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique project identifier"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "projects"
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Project name"
+            },
+            "slug": {
+              "type": "string",
+              "description": "URL-friendly project identifier"
+            },
+            "description": {
+              "type": "string",
+              "description": "Project description"
+            },
+            "private": {
+              "type": "boolean",
+              "description": "Whether the project is private"
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "translation_memory_fillup": {
+              "type": "boolean"
+            },
+            "machine_translation_fillup": {
+              "type": "boolean"
+            },
+            "source_language": {
+              "$ref": "#/definitions/LanguageRef"
+            },
+            "datetime_created": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "datetime_modified": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "relationships": {
+          "type": "object",
+          "properties": {
+            "organization": {
+              "$ref": "#/definitions/RelationshipData"
+            },
+            "maintainers": {
+              "$ref": "#/definitions/RelationshipData"
+            },
+            "team": {
+              "$ref": "#/definitions/RelationshipData"
+            }
+          }
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "A translatable resource file within a Transifex project",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "resources"
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "description": "URL-friendly resource identifier"
+            },
+            "name": {
+              "type": "string"
+            },
+            "i18n_type": {
+              "type": "string",
+              "description": "Internationalization format (e.g., PO, XLIFF, JSON)"
+            },
+            "priority": {
+              "type": "string",
+              "enum": [
+                "normal",
+                "high",
+                "urgent"
+              ]
+            },
+            "datetime_created": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "datetime_modified": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "string_count": {
+              "type": "integer"
+            },
+            "word_count": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "Language": {
+      "type": "object",
+      "description": "A language supported by Transifex",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "BCP 47 language code (e.g., en, fr, es)"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "languages"
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Language code"
+            },
+            "name": {
+              "type": "string",
+              "description": "Language name in English"
+            },
+            "rtl": {
+              "type": "boolean",
+              "description": "Right-to-left language"
+            },
+            "plural_equation": {
+              "type": "string"
+            },
+            "plural_rules": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "LanguageRef": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "rtl": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Organization": {
+      "type": "object",
+      "description": "A Transifex organization that owns projects and teams",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "organizations"
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "slug": {
+              "type": "string"
+            },
+            "logo_url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "private": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "Team": {
+      "type": "object",
+      "description": "A Transifex translation team for a specific language",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "teams"
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "cla": {
+              "type": "string",
+              "description": "Contributor License Agreement text"
+            },
+            "auto_join": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "ResourceString": {
+      "type": "object",
+      "description": "A source string within a Transifex resource",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "resource_strings"
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "String key identifier"
+            },
+            "context": {
+              "type": "string"
+            },
+            "strings": {
+              "type": "object",
+              "description": "Source string content by plural form",
+              "properties": {
+                "one": {
+                  "type": "string"
+                },
+                "other": {
+                  "type": "string"
+                }
+              }
+            },
+            "comment": {
+              "type": "string",
+              "description": "Translator comment"
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "occurrences": {
+              "type": "string"
+            },
+            "character_limit": {
+              "type": "integer"
+            },
+            "datetime_created": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "datetime_modified": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    },
+    "ResourceTranslation": {
+      "type": "object",
+      "description": "A translation of a source string into a target language",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "resource_translations"
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "strings": {
+              "type": "object",
+              "description": "Translated strings by plural form",
+              "properties": {
+                "one": {
+                  "type": "string"
+                },
+                "other": {
+                  "type": "string"
+                }
+              }
+            },
+            "reviewed": {
+              "type": "boolean"
+            },
+            "proofread": {
+              "type": "boolean"
+            },
+            "finalized": {
+              "type": "boolean"
+            },
+            "datetime_created": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "datetime_modified": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "datetime_reviewed": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    },
+    "Task": {
+      "type": "object",
+      "description": "A Transifex translation task assigned to a team member",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "tasks"
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "due_date": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "pending",
+                "in_progress",
+                "completed",
+                "failed"
+              ]
+            },
+            "priority": {
+              "type": "string",
+              "enum": [
+                "normal",
+                "high",
+                "urgent"
+              ]
+            },
+            "type_attr": {
+              "type": "string",
+              "enum": [
+                "translation",
+                "review",
+                "proofread"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Glossary": {
+      "type": "object",
+      "description": "A terminology glossary for consistent translations",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "glossaries"
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "language_codes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "description": "A Transifex platform user",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "users"
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string",
+              "format": "email"
+            },
+            "display_name": {
+              "type": "string"
+            },
+            "bio": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ProjectWebhook": {
+      "type": "object",
+      "description": "A webhook for receiving Transifex project event notifications",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "project_webhooks"
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "format": "uri",
+              "description": "Webhook endpoint URL"
+            },
+            "secret": {
+              "type": "string",
+              "description": "HMAC secret for payload signing"
+            },
+            "events": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of events that trigger the webhook"
+            },
+            "active": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "RelationshipData": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "related": {
+              "type": "string",
+              "format": "uri"
+            },
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "JsonApiError": {
+      "type": "object",
+      "description": "JSON:API error response",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string"
+              },
+              "code": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "detail": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

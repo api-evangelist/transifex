@@ -1,0 +1,17 @@
+{
+  "data": {
+    "type": "resource_strings_async_uploads",
+    "attributes": {
+      "content": "msgid \"\"\nmsgstr \"\"\n\"Content-Type: text/plain; charset=UTF-8\\n\"\n\nmsgid \"Hello, World!\"\nmsgstr \"\"\n",
+      "content_encoding": "text"
+    },
+    "relationships": {
+      "resource": {
+        "data": {
+          "type": "resources",
+          "id": "o:mycompany:p:my-app:r:messages"
+        }
+      }
+    }
+  }
+}

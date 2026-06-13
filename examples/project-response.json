@@ -1,0 +1,36 @@
+{
+  "data": {
+    "id": "o:mycompany:p:my-app-localization",
+    "type": "projects",
+    "attributes": {
+      "name": "My App Localization",
+      "slug": "my-app-localization",
+      "description": "Localization project for My App",
+      "private": false,
+      "tags": [
+        "mobile",
+        "production"
+      ],
+      "translation_memory_fillup": true,
+      "machine_translation_fillup": false,
+      "datetime_created": "2026-01-15T10:00:00Z",
+      "datetime_modified": "2026-06-01T15:30:00Z"
+    },
+    "relationships": {
+      "organization": {
+        "data": {
+          "type": "organizations",
+          "id": "o:mycompany"
+        }
+      },
+      "maintainers": {
+        "links": {
+          "related": "https://rest.api.transifex.com/projects/o:mycompany:p:my-app-localization/maintainers"
+        }
+      }
+    },
+    "links": {
+      "self": "https://rest.api.transifex.com/projects/o:mycompany:p:my-app-localization"
+    }
+  }
+}

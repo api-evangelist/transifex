@@ -46,6 +46,14 @@ apis:
         url: https://developers.transifex.com/reference/
       - type: OpenAPI
         url: https://transifex.github.io/openapi/
+      - type: OpenAPI
+        url: openapi/transifex-transifex-api-openapi.yml
+      - type: JSONSchema
+        url: json-schema/transifex-schema.json
+      - type: Vocabulary
+        url: vocabulary/transifex-vocabulary.yml
+      - type: JSONLDContext
+        url: json-ld/transifex-context.jsonld
       - type: Authentication
         url: https://developers.transifex.com/reference/api-authentication
       - type: RateLimits

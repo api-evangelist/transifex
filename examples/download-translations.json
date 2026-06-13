@@ -1,0 +1,26 @@
+{
+  "data": {
+    "type": "resource_translations_async_downloads",
+    "attributes": {
+      "callback_url": null,
+      "content_encoding": "text",
+      "file_type": "default",
+      "pseudo": false,
+      "mode": "default"
+    },
+    "relationships": {
+      "language": {
+        "data": {
+          "type": "languages",
+          "id": "l:fr"
+        }
+      },
+      "resource": {
+        "data": {
+          "type": "resources",
+          "id": "o:mycompany:p:my-app:r:messages"
+        }
+      }
+    }
+  }
+}

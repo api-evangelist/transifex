@@ -1,0 +1,216 @@
+vocabulary:
+  name: Transifex API Vocabulary
+  description: >
+    Key terms and concepts used in the Transifex REST API v3 for localization
+    management, translation workflows, and content internationalization.
+  version: "3.0"
+  url: https://developers.transifex.com/reference/
+  terms:
+    - term: Project
+      definition: >
+        The top-level container in Transifex that holds resources, language teams,
+        and translation memory. A project belongs to an organization and has a
+        source language and one or more target languages.
+      type: resource
+      api_type: projects
+      example_id: "o:mycompany:p:my-app"
+
+    - term: Resource
+      definition: >
+        A translatable file within a project, such as a PO file, XLIFF, JSON, or
+        any supported i18n format. Resources contain source strings and their
+        translations for each target language.
+      type: resource
+      api_type: resources
+      example_id: "o:mycompany:p:my-app:r:messages"
+
+    - term: Resource String
+      definition: >
+        An individual source string within a resource identified by a unique key
+        and optional context. Strings can have plural forms, comments, tags, and
+        occurrence information.
+      type: resource
+      api_type: resource_strings
+      example_id: "o:mycompany:p:my-app:r:messages:s:hello_world:c:"
+
+    - term: Resource Translation
+      definition: >
+        The translated content of a resource string into a specific target language.
+        Translations have review and proofread states and can be finalized.
+      type: resource
+      api_type: resource_translations
+
+    - term: Language
+      definition: >
+        A BCP 47 language tag supported by Transifex, including metadata like
+        name, direction (RTL/LTR), and plural rules. Used as source and target
+        languages for projects and teams.
+      type: resource
+      api_type: languages
+      example: "l:en, l:fr, l:es, l:zh-Hans"
+
+    - term: Organization
+      definition: >
+        The account entity in Transifex that owns projects, teams, and members.
+        Organizations have administrators and can be configured for private or
+        public access.
+      type: resource
+      api_type: organizations
+      example_id: "o:mycompany"
+
+    - term: Team
+      definition: >
+        A group of translators working on specific languages within a project.
+        Teams manage language assignments, member roles, and contributor agreements.
+      type: resource
+      api_type: teams
+
+    - term: Team Membership
+      definition: >
+        The association of a user with a team, including their role (translator,
+        reviewer, coordinator) and language assignments.
+      type: resource
+      api_type: team_memberships
+
+    - term: Task
+      definition: >
+        A work assignment for translation, review, or proofreading that can be
+        assigned to team members with due dates, priorities, and status tracking.
+      type: resource
+      api_type: tasks
+      statuses:
+        - pending
+        - in_progress
+        - completed
+        - failed
+      priorities:
+        - normal
+        - high
+        - urgent
+
+    - term: Glossary
+      definition: >
+        A terminology database shared across projects to ensure consistent
+        translation of key terms. Glossaries can be associated with specific
+        language pairs and exported as TMX files.
+      type: resource
+      api_type: glossaries
+
+    - term: Translation Memory (TM)
+      definition: >
+        A database of previously translated segments that can be used to
+        auto-fill new translations. Accessed via TMX async downloads and uploads.
+      type: concept
+      related_api_types:
+        - tmx_async_downloads
+        - tmx_async_uploads
+
+    - term: Async Operation
+      definition: >
+        Long-running operations in the Transifex API (uploads, downloads, merges)
+        that are handled asynchronously. Clients poll for completion status using
+        the returned async operation ID.
+      type: concept
+      related_api_types:
+        - resource_strings_async_downloads
+        - resource_strings_async_uploads
+        - resource_translations_async_downloads
+        - resource_translations_async_uploads
+        - resource_translations_async_fillups
+        - resource_async_merges
+        - tmx_async_downloads
+        - tmx_async_uploads
+
+    - term: Project Webhook
+      definition: >
+        A configurable HTTP callback that notifies external systems when specific
+        Transifex events occur, such as translation completion, review, or resource
+        creation. Payloads are HMAC-signed using a shared secret.
+      type: resource
+      api_type: project_webhooks
+
+    - term: Resource Language Stats
+      definition: >
+        Statistical data about the translation progress of a resource in a specific
+        language, including counts of translated, untranslated, reviewed, and
+        proofread strings.
+      type: resource
+      api_type: resource_language_stats
+
+    - term: Context Screenshot
+      definition: >
+        An image that provides visual context for translators, mapped to specific
+        source strings to aid translation accuracy.
+      type: resource
+      api_type: context_screenshots
+
+    - term: Source Language
+      definition: >
+        The original language of the content in a project. Source strings are
+        written in the source language and translated into target languages.
+      type: concept
+
+    - term: i18n Format
+      definition: >
+        The file format used for storing translations (e.g., PO/POT, XLIFF, JSON,
+        YAML, Android XML, iOS Strings, Java Properties). Transifex supports
+        40+ formats.
+      type: concept
+      api_type: i18n_formats
+
+    - term: Bearer Token Authentication
+      definition: >
+        The authentication method for the Transifex API. Clients include an API
+        token in the Authorization header as "Bearer <token>". Tokens are generated
+        in Transifex User Settings.
+      type: concept
+      header_format: "Authorization: Bearer 1/your-api-token"
+
+    - term: JSON:API
+      definition: >
+        The specification (jsonapi.org) that the Transifex REST API v3 follows.
+        Resources are represented with "data", "attributes", "relationships", and
+        "links" structures. Errors follow the JSON:API error format.
+      type: concept
+      url: https://jsonapi.org/
+
+    - term: Unique Identifier
+      definition: >
+        A composite identifier for Transifex resources that combines organization
+        slug, project slug, resource slug, and string key (e.g.,
+        o:org:p:project:r:resource:s:key:c:context).
+      type: concept
+      api_type: unique_identifiers
+
+    - term: Translation Fillup
+      definition: >
+        Automatic population of untranslated strings using translation memory or
+        machine translation. Configured at project level and triggered via async
+        fillup operations.
+      type: concept
+      api_type: resource_translations_async_fillups
+
+    - term: Discussion
+      definition: >
+        A comment thread attached to a translation resource for communication
+        between translators, reviewers, and project managers.
+      type: resource
+      api_type: discussions
+
+    - term: Resource Metadata
+      definition: >
+        Additional configurable metadata attached to a resource, beyond the
+        standard attributes.
+      type: resource
+      api_type: resource_metadata
+
+    - term: Activity Report
+      definition: >
+        Downloadable reports of activity on organizations, projects, resources,
+        or teams, generated asynchronously.
+      type: concept
+      related_api_types:
+        - organization_activity_reports_async_downloads
+        - project_activity_reports_async_downloads
+        - resource_activity_reports_async_downloads
+        - team_activity_reports_async_downloads

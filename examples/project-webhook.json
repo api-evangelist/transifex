@@ -1,0 +1,23 @@
+{
+  "data": {
+    "type": "project_webhooks",
+    "attributes": {
+      "url": "https://myapp.com/webhooks/transifex",
+      "secret": "my-webhook-secret-key",
+      "events": [
+        "translation_completed",
+        "translation_reviewed",
+        "resource_created"
+      ],
+      "active": true
+    },
+    "relationships": {
+      "project": {
+        "data": {
+          "type": "projects",
+          "id": "o:mycompany:p:my-app-localization"
+        }
+      }
+    }
+  }
+}

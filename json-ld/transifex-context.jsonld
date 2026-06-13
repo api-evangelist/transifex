@@ -1,0 +1,249 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "xapi": "https://developers.transifex.com/reference/",
+    "tx": "https://www.transifex.com/vocabulary/",
+
+    "Project": {
+      "@id": "schema:Project",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "type": "@type",
+        "name": "schema:name",
+        "description": "schema:description",
+        "slug": "tx:slug",
+        "private": "tx:private",
+        "tags": "schema:keywords",
+        "sourceLanguage": "tx:sourceLanguage",
+        "datetimeCreated": "schema:dateCreated",
+        "datetimeModified": "schema:dateModified",
+        "organization": {
+          "@id": "tx:organization",
+          "@type": "@id"
+        },
+        "maintainers": {
+          "@id": "tx:maintainers",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Resource": {
+      "@id": "tx:Resource",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "type": "@type",
+        "slug": "tx:slug",
+        "name": "schema:name",
+        "i18nType": "tx:i18nType",
+        "priority": "tx:priority",
+        "stringCount": "tx:stringCount",
+        "wordCount": "tx:wordCount",
+        "datetimeCreated": "schema:dateCreated",
+        "datetimeModified": "schema:dateModified",
+        "project": {
+          "@id": "tx:project",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Language": {
+      "@id": "schema:Language",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "type": "@type",
+        "code": "tx:languageCode",
+        "name": "schema:name",
+        "rtl": "tx:rightToLeft",
+        "pluralEquation": "tx:pluralEquation",
+        "pluralRules": "tx:pluralRules"
+      }
+    },
+
+    "Organization": {
+      "@id": "schema:Organization",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "type": "@type",
+        "name": "schema:name",
+        "slug": "tx:slug",
+        "logoUrl": "schema:logo",
+        "private": "tx:private"
+      }
+    },
+
+    "Team": {
+      "@id": "schema:WorkGroup",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "type": "@type",
+        "name": "schema:name",
+        "cla": "tx:contributorLicenseAgreement",
+        "autoJoin": "tx:autoJoin",
+        "language": {
+          "@id": "tx:teamLanguage",
+          "@type": "@id"
+        },
+        "managers": {
+          "@id": "tx:managers",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "ResourceString": {
+      "@id": "tx:ResourceString",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "type": "@type",
+        "key": "tx:stringKey",
+        "context": "tx:stringContext",
+        "strings": "tx:stringContent",
+        "comment": "schema:description",
+        "tags": "schema:keywords",
+        "occurrences": "tx:occurrences",
+        "characterLimit": "tx:characterLimit",
+        "datetimeCreated": "schema:dateCreated",
+        "datetimeModified": "schema:dateModified"
+      }
+    },
+
+    "ResourceTranslation": {
+      "@id": "tx:ResourceTranslation",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "type": "@type",
+        "strings": "tx:translatedContent",
+        "reviewed": "tx:reviewed",
+        "proofread": "tx:proofread",
+        "finalized": "tx:finalized",
+        "datetimeCreated": "schema:dateCreated",
+        "datetimeModified": "schema:dateModified",
+        "datetimeReviewed": "tx:datetimeReviewed",
+        "language": {
+          "@id": "tx:targetLanguage",
+          "@type": "@id"
+        },
+        "resourceString": {
+          "@id": "tx:sourceString",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Task": {
+      "@id": "schema:Action",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "type": "@type",
+        "name": "schema:name",
+        "dueDate": "schema:scheduledTime",
+        "status": "schema:actionStatus",
+        "priority": "tx:priority",
+        "assignees": {
+          "@id": "schema:agent",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Glossary": {
+      "@id": "schema:DefinedTermSet",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "type": "@type",
+        "name": "schema:name",
+        "languageCodes": "tx:supportedLanguages"
+      }
+    },
+
+    "User": {
+      "@id": "schema:Person",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "type": "@type",
+        "username": "schema:identifier",
+        "email": "schema:email",
+        "displayName": "schema:name",
+        "bio": "schema:description"
+      }
+    },
+
+    "ProjectWebhook": {
+      "@id": "tx:ProjectWebhook",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "type": "@type",
+        "url": "schema:url",
+        "secret": "tx:webhookSecret",
+        "events": "tx:subscribedEvents",
+        "active": "tx:active"
+      }
+    },
+
+    "ResourceLanguageStats": {
+      "@id": "tx:ResourceLanguageStats",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "type": "@type",
+        "translatedStrings": "tx:translatedStrings",
+        "untranslatedStrings": "tx:untranslatedStrings",
+        "reviewedStrings": "tx:reviewedStrings",
+        "proofreadStrings": "tx:proofreadStrings",
+        "totalStrings": "tx:totalStrings",
+        "completionPercentage": "tx:completionPercentage"
+      }
+    },
+
+    "TransifexAPI": {
+      "@id": "tx:TransifexAPI",
+      "@context": {
+        "baseUrl": "schema:url",
+        "version": "schema:version",
+        "authScheme": "tx:authScheme",
+        "specification": "schema:softwareVersion"
+      }
+    },
+
+    "api": {
+      "@id": "tx:TransifexAPI",
+      "@type": "@id"
+    },
+
+    "baseUrl": "schema:url",
+    "version": "schema:version",
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "email": "schema:email",
+    "dateCreated": "schema:dateCreated",
+    "dateModified": "schema:dateModified",
+    "identifier": "schema:identifier"
+  },
+  "@graph": [
+    {
+      "@type": "TransifexAPI",
+      "name": "Transifex API",
+      "description": "REST API v3 for the Transifex cloud-based localization management platform",
+      "baseUrl": "https://rest.api.transifex.com",
+      "version": "3.0",
+      "authScheme": "Bearer Token",
+      "specification": "OpenAPI 3.0.1",
+      "url": "https://developers.transifex.com/reference/"
+    }
+  ]
+}
