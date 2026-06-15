@@ -1,0 +1,903 @@
+"""
+Transifex GraphQL API Schema
+Conceptual schema derived from the Transifex REST API v3.
+Covers project management, resource management, translations,
+translation memory, glossary, team management, and OTA delivery.
+"""
+
+# ─── Scalars ────────────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar JSON
+scalar URL
+scalar Upload
+
+# ─── Enums ──────────────────────────────────────────────────────────────────
+
+enum ProjectType {
+  FILE_BASED
+  BRANCH_BASED
+}
+
+enum TranslationStatus {
+  TRANSLATED
+  UNTRANSLATED
+  PROOFREAD
+  FINALIZED
+}
+
+enum ResourceStringStatus {
+  TRANSLATED
+  UNTRANSLATED
+  PROOFREAD
+  REVIEWED
+}
+
+enum WorkflowStep {
+  TRANSLATION
+  REVIEW
+  PROOFREADING
+}
+
+enum TeamMemberRole {
+  COORDINATOR
+  REVIEWER
+  TRANSLATOR
+}
+
+enum OrganizationRole {
+  OWNER
+  MEMBER
+}
+
+enum TranslationMemoryMatchType {
+  EXACT
+  FUZZY
+  MT
+}
+
+enum FileFormat {
+  PO
+  POT
+  XLIFF
+  ANDROID
+  IOS_STRINGS
+  YAML
+  JSON
+  CSV
+  RESX
+  PHP_ARRAY
+  JAVA_PROPERTIES
+  MOZILLA_PROPERTIES
+  HTML
+  DOCX
+  SRT
+  VTT
+  STRINGSDICT
+  PLIST
+}
+
+enum SortOrder {
+  ASC
+  DESC
+}
+
+enum OTABuildStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum GlossaryTermType {
+  NOUN
+  VERB
+  ADJECTIVE
+  ADVERB
+  PHRASE
+}
+
+# ─── Input Types ─────────────────────────────────────────────────────────────
+
+input PaginationInput {
+  page: Int
+  pageSize: Int
+  cursor: String
+}
+
+input ProjectFilterInput {
+  organizationId: ID
+  archived: Boolean
+  createdAfter: DateTime
+  createdBefore: DateTime
+  search: String
+}
+
+input ResourceFilterInput {
+  projectId: ID!
+  fileFormat: FileFormat
+  search: String
+}
+
+input TranslationFilterInput {
+  resourceLanguageId: ID!
+  status: TranslationStatus
+  reviewedAfter: DateTime
+  translatedAfter: DateTime
+}
+
+input StringFilterInput {
+  resourceId: ID!
+  status: ResourceStringStatus
+  search: String
+  tags: [String!]
+}
+
+input TeamFilterInput {
+  organizationId: ID!
+  search: String
+}
+
+input GlossaryFilterInput {
+  organizationId: ID!
+  search: String
+  termType: GlossaryTermType
+}
+
+input TMFilterInput {
+  organizationId: ID!
+  search: String
+}
+
+input CreateProjectInput {
+  name: String!
+  slug: String!
+  description: String
+  organizationId: ID!
+  sourceLanguageId: ID!
+  projectType: ProjectType!
+  private: Boolean
+  tags: [String!]
+}
+
+input UpdateProjectInput {
+  name: String
+  description: String
+  private: Boolean
+  archived: Boolean
+  tags: [String!]
+}
+
+input CreateResourceInput {
+  projectId: ID!
+  name: String!
+  slug: String!
+  fileFormat: FileFormat!
+  content: String
+  acceptTranslations: Boolean
+  stringCount: Int
+}
+
+input UpdateResourceInput {
+  name: String
+  acceptTranslations: Boolean
+  content: String
+}
+
+input CreateTranslationInput {
+  resourceStringId: ID!
+  languageId: ID!
+  strings: [TranslationStringInput!]!
+}
+
+input TranslationStringInput {
+  pluralForm: String
+  content: String!
+}
+
+input CreateTeamInput {
+  organizationId: ID!
+  name: String!
+  autoJoin: Boolean
+  cla: String
+}
+
+input UpdateTeamInput {
+  name: String
+  autoJoin: Boolean
+  cla: String
+}
+
+input AddTeamMemberInput {
+  teamId: ID!
+  userId: ID!
+  role: TeamMemberRole!
+}
+
+input CreateGlossaryTermInput {
+  glossaryId: ID!
+  term: String!
+  definition: String
+  partOfSpeech: GlossaryTermType
+  notes: String
+  forbidden: Boolean
+  caseSensitive: Boolean
+  exactMatch: Boolean
+}
+
+input UpdateGlossaryTermInput {
+  term: String
+  definition: String
+  partOfSpeech: GlossaryTermType
+  notes: String
+  forbidden: Boolean
+  caseSensitive: Boolean
+  exactMatch: Boolean
+}
+
+input CreateGlossaryInput {
+  organizationId: ID!
+  name: String!
+  description: String
+}
+
+input TMSearchInput {
+  organizationId: ID!
+  sourceLanguageId: ID!
+  targetLanguageId: ID!
+  content: String!
+  minScore: Float
+  matchType: TranslationMemoryMatchType
+}
+
+input CreateOTAReleaseInput {
+  projectId: ID!
+  name: String!
+  languageIds: [ID!]!
+  filters: OTAReleaseFilterInput
+}
+
+input OTAReleaseFilterInput {
+  onlyReviewed: Boolean
+  tags: [String!]
+}
+
+input CreateAsyncUploadInput {
+  resourceId: ID!
+  fileContent: String!
+  fileFormat: FileFormat!
+  replaceEditedStrings: Boolean
+}
+
+# ─── Core Types ──────────────────────────────────────────────────────────────
+
+type Organization {
+  id: ID!
+  slug: String!
+  name: String!
+  logoUrl: URL
+  privateProjects: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  projects(filter: ProjectFilterInput, pagination: PaginationInput): ProjectConnection!
+  teams(filter: TeamFilterInput, pagination: PaginationInput): TeamConnection!
+  glossaries(filter: GlossaryFilterInput, pagination: PaginationInput): GlossaryConnection!
+  translationMemories(filter: TMFilterInput, pagination: PaginationInput): TranslationMemoryConnection!
+  members(pagination: PaginationInput): OrganizationMemberConnection!
+  languages: [Language!]!
+}
+
+type Project {
+  id: ID!
+  slug: String!
+  name: String!
+  description: String
+  projectType: ProjectType!
+  private: Boolean!
+  archived: Boolean!
+  tags: [String!]!
+  sourceLanguage: Language!
+  targetLanguages: [Language!]!
+  organization: Organization!
+  resources(filter: ResourceFilterInput, pagination: PaginationInput): ResourceConnection!
+  teams: [Team!]!
+  statistics: ProjectStatistics!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Resource {
+  id: ID!
+  slug: String!
+  name: String!
+  fileFormat: FileFormat!
+  acceptTranslations: Boolean!
+  stringCount: Int!
+  wordCount: Int!
+  project: Project!
+  strings(filter: StringFilterInput, pagination: PaginationInput): ResourceStringConnection!
+  languageStats: [ResourceLanguageStat!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ResourceString {
+  id: ID!
+  key: String!
+  context: String
+  pluralizedString: Boolean!
+  pluralForm: String
+  string: String!
+  characterLimit: Int
+  instructions: String
+  tags: [String!]!
+  occurrences: [StringOccurrence!]!
+  translations: [Translation!]!
+  resource: Resource!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Translation {
+  id: ID!
+  strings: [TranslationString!]!
+  status: TranslationStatus!
+  translator: User
+  reviewer: User
+  proofreadBy: User
+  resourceString: ResourceString!
+  language: Language!
+  dateCreated: DateTime!
+  dateModified: DateTime!
+  dateReviewed: DateTime
+  dateProofread: DateTime
+}
+
+type TranslationString {
+  pluralForm: String
+  content: String!
+}
+
+type Language {
+  id: ID!
+  code: String!
+  name: String!
+  rtl: Boolean!
+  pluralRules: JSON
+}
+
+type ResourceLanguageStat {
+  language: Language!
+  translatedStrings: Int!
+  untranslatedStrings: Int!
+  reviewedStrings: Int!
+  proofreadStrings: Int!
+  totalStrings: Int!
+  wordCount: Int!
+  translatedWordCount: Int!
+  completionPercentage: Float!
+}
+
+type ProjectStatistics {
+  totalStrings: Int!
+  translatedStrings: Int!
+  untranslatedStrings: Int!
+  reviewedStrings: Int!
+  languages: Int!
+  resources: Int!
+  lastActivityAt: DateTime
+}
+
+type User {
+  id: ID!
+  username: String!
+  email: String
+  name: String
+  avatarUrl: URL
+  dateJoined: DateTime!
+  organizations: [Organization!]!
+  teamMemberships: [TeamMembership!]!
+}
+
+type Team {
+  id: ID!
+  name: String!
+  slug: String!
+  autoJoin: Boolean!
+  cla: String
+  organization: Organization!
+  members(pagination: PaginationInput): TeamMemberConnection!
+  coordinators: [User!]!
+  languages: [Language!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type TeamMembership {
+  id: ID!
+  team: Team!
+  user: User!
+  role: TeamMemberRole!
+  joinedAt: DateTime!
+}
+
+type OrganizationMembership {
+  id: ID!
+  organization: Organization!
+  user: User!
+  role: OrganizationRole!
+  joinedAt: DateTime!
+}
+
+type Glossary {
+  id: ID!
+  name: String!
+  description: String
+  organization: Organization!
+  terms(pagination: PaginationInput): GlossaryTermConnection!
+  termCount: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type GlossaryTerm {
+  id: ID!
+  term: String!
+  definition: String
+  partOfSpeech: GlossaryTermType
+  notes: String
+  forbidden: Boolean!
+  caseSensitive: Boolean!
+  exactMatch: Boolean!
+  glossary: Glossary!
+  translations: [GlossaryTermTranslation!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type GlossaryTermTranslation {
+  id: ID!
+  term: GlossaryTerm!
+  language: Language!
+  content: String!
+  definition: String
+  notes: String
+  forbidden: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type TranslationMemory {
+  id: ID!
+  name: String!
+  organization: Organization!
+  entryCount: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type TMEntry {
+  id: ID!
+  translationMemory: TranslationMemory!
+  sourceLanguage: Language!
+  targetLanguage: Language!
+  sourceContent: String!
+  targetContent: String!
+  score: Float
+  matchType: TranslationMemoryMatchType
+  project: Project
+  resource: Resource
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type TMSearchResult {
+  entry: TMEntry!
+  score: Float!
+  matchType: TranslationMemoryMatchType!
+}
+
+type OTAProject {
+  id: ID!
+  slug: String!
+  name: String!
+  project: Project!
+  releases: [OTARelease!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type OTARelease {
+  id: ID!
+  name: String!
+  version: String
+  status: OTABuildStatus!
+  otaProject: OTAProject!
+  languages: [Language!]!
+  downloadUrl: URL
+  expiresAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type AsyncJob {
+  id: ID!
+  type: String!
+  status: String!
+  progress: Float
+  errors: [AsyncJobError!]
+  result: JSON
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  completedAt: DateTime
+}
+
+type AsyncJobError {
+  code: String!
+  detail: String!
+}
+
+type StringOccurrence {
+  file: String!
+  line: Int
+}
+
+type TranslationUpload {
+  id: ID!
+  resource: Resource!
+  status: String!
+  errors: [String!]
+  stringsCreated: Int
+  stringsUpdated: Int
+  stringsDeleted: Int
+  stringsSkipped: Int
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ResourceDownload {
+  id: ID!
+  resource: Resource!
+  language: Language!
+  fileFormat: FileFormat!
+  status: String!
+  downloadUrl: URL
+  createdAt: DateTime!
+  expiresAt: DateTime
+}
+
+type WebhookDelivery {
+  id: ID!
+  webhook: Webhook!
+  event: String!
+  payload: JSON!
+  responseStatusCode: Int
+  responseBody: String
+  deliveredAt: DateTime!
+  success: Boolean!
+}
+
+type Webhook {
+  id: ID!
+  url: URL!
+  secret: String
+  events: [String!]!
+  active: Boolean!
+  organization: Organization!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deliveries(pagination: PaginationInput): WebhookDeliveryConnection!
+}
+
+type APIToken {
+  id: ID!
+  name: String!
+  token: String
+  expiresAt: DateTime
+  lastUsedAt: DateTime
+  createdAt: DateTime!
+}
+
+type MachineTranslationConfig {
+  id: ID!
+  provider: String!
+  enabled: Boolean!
+  project: Project!
+  credentials: JSON
+  updatedAt: DateTime!
+}
+
+# ─── Connection / Pagination Types ───────────────────────────────────────────
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  totalCount: Int!
+}
+
+type ProjectConnection {
+  nodes: [Project!]!
+  pageInfo: PageInfo!
+}
+
+type ResourceConnection {
+  nodes: [Resource!]!
+  pageInfo: PageInfo!
+}
+
+type ResourceStringConnection {
+  nodes: [ResourceString!]!
+  pageInfo: PageInfo!
+}
+
+type TeamConnection {
+  nodes: [Team!]!
+  pageInfo: PageInfo!
+}
+
+type TeamMemberConnection {
+  nodes: [TeamMembership!]!
+  pageInfo: PageInfo!
+}
+
+type OrganizationMemberConnection {
+  nodes: [OrganizationMembership!]!
+  pageInfo: PageInfo!
+}
+
+type GlossaryConnection {
+  nodes: [Glossary!]!
+  pageInfo: PageInfo!
+}
+
+type GlossaryTermConnection {
+  nodes: [GlossaryTerm!]!
+  pageInfo: PageInfo!
+}
+
+type TranslationMemoryConnection {
+  nodes: [TranslationMemory!]!
+  pageInfo: PageInfo!
+}
+
+type WebhookDeliveryConnection {
+  nodes: [WebhookDelivery!]!
+  pageInfo: PageInfo!
+}
+
+# ─── Mutation Payload Types ───────────────────────────────────────────────────
+
+type ProjectPayload {
+  project: Project
+  errors: [UserError!]
+}
+
+type ResourcePayload {
+  resource: Resource
+  errors: [UserError!]
+}
+
+type TranslationPayload {
+  translation: Translation
+  errors: [UserError!]
+}
+
+type TeamPayload {
+  team: Team
+  errors: [UserError!]
+}
+
+type TeamMemberPayload {
+  membership: TeamMembership
+  errors: [UserError!]
+}
+
+type GlossaryPayload {
+  glossary: Glossary
+  errors: [UserError!]
+}
+
+type GlossaryTermPayload {
+  term: GlossaryTerm
+  errors: [UserError!]
+}
+
+type OTAReleasePayload {
+  release: OTARelease
+  errors: [UserError!]
+}
+
+type AsyncJobPayload {
+  job: AsyncJob
+  errors: [UserError!]
+}
+
+type DeletePayload {
+  id: ID
+  success: Boolean!
+  errors: [UserError!]
+}
+
+type UserError {
+  field: String
+  message: String!
+  code: String
+}
+
+# ─── Root Types ──────────────────────────────────────────────────────────────
+
+type Query {
+  "Fetch the currently authenticated user"
+  me: User
+
+  "Look up a single organization by slug"
+  organization(slug: String!): Organization
+
+  "List all organizations the viewer belongs to"
+  organizations(pagination: PaginationInput): [Organization!]!
+
+  "Look up a project by organization slug and project slug"
+  project(organizationSlug: String!, projectSlug: String!): Project
+
+  "List projects for an organization"
+  projects(filter: ProjectFilterInput, pagination: PaginationInput, sort: SortOrder): ProjectConnection!
+
+  "Look up a resource by project and resource slug"
+  resource(projectId: ID!, resourceSlug: String!): Resource
+
+  "List resources within a project"
+  resources(filter: ResourceFilterInput, pagination: PaginationInput): ResourceConnection!
+
+  "Fetch a single resource string by ID"
+  resourceString(id: ID!): ResourceString
+
+  "List resource strings with optional filters"
+  resourceStrings(filter: StringFilterInput, pagination: PaginationInput): ResourceStringConnection!
+
+  "Fetch a specific translation"
+  translation(id: ID!): Translation
+
+  "List translations for a resource-language pair"
+  translations(filter: TranslationFilterInput, pagination: PaginationInput): [Translation!]!
+
+  "Fetch a language by code"
+  language(code: String!): Language
+
+  "List all supported languages"
+  languages: [Language!]!
+
+  "Fetch a team by ID"
+  team(id: ID!): Team
+
+  "List teams for an organization"
+  teams(filter: TeamFilterInput, pagination: PaginationInput): TeamConnection!
+
+  "Fetch a glossary by ID"
+  glossary(id: ID!): Glossary
+
+  "List glossaries for an organization"
+  glossaries(filter: GlossaryFilterInput, pagination: PaginationInput): GlossaryConnection!
+
+  "Fetch a glossary term by ID"
+  glossaryTerm(id: ID!): GlossaryTerm
+
+  "Fetch a translation memory by ID"
+  translationMemory(id: ID!): TranslationMemory
+
+  "List translation memories for an organization"
+  translationMemories(filter: TMFilterInput, pagination: PaginationInput): TranslationMemoryConnection!
+
+  "Search for TM matches"
+  searchTranslationMemory(input: TMSearchInput!): [TMSearchResult!]!
+
+  "Fetch an OTA project by ID"
+  otaProject(id: ID!): OTAProject
+
+  "Fetch an OTA release by ID"
+  otaRelease(id: ID!): OTARelease
+
+  "Fetch an async job by ID"
+  asyncJob(id: ID!): AsyncJob
+
+  "Fetch a webhook by ID"
+  webhook(id: ID!): Webhook
+
+  "List webhooks for an organization"
+  webhooks(organizationId: ID!, pagination: PaginationInput): [Webhook!]!
+
+  "Fetch machine translation config for a project"
+  machineTranslationConfig(projectId: ID!): MachineTranslationConfig
+}
+
+type Mutation {
+  "Create a new project"
+  createProject(input: CreateProjectInput!): ProjectPayload!
+
+  "Update an existing project"
+  updateProject(id: ID!, input: UpdateProjectInput!): ProjectPayload!
+
+  "Archive a project"
+  archiveProject(id: ID!): ProjectPayload!
+
+  "Delete a project"
+  deleteProject(id: ID!): DeletePayload!
+
+  "Create a new resource"
+  createResource(input: CreateResourceInput!): ResourcePayload!
+
+  "Update a resource"
+  updateResource(id: ID!, input: UpdateResourceInput!): ResourcePayload!
+
+  "Delete a resource"
+  deleteResource(id: ID!): DeletePayload!
+
+  "Upload content to a resource (async)"
+  uploadResourceContent(input: CreateAsyncUploadInput!): AsyncJobPayload!
+
+  "Save a translation"
+  saveTranslation(input: CreateTranslationInput!): TranslationPayload!
+
+  "Review a translation"
+  reviewTranslation(id: ID!): TranslationPayload!
+
+  "Unreviewed a translation"
+  unreviewTranslation(id: ID!): TranslationPayload!
+
+  "Proofread a translation"
+  proofreadTranslation(id: ID!): TranslationPayload!
+
+  "Create a team"
+  createTeam(input: CreateTeamInput!): TeamPayload!
+
+  "Update a team"
+  updateTeam(id: ID!, input: UpdateTeamInput!): TeamPayload!
+
+  "Delete a team"
+  deleteTeam(id: ID!): DeletePayload!
+
+  "Add a member to a team"
+  addTeamMember(input: AddTeamMemberInput!): TeamMemberPayload!
+
+  "Remove a member from a team"
+  removeTeamMember(teamId: ID!, userId: ID!): DeletePayload!
+
+  "Create a glossary"
+  createGlossary(input: CreateGlossaryInput!): GlossaryPayload!
+
+  "Delete a glossary"
+  deleteGlossary(id: ID!): DeletePayload!
+
+  "Create a glossary term"
+  createGlossaryTerm(input: CreateGlossaryTermInput!): GlossaryTermPayload!
+
+  "Update a glossary term"
+  updateGlossaryTerm(id: ID!, input: UpdateGlossaryTermInput!): GlossaryTermPayload!
+
+  "Delete a glossary term"
+  deleteGlossaryTerm(id: ID!): DeletePayload!
+
+  "Create an OTA release"
+  createOTARelease(input: CreateOTAReleaseInput!): OTAReleasePayload!
+
+  "Trigger an OTA build"
+  triggerOTABuild(releaseId: ID!): OTAReleasePayload!
+
+  "Add a target language to a project"
+  addLanguageToProject(projectId: ID!, languageId: ID!): ProjectPayload!
+
+  "Remove a target language from a project"
+  removeLanguageFromProject(projectId: ID!, languageId: ID!): ProjectPayload!
+}
+
+type Subscription {
+  "Subscribe to async job updates"
+  asyncJobUpdated(jobId: ID!): AsyncJob!
+
+  "Subscribe to translation updates for a resource-language"
+  translationUpdated(resourceLanguageId: ID!): Translation!
+
+  "Subscribe to OTA build status changes"
+  otaBuildStatusChanged(releaseId: ID!): OTARelease!
+}
