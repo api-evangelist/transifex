@@ -61,6 +61,10 @@ apis:
   - url: graphql/transifex-graphql.md
     type: GraphQL
 common:
+- type: DomainSecurity
+  url: security/transifex-domain-security.yml
+- type: Authentication
+  url: authentication/transifex-authentication.yml
 - type: Website
   url: https://www.transifex.com
 - type: Documentation

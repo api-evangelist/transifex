@@ -1,0 +1,21 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/transifex-transifex-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: |-
+    To use the API you need to authenticate your requests using Token Authentication. Specifically, you need to
+
+    * Acquire an authentication token from the Transifex (under user settings)
+    * Uses the `Bearer` keyword and  prepend the token when passing the header.
+
+    For example, if the authentication token is `1/0b4e75552e481aeae813aebad53f3de3fcc67ccd`, then the HTTP header should look like this:
+
+    `Aut
+  sources:
+  - openapi/transifex-transifex-api-openapi.yml
