@@ -61,6 +61,8 @@ apis:
   - url: graphql/transifex-graphql.md
     type: GraphQL
 common:
+- type: AgenticAccess
+  url: agentic-access/transifex-agentic-access.yml
 - type: DomainSecurity
   url: security/transifex-domain-security.yml
 - type: Authentication
