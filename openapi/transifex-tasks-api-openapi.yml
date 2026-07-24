@@ -1,0 +1,3251 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@transifex.com
+    name: Transifex Support
+  description: "<br/>\n<br/>\n\n# Introduction\n\nThis API is based on **{json:api}**.\n\n{json:api} is a specification that follows shared conventions and standards. This specification enables API discoverability and partial\nself-descriptiveness through conventions. The Json Api specification exposes resources and their relationships representations with\nunique uris and all CRUD operations are performed on those endpoints. With it's simplified approach it assists the API uniformity.\n\nRead more: https://jsonapi.org/\n\nAdditionally, this API is defined using OpenAPI (ex Swagger). This means that you can easily:\n* Generate clients in your preferred: https://swagger.io/tools/swagger-codegen/\n* Download the specification file (see above) and use it in clients like Postman etc\n\n<br />\n<br />\n\n# Pagination\n\nAll list endpoints include pagination to guarantee performant responses. Those endpoints will return `next` and `previous` links in the\nresponse payload (`links` section). The client does not have to construct any pagination specific URLs or headers, just follow those\nlinks.\n\nPage size is fixed to 150 items per page.\n\n<br />\n<br />\n\n# Content Negotiation\n\nThe basic media type for the API is `application/vnd.api+json`. If you want to execute a request that includes data (`POST`, `PATCH`, `DELETE`)\nyou should include this media type in the `Content-Type` header. The only case where a different `Content-Type` header will be accepted is for\nendpoints that can accept file like objects where the media type used should be `multipart/form-data`.\n\nThe base media type this API responds is `application/vnd.api+json`. To retrieve the data in this media type you should include it in the `Accept`\nheader. The only case where the server will return another media type is for endpoint that return file like objects.\nIn this case the media type used should be `*/*` and the server will prioritize the negotiation to the media type dictated from the file.\nNote that `application/vnd.api+json` will be also available for accept header in these cases and will return a JSON serialized representation of the file.\n\nRead more here: https://jsonapi.org/format/#content-negotiation\n\n# File Uploads\n\nThere are three different methods for uploading file content to Transifex:\n* Using Content-Type `application/vnd.api+json` the content must\n    be JSON serializable.\n    - For content that is directly JSON serializable you can dump the content\n    of the file directly and set the `content_encoding` attribute  to `text`.\n    - For any content, even if it's not JSON serializable (eg .xlsx, .idml or .docx file extensions),\n    you can encode the file using the `base64` encoding and set the `content_encoding` attribute to `base64`.\n* Using Content-Type `multipart/form-data` the content can be any raw file, and can\n    be send without further processing.\n\n# Asynchronous Processing\n\nAsynchronous operations are triggered via a POST request. The response status in such cases is 202 Accepted, with a link in the Content-Location header.\nTo check the status of the operation, a client can send a request to the location given earlier.\nAn optional `callback_url` can be provided when the asynchronous operation is triggered. If such url is provided, upon completion\na HTTP POST request is executed containing all information required to identify the specific operation:\n\nExample request:\n```\nPOST callback_url HTTP/1.1\nContent-Type: application/json\n\n{\n  \"data\": {\n    \"type\": resource_strings_async_downloads\",\n    \"id\": \"xxxxxxxxx\",\n    \"attributes\": {\n      \"location\": \"https://rest.api.transifex.com/resource_strings_async_downloads/xxxxxxxxx\",\n      \"status\": \"succeeded\"\n    }\n  }\n}\n```\n\n# Restrictions\n\nThe following Plan based restrictions apply:\n* [Activity Reports](#tag/Activity-Reports) are available to Premium and up\n* [XLIFF export](#tag/Resource-Translations/paths/~1resource_translations_async_downloads/post) is available to Premium and up.\n* [Screenshots](#tag/Context-Screenshots) are available to Premium and up\n\n# Rate Limit\n\nTo maintain optimal performance and availability of the API, we limit the request rate to 500\nrequests/min or 30,000 requests / 5 minutes / IP. Polling endpoints like\n`resource_translations_async_downloads/{resource_translations_async_download_id}` and\n`resource_strings_async_downloads/{resource_strings_async_download_id}` have a rate limit of 1,200 requests/min.\nOnce past the respective limit, requests will be throttled and you will get a 429 Throttled response.\n\n\nExample response:\n```\n{\n  \"errors\": [\n    {\n      \"code\": \"Throttled\",\n      \"detail\": \"Request was throttled. Expected available in 60 seconds.\",\n      \"status\": \"429\",\n      \"title\": \"Throttled\"\n    }\n  ]\n}\n```\n\n# Authentication\n<!-- ReDoc-Inject: <security-definitions> -->\n"
+  title: Transifex Activity Reports Tasks API
+  version: '3.0'
+  x-logo:
+    altText: Transifex logo
+    backgroundColor: '#FFFFFF'
+    url: transifex-blue-logo.svg
+servers:
+- url: https://rest.api.transifex.com
+security:
+- bearerAuth: []
+tags:
+- description: 'Tasks are work items that can be assigned to users within a project. They help organize and track translation work.
+
+    '
+  name: Tasks
+paths:
+  /tasks:
+    get:
+      description: Get the list of tasks that belong to a single organization.
+      parameters:
+      - description: Filter results by an organization
+        in: query
+        name: filter[organization]
+        required: true
+        schema:
+          description: Organization identifier.
+          example: o:org_123
+          pattern: ^o:[a-zA-Z0-9._-]+$
+          type: string
+      - description: 'The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.
+
+          '
+        in: query
+        name: page[cursor]
+        schema:
+          type: string
+      - description: Filter tasks by a project
+        in: query
+        name: filter[project]
+        required: false
+        schema:
+          description: Project identifier.
+          example: o:organization_slug:p:project_slug
+          pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+$
+          type: string
+      - description: Filter tasks by a task name
+        in: query
+        name: filter[name]
+        required: false
+        schema:
+          type: string
+      - description: Filter tasks by a task status
+        in: query
+        name: filter[statuses]
+        required: false
+        schema:
+          description: Comma-separated list of task statuses
+          example: PENDING,FINISHED
+          pattern: ^(INITIALIZING|PENDING|FINISHED|DELETED)(,(INITIALIZING|PENDING|FINISHED|DELETED))*$
+          type: string
+      - description: Filter tasks by a task assignee(s0)
+        in: query
+        name: filter[assignees]
+        required: false
+        schema:
+          description: Comma-separated list of user IDs and optionally "unassigned"
+          example: u:user_1,u:user_2,unassigned
+          pattern: ^(u:[\w.-]+|unassigned)(,(u:[\w.-]+|unassigned))*$
+          type: string
+      - description: Filter tasks by a task creator(s)
+        in: query
+        name: filter[creators]
+        required: false
+        schema:
+          description: Comma-separated list of user IDs
+          example: u:user_1,u:user_2
+          pattern: ^u:[\w.-]+(,u:[\w.-]+)*$
+          type: string
+      - description: Filter tasks by a task due date before
+        in: query
+        name: filter[due_date][before]
+        required: false
+        schema:
+          example: XXXX-XX-XX
+          format: date
+          type: string
+      - description: Filter tasks by a task due date after
+        in: query
+        name: filter[due_date][after]
+        required: false
+        schema:
+          example: XXXX-XX-XX
+          format: date
+          type: string
+      - description: Filter tasks by a task created date before
+        in: query
+        name: filter[created_date][before]
+        required: false
+        schema:
+          example: XXXX-XX-XX
+          format: date
+          type: string
+      - description: Filter tasks by a task created date after
+        in: query
+        name: filter[created_date][after]
+        required: false
+        schema:
+          example: XXXX-XX-XX
+          format: date
+          type: string
+      - description: Filter tasks by a language code
+        in: query
+        name: filter[language_code]
+        required: false
+        schema:
+          example: en
+          type: string
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    description: List of Task objects.
+                    items:
+                      additionalProperties: false
+                      properties:
+                        attributes:
+                          additionalProperties: false
+                          description: Task attributes.
+                          properties:
+                            completed_at:
+                              description: The date when the task was completed.
+                              example: '2025-01-01T00:00:00Z'
+                              format: date-time
+                              nullable: true
+                              type: string
+                            created_at:
+                              description: The date when the task was created.
+                              example: '2025-01-01T00:00:00Z'
+                              format: date-time
+                              type: string
+                            description:
+                              description: A description of the Task.
+                              example: Translate all resource strings
+                              type: string
+                            due_date:
+                              description: The final due date of the task.
+                              example: '2025-01-01'
+                              format: date
+                              nullable: true
+                              type: string
+                            exclusive_editing:
+                              description: Whether the task has exclusive editing enabled.
+                              example: false
+                              type: boolean
+                            name:
+                              description: The name of the Task.
+                              example: Transifex task
+                              maxLength: 255
+                              type: string
+                            priority:
+                              enum:
+                              - NORMAL
+                              - HIGH
+                              - URGENT
+                              example: NORMAL
+                              type: string
+                            status:
+                              enum:
+                              - INITIALIZING
+                              - PENDING
+                              - FINISHED
+                              - DELETED
+                              example: PENDING
+                              type: string
+                            type:
+                              example:
+                              - TRANSLATION
+                              - REVIEW
+                              items:
+                                type: string
+                              type: array
+                            updated_at:
+                              description: The date when the task was updated.
+                              example: '2025-01-01T00:00:00Z'
+                              format: date-time
+                              type: string
+                          required:
+                          - name
+                          type: object
+                        id:
+                          description: Task identifier.
+                          example: o:organization_slug:p:project_slug:t:task_hash
+                          pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:t:[a-zA-Z0-9_-]+$
+                          type: string
+                        links:
+                          additionalProperties: false
+                          description: Tasks self link.
+                          properties:
+                            self:
+                              description: Tasks details link.
+                              example: /tasks/o:organization_slug:p:project_slug:t:task_id
+                              type: string
+                          required:
+                          - self
+                          type: object
+                        relationships:
+                          additionalProperties: false
+                          description: Task relationships.
+                          properties:
+                            languages:
+                              additionalProperties: false
+                              properties:
+                                links:
+                                  additionalProperties: false
+                                  description: Task progress per language link.
+                                  properties:
+                                    related:
+                                      description: Task progress per language link.
+                                      example: /tasks/o:organization_slug:p:project_slug:t:task_id/languages
+                                      type: string
+                                  required:
+                                  - related
+                                  type: object
+                              required:
+                              - links
+                              type: object
+                            owner:
+                              additionalProperties: false
+                              properties:
+                                data:
+                                  description: User id.
+                                  properties:
+                                    id:
+                                      description: User identifier.
+                                      example: u:user_1
+                                      pattern: ^u:[\w.-]+$
+                                      type: string
+                                    type:
+                                      enum:
+                                      - users
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                                  type: object
+                                links:
+                                  additionalProperties: false
+                                  description: User links.
+                                  properties:
+                                    related:
+                                      description: User details link.
+                                      example: /users/u:user_1
+                                      type: string
+                                  required:
+                                  - related
+                                  type: object
+                              required:
+                              - links
+                              - data
+                              type: object
+                            project:
+                              additionalProperties: false
+                              properties:
+                                data:
+                                  additionalProperties: false
+                                  description: Project data container.
+                                  properties:
+                                    id:
+                                      description: Project identifier.
+                                      example: o:organization_slug:p:project_slug
+                                      pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+$
+                                      type: string
+                                    type:
+                                      enum:
+                                      - projects
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                                  type: object
+                                links:
+                                  additionalProperties: false
+                                  description: Project links.
+                                  properties:
+                                    related:
+                                      description: Project details link.
+                                      example: /projects/o:organization_slug:p:project_slug
+                                      type: string
+                                  required:
+                                  - related
+                                  type: object
+                              required:
+                              - links
+                              - data
+                              type: object
+                          required:
+                          - owner
+                          - project
+                          type: object
+                        type:
+                          enum:
+                          - tasks
+                          type: string
+                      required:
+                      - type
+                      - id
+                      - attributes
+                      - relationships
+                      - links
+                      type: object
+                    type: array
+                  links:
+                    additionalProperties: false
+                    description: Pagination links.
+                    properties:
+                      next:
+                        description: Tasks cursor link.
+                        example: /tasks?filter[organization]=o:organization_slug&page[cursor]=XXX
+                        nullable: true
+                        type: string
+                      previous:
+                        description: Tasks cursor link.
+                        example: /tasks?filter[organization]=o:organization_slug&page[cursor]=XXX
+                        nullable: true
+                        type: string
+                      self:
+                        description: Tasks details link.
+                        example: /tasks/o:organization_slug:p:project_slug:t:task_id
+                        type: string
+                    required:
+                    - self
+                    - next
+                    - previous
+                    type: object
+                required:
+                - data
+                - links
+                type: object
+          description: Get a list of all the tasks for a given organization
+        '400':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: invalid
+                          type: string
+                        detail:
+                          example: Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens
+                          type: string
+                        source:
+                          anyOf:
+                          - properties:
+                              pointer:
+                                example: /data/attributes/name
+                                type: string
+                          - properties:
+                              parameter:
+                                example: ?filter[foo]
+                                type: string
+                        status:
+                          example: '400'
+                          type: string
+                        title:
+                          example: Field `name` is invalid
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Invalid
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '403':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: true
+                      properties:
+                        code:
+                          example: forbidden
+                          type: string
+                        detail:
+                          example: You do not have permissions to perform this action
+                          type: string
+                        status:
+                          example: '403'
+                          type: string
+                        title:
+                          example: Operation not allowed
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Forbidden
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '409':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: conflict
+                          type: string
+                        detail:
+                          example: Value `some_field_value` already exists
+                          type: string
+                        source:
+                          additionalProperties: false
+                          properties:
+                            pointer:
+                              example: /data/attributes/some_field
+                              type: string
+                          type: object
+                        status:
+                          example: '409'
+                          type: string
+                        title:
+                          example: Field `some_field` conflicted
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Conflict
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      summary: List tasks
+      tags:
+      - Tasks
+      x-released: true
+    post:
+      description: "Making a POST request to this endpoint creates a task for the given project, \nwith the provided language and source string attributes. If it is not set to auto assign the assignees,\nuse the following endpoint [tasks/<task_id>/languages/<language_id>/relationships/assignees]   \n"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              additionalProperties: false
+              properties:
+                data:
+                  additionalProperties: false
+                  description: Create task body request details.
+                  properties:
+                    attributes:
+                      additionalProperties: false
+                      description: Task attributes.
+                      properties:
+                        assignee_selection_method:
+                          enum:
+                          - SKIP
+                          - AUTO
+                          example: SKIP
+                          type: string
+                        description:
+                          description: A description of the Task.
+                          example: Translate all resource strings
+                          type: string
+                        due_dates:
+                          additionalProperties: false
+                          description: The due dates to create the task for.
+                          nullable: true
+                          properties:
+                            PROOFREAD:
+                              description: The due date to create the task for proofread.
+                              example: '2025-01-01'
+                              type: string
+                            REVIEW:
+                              description: The due date to create the task for review.
+                              example: '2025-01-01'
+                              type: string
+                            TRANSLATION:
+                              description: The due date to create the task for translation.
+                              example: '2025-01-01'
+                              type: string
+                          type: object
+                        exclusive_editing:
+                          description: Whether to enable exclusive editing for the task.
+                          example: true
+                          type: boolean
+                        language_codes:
+                          description: The languages to create the task for.
+                          example:
+                          - l:en
+                          - l:fr
+                          items:
+                            type: string
+                          type: array
+                        name:
+                          description: The name of the Task.
+                          example: Transifex task
+                          maxLength: 255
+                          type: string
+                        priority:
+                          enum:
+                          - NORMAL
+                          - HIGH
+                          - URGENT
+                          example: NORMAL
+                          type: string
+                        resource_string_ids:
+                          description: The resource strings to create the task for.
+                          example:
+                          - o:<org_slug>:p:<proj_slug>:r:<res_slug>:s:<string_hash1>
+                          - o:<org_slug>:p:<proj_slug>:r:<res_slug>:s:<string_hash2>
+                          items:
+                            type: string
+                          type: array
+                        task_type:
+                          enum:
+                          - TRANSLATION
+                          - AI_TRANSLATION
+                          - TRANSLATION_AND_REVIEW
+                          - AI_TRANSLATION_AND_REVIEW
+                          - TRANSLATION_AND_REVIEW_AND_PROOFREAD
+                          - AI_TRANSLATION_AND_REVIEW_AND_PROOFREAD
+                          example: TRANSLATION
+                          type: string
+                      required:
+                      - name
+                      - task_type
+                      - language_codes
+                      - resource_string_ids
+                      type: object
+                    relationships:
+                      additionalProperties: false
+                      description: Task relationships.
+                      properties:
+                        project:
+                          additionalProperties: false
+                          description: The `project` task should belong to.
+                          properties:
+                            data:
+                              additionalProperties: false
+                              description: Project data container.
+                              properties:
+                                id:
+                                  description: Project identifier.
+                                  example: o:organization_slug:p:project_slug
+                                  pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+$
+                                  type: string
+                                type:
+                                  enum:
+                                  - projects
+                                  type: string
+                              required:
+                              - type
+                              - id
+                              type: object
+                          required:
+                          - data
+                          type: object
+                      required:
+                      - project
+                      type: object
+                    type:
+                      enum:
+                      - tasks
+                      type: string
+                  required:
+                  - type
+                  - attributes
+                  - relationships
+                  type: object
+              required:
+              - data
+              type: object
+        required: true
+      responses:
+        '201':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    additionalProperties: false
+                    properties:
+                      attributes:
+                        additionalProperties: false
+                        description: Task attributes.
+                        properties:
+                          completed_at:
+                            description: The date when the task was completed.
+                            example: '2025-01-01T00:00:00Z'
+                            format: date-time
+                            nullable: true
+                            type: string
+                          created_at:
+                            description: The date when the task was created.
+                            example: '2025-01-01T00:00:00Z'
+                            format: date-time
+                            type: string
+                          description:
+                            description: A description of the Task.
+                            example: Translate all resource strings
+                            type: string
+                          due_date:
+                            description: The final due date of the task.
+                            example: '2025-01-01'
+                            format: date
+                            nullable: true
+                            type: string
+                          exclusive_editing:
+                            description: Whether the task has exclusive editing enabled.
+                            example: false
+                            type: boolean
+                          name:
+                            description: The name of the Task.
+                            example: Transifex task
+                            maxLength: 255
+                            type: string
+                          priority:
+                            enum:
+                            - NORMAL
+                            - HIGH
+                            - URGENT
+                            example: NORMAL
+                            type: string
+                          status:
+                            enum:
+                            - INITIALIZING
+                            - PENDING
+                            - FINISHED
+                            - DELETED
+                            example: PENDING
+                            type: string
+                          type:
+                            example:
+                            - TRANSLATION
+                            - REVIEW
+                            items:
+                              type: string
+                            type: array
+                          updated_at:
+                            description: The date when the task was updated.
+                            example: '2025-01-01T00:00:00Z'
+                            format: date-time
+                            type: string
+                        required:
+                        - name
+                        type: object
+                      id:
+                        description: Task identifier.
+                        example: o:organization_slug:p:project_slug:t:task_hash
+                        pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:t:[a-zA-Z0-9_-]+$
+                        type: string
+                      links:
+                        additionalProperties: false
+                        description: Tasks self link.
+                        properties:
+                          self:
+                            description: Tasks details link.
+                            example: /tasks/o:organization_slug:p:project_slug:t:task_id
+                            type: string
+                        required:
+                        - self
+                        type: object
+                      relationships:
+                        additionalProperties: false
+                        description: Task relationships.
+                        properties:
+                          languages:
+                            additionalProperties: false
+                            properties:
+                              links:
+                                additionalProperties: false
+                                description: Task progress per language link.
+                                properties:
+                                  related:
+                                    description: Task progress per language link.
+                                    example: /tasks/o:organization_slug:p:project_slug:t:task_id/languages
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            type: object
+                          owner:
+                            additionalProperties: false
+                            properties:
+                              data:
+                                description: User id.
+                                properties:
+                                  id:
+                                    description: User identifier.
+                                    example: u:user_1
+                                    pattern: ^u:[\w.-]+$
+                                    type: string
+                                  type:
+                                    enum:
+                                    - users
+                                    type: string
+                                required:
+                                - type
+                                - id
+                                type: object
+                              links:
+                                additionalProperties: false
+                                description: User links.
+                                properties:
+                                  related:
+                                    description: User details link.
+                                    example: /users/u:user_1
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            - data
+                            type: object
+                          project:
+                            additionalProperties: false
+                            properties:
+                              data:
+                                additionalProperties: false
+                                description: Project data container.
+                                properties:
+                                  id:
+                                    description: Project identifier.
+                                    example: o:organization_slug:p:project_slug
+                                    pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+$
+                                    type: string
+                                  type:
+                                    enum:
+                                    - projects
+                                    type: string
+                                required:
+                                - type
+                                - id
+                                type: object
+                              links:
+                                additionalProperties: false
+                                description: Project links.
+                                properties:
+                                  related:
+                                    description: Project details link.
+                                    example: /projects/o:organization_slug:p:project_slug
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            - data
+                            type: object
+                        required:
+                        - owner
+                        - project
+                        type: object
+                      type:
+                        enum:
+                        - tasks
+                        type: string
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    - relationships
+                    - links
+                    type: object
+                required:
+                - data
+                type: object
+          description: Created.
+          headers:
+            Location:
+              required: true
+              schema:
+                description: Tasks details link.
+                example: /tasks/o:organization_slug:p:project_slug:t:task_id
+                type: string
+        '400':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: invalid
+                          type: string
+                        detail:
+                          example: Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens
+                          type: string
+                        source:
+                          anyOf:
+                          - properties:
+                              pointer:
+                                example: /data/attributes/name
+                                type: string
+                          - properties:
+                              parameter:
+                                example: ?filter[foo]
+                                type: string
+                        status:
+                          example: '400'
+                          type: string
+                        title:
+                          example: Field `name` is invalid
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Invalid
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '402':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: payment_required
+                          type: string
+                        detail:
+                          example: 'Your plan doesn''t cover the requested feature, please upgrade
+
+                            '
+                          type: string
+                        status:
+                          example: '402'
+                          type: string
+                        title:
+                          example: Payment required
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Payment required
+        '403':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: true
+                      properties:
+                        code:
+                          example: forbidden
+                          type: string
+                        detail:
+                          example: You do not have permissions to perform this action
+                          type: string
+                        status:
+                          example: '403'
+                          type: string
+                        title:
+                          example: Operation not allowed
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Forbidden
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '409':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: conflict
+                          type: string
+                        detail:
+                          example: Value `some_field_value` already exists
+                          type: string
+                        source:
+                          additionalProperties: false
+                          properties:
+                            pointer:
+                              example: /data/attributes/some_field
+                              type: string
+                          type: object
+                        status:
+                          example: '409'
+                          type: string
+                        title:
+                          example: Field `some_field` conflicted
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Conflict
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      security:
+      - bearerAuth: []
+      summary: Create new task
+      tags:
+      - Tasks
+      x-released: true
+  /tasks/{task_id}:
+    delete:
+      description: Delete a task.
+      parameters:
+      - description: Task identifier
+        in: path
+        name: task_id
+        required: true
+        schema:
+          description: Task identifier.
+          example: o:organization_slug:p:project_slug:t:task_hash
+          pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:t:[a-zA-Z0-9_-]+$
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: invalid
+                          type: string
+                        detail:
+                          example: Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens
+                          type: string
+                        source:
+                          anyOf:
+                          - properties:
+                              pointer:
+                                example: /data/attributes/name
+                                type: string
+                          - properties:
+                              parameter:
+                                example: ?filter[foo]
+                                type: string
+                        status:
+                          example: '400'
+                          type: string
+                        title:
+                          example: Field `name` is invalid
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Invalid
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '403':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: true
+                      properties:
+                        code:
+                          example: forbidden
+                          type: string
+                        detail:
+                          example: You do not have permissions to perform this action
+                          type: string
+                        status:
+                          example: '403'
+                          type: string
+                        title:
+                          example: Operation not allowed
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Forbidden
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '409':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: conflict
+                          type: string
+                        detail:
+                          example: Value `some_field_value` already exists
+                          type: string
+                        source:
+                          additionalProperties: false
+                          properties:
+                            pointer:
+                              example: /data/attributes/some_field
+                              type: string
+                          type: object
+                        status:
+                          example: '409'
+                          type: string
+                        title:
+                          example: Field `some_field` conflicted
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Conflict
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      summary: Delete Task
+      tags:
+      - Tasks
+      x-released: true
+    get:
+      description: Get a single task by its ID.
+      parameters:
+      - description: Task identifier
+        in: path
+        name: task_id
+        required: true
+        schema:
+          description: Task identifier.
+          example: o:organization_slug:p:project_slug:t:task_hash
+          pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:t:[a-zA-Z0-9_-]+$
+          type: string
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    additionalProperties: false
+                    properties:
+                      attributes:
+                        additionalProperties: false
+                        description: Task attributes.
+                        properties:
+                          completed_at:
+                            description: The date when the task was completed.
+                            example: '2025-01-01T00:00:00Z'
+                            format: date-time
+                            nullable: true
+                            type: string
+                          created_at:
+                            description: The date when the task was created.
+                            example: '2025-01-01T00:00:00Z'
+                            format: date-time
+                            type: string
+                          description:
+                            description: A description of the Task.
+                            example: Translate all resource strings
+                            type: string
+                          due_date:
+                            description: The final due date of the task.
+                            example: '2025-01-01'
+                            format: date
+                            nullable: true
+                            type: string
+                          exclusive_editing:
+                            description: Whether the task has exclusive editing enabled.
+                            example: false
+                            type: boolean
+                          name:
+                            description: The name of the Task.
+                            example: Transifex task
+                            maxLength: 255
+                            type: string
+                          priority:
+                            enum:
+                            - NORMAL
+                            - HIGH
+                            - URGENT
+                            example: NORMAL
+                            type: string
+                          status:
+                            enum:
+                            - INITIALIZING
+                            - PENDING
+                            - FINISHED
+                            - DELETED
+                            example: PENDING
+                            type: string
+                          type:
+                            example:
+                            - TRANSLATION
+                            - REVIEW
+                            items:
+                              type: string
+                            type: array
+                          updated_at:
+                            description: The date when the task was updated.
+                            example: '2025-01-01T00:00:00Z'
+                            format: date-time
+                            type: string
+                        required:
+                        - name
+                        type: object
+                      id:
+                        description: Task identifier.
+                        example: o:organization_slug:p:project_slug:t:task_hash
+                        pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:t:[a-zA-Z0-9_-]+$
+                        type: string
+                      links:
+                        additionalProperties: false
+                        description: Tasks self link.
+                        properties:
+                          self:
+                            description: Tasks details link.
+                            example: /tasks/o:organization_slug:p:project_slug:t:task_id
+                            type: string
+                        required:
+                        - self
+                        type: object
+                      relationships:
+                        additionalProperties: false
+                        description: Task relationships.
+                        properties:
+                          languages:
+                            additionalProperties: false
+                            properties:
+                              links:
+                                additionalProperties: false
+                                description: Task progress per language link.
+                                properties:
+                                  related:
+                                    description: Task progress per language link.
+                                    example: /tasks/o:organization_slug:p:project_slug:t:task_id/languages
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            type: object
+                          owner:
+                            additionalProperties: false
+                            properties:
+                              data:
+                                description: User id.
+                                properties:
+                                  id:
+                                    description: User identifier.
+                                    example: u:user_1
+                                    pattern: ^u:[\w.-]+$
+                                    type: string
+                                  type:
+                                    enum:
+                                    - users
+                                    type: string
+                                required:
+                                - type
+                                - id
+                                type: object
+                              links:
+                                additionalProperties: false
+                                description: User links.
+                                properties:
+                                  related:
+                                    description: User details link.
+                                    example: /users/u:user_1
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            - data
+                            type: object
+                          project:
+                            additionalProperties: false
+                            properties:
+                              data:
+                                additionalProperties: false
+                                description: Project data container.
+                                properties:
+                                  id:
+                                    description: Project identifier.
+                                    example: o:organization_slug:p:project_slug
+                                    pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+$
+                                    type: string
+                                  type:
+                                    enum:
+                                    - projects
+                                    type: string
+                                required:
+                                - type
+                                - id
+                                type: object
+                              links:
+                                additionalProperties: false
+                                description: Project links.
+                                properties:
+                                  related:
+                                    description: Project details link.
+                                    example: /projects/o:organization_slug:p:project_slug
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            - data
+                            type: object
+                        required:
+                        - owner
+                        - project
+                        type: object
+                      type:
+                        enum:
+                        - tasks
+                        type: string
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    - relationships
+                    - links
+                    type: object
+                required:
+                - data
+                type: object
+          description: Get a single task
+        '400':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: invalid
+                          type: string
+                        detail:
+                          example: Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens
+                          type: string
+                        source:
+                          anyOf:
+                          - properties:
+                              pointer:
+                                example: /data/attributes/name
+                                type: string
+                          - properties:
+                              parameter:
+                                example: ?filter[foo]
+                                type: string
+                        status:
+                          example: '400'
+                          type: string
+                        title:
+                          example: Field `name` is invalid
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Invalid
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '403':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: true
+                      properties:
+                        code:
+                          example: forbidden
+                          type: string
+                        detail:
+                          example: You do not have permissions to perform this action
+                          type: string
+                        status:
+                          example: '403'
+                          type: string
+                        title:
+                          example: Operation not allowed
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Forbidden
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      summary: Get a task
+      tags:
+      - Tasks
+      x-released: true
+    patch:
+      parameters:
+      - description: Task identifier
+        in: path
+        name: task_id
+        required: true
+        schema:
+          description: Task identifier.
+          example: o:organization_slug:p:project_slug:t:task_hash
+          pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:t:[a-zA-Z0-9_-]+$
+          type: string
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              additionalProperties: false
+              properties:
+                data:
+                  additionalProperties: false
+                  description: Update task body request details.
+                  minProperties: 3
+                  properties:
+                    attributes:
+                      description: 'Task update attributes. Only one of the following can be performed at a time:
+
+                        update [name, description, priority, due_dates] or mark_as_completed or reopen.
+
+                        '
+                      minProperties: 1
+                      oneOf:
+                      - additionalProperties: false
+                        properties:
+                          exclusive_editing:
+                            description: Enable or disable exclusive editing for the task.
+                            example: true
+                            type: boolean
+                        required:
+                        - exclusive_editing
+                        type: object
+                      - additionalProperties: false
+                        properties:
+                          reopen:
+                            description: Whether to reopen the task.
+                            example: true
+                            type: boolean
+                        required:
+                        - reopen
+                        type: object
+                      - additionalProperties: false
+                        properties:
+                          mark_as_completed:
+                            description: Whether to mark the task as Completed.
+                            example: true
+                            type: boolean
+                        required:
+                        - mark_as_completed
+                        type: object
+                      - additionalProperties: false
+                        anyOf:
+                        - required:
+                          - name
+                        - required:
+                          - description
+                        - required:
+                          - priority
+                        - required:
+                          - due_dates
+                        properties:
+                          description:
+                            description: A description of the Task.
+                            example: Translate all resource strings
+                            type: string
+                          due_dates:
+                            additionalProperties: false
+                            description: The due dates to create the task for.
+                            nullable: true
+                            properties:
+                              PROOFREAD:
+                                description: The due date to create the task for proofread.
+                                example: '2025-01-01'
+                                type: string
+                              REVIEW:
+                                description: The due date to create the task for review.
+                                example: '2025-01-01'
+                                type: string
+                              TRANSLATION:
+                                description: The due date to create the task for translation.
+                                example: '2025-01-01'
+                                type: string
+                            type: object
+                          name:
+                            description: The name of the Task.
+                            example: Transifex task
+                            maxLength: 255
+                            type: string
+                          priority:
+                            enum:
+                            - NORMAL
+                            - HIGH
+                            - URGENT
+                            example: NORMAL
+                            type: string
+                        type: object
+                      type: object
+                    id:
+                      description: Task identifier.
+                      example: o:organization_slug:p:project_slug:t:task_hash
+                      pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:t:[a-zA-Z0-9_-]+$
+                      type: string
+                    type:
+                      enum:
+                      - tasks
+                      type: string
+                  required:
+                  - id
+                  - type
+                  type: object
+              required:
+              - data
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    additionalProperties: false
+                    description: The updated task object.
+                    properties:
+                      attributes:
+                        additionalProperties: false
+                        description: Task attributes.
+                        properties:
+                          completed_at:
+                            description: The date when the task was completed.
+                            example: '2025-01-01T00:00:00Z'
+                            format: date-time
+                            nullable: true
+                            type: string
+                          created_at:
+                            description: The date when the task was created.
+                            example: '2025-01-01T00:00:00Z'
+                            format: date-time
+                            type: string
+                          description:
+                            description: A description of the Task.
+                            example: Translate all resource strings
+                            type: string
+                          due_date:
+                            description: The final due date of the task.
+                            example: '2025-01-01'
+                            format: date
+                            nullable: true
+                            type: string
+                          exclusive_editing:
+                            description: Whether the task has exclusive editing enabled.
+                            example: false
+                            type: boolean
+                          name:
+                            description: The name of the Task.
+                            example: Transifex task
+                            maxLength: 255
+                            type: string
+                          priority:
+                            enum:
+                            - NORMAL
+                            - HIGH
+                            - URGENT
+                            example: NORMAL
+                            type: string
+                          status:
+                            enum:
+                            - INITIALIZING
+                            - PENDING
+                            - FINISHED
+                            - DELETED
+                            example: PENDING
+                            type: string
+                          type:
+                            example:
+                            - TRANSLATION
+                            - REVIEW
+                            items:
+                              type: string
+                            type: array
+                          updated_at:
+                            description: The date when the task was updated.
+                            example: '2025-01-01T00:00:00Z'
+                            format: date-time
+                            type: string
+                        required:
+                        - name
+                        type: object
+                      id:
+                        description: Task identifier.
+                        example: o:organization_slug:p:project_slug:t:task_hash
+                        pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:t:[a-zA-Z0-9_-]+$
+                        type: string
+                      links:
+                        additionalProperties: false
+                        description: Tasks self link.
+                        properties:
+                          self:
+                            description: Tasks details link.
+                            example: /tasks/o:organization_slug:p:project_slug:t:task_id
+                            type: string
+                        required:
+                        - self
+                        type: object
+                      relationships:
+                        additionalProperties: false
+                        description: Task relationships.
+                        properties:
+                          languages:
+                            additionalProperties: false
+                            properties:
+                              links:
+                                additionalProperties: false
+                                description: Task progress per language link.
+                                properties:
+                                  related:
+                                    description: Task progress per language link.
+                                    example: /tasks/o:organization_slug:p:project_slug:t:task_id/languages
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            type: object
+                          owner:
+                            additionalProperties: false
+                            properties:
+                              data:
+                                description: User id.
+                                properties:
+                                  id:
+                                    description: User identifier.
+                                    example: u:user_1
+                                    pattern: ^u:[\w.-]+$
+                                    type: string
+                                  type:
+                                    enum:
+                                    - users
+                                    type: string
+                                required:
+                                - type
+                                - id
+                                type: object
+                              links:
+                                additionalProperties: false
+                                description: User links.
+                                properties:
+                                  related:
+                                    description: User details link.
+                                    example: /users/u:user_1
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            - data
+                            type: object
+                          project:
+                            additionalProperties: false
+                            properties:
+                              data:
+                                additionalProperties: false
+                                description: Project data container.
+                                properties:
+                                  id:
+                                    description: Project identifier.
+                                    example: o:organization_slug:p:project_slug
+                                    pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+$
+                                    type: string
+                                  type:
+                                    enum:
+                                    - projects
+                                    type: string
+                                required:
+                                - type
+                                - id
+                                type: object
+                              links:
+                                additionalProperties: false
+                                description: Project links.
+                                properties:
+                                  related:
+                                    description: Project details link.
+                                    example: /projects/o:organization_slug:p:project_slug
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            - data
+                            type: object
+                        required:
+                        - owner
+                        - project
+                        type: object
+                      type:
+                        enum:
+                        - tasks
+                        type: string
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    - relationships
+                    - links
+                    type: object
+                required:
+                - data
+                type: object
+          description: Successful response.
+        '400':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: invalid
+                          type: string
+                        detail:
+                          example: Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens
+                          type: string
+                        source:
+                          anyOf:
+                          - properties:
+                              pointer:
+                                example: /data/attributes/name
+                                type: string
+                          - properties:
+                              parameter:
+                                example: ?filter[foo]
+                                type: string
+                        status:
+                          example: '400'
+                          type: string
+                        title:
+                          example: Field `name` is invalid
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Invalid
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '403':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: true
+                      properties:
+                        code:
+                          example: forbidden
+                          type: string
+                        detail:
+                          example: You do not have permissions to perform this action
+                          type: string
+                        status:
+                          example: '403'
+                          type: string
+                        title:
+                          example: Operation not allowed
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Forbidden
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '409':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: conflict
+                          type: string
+                        detail:
+                          example: Value `some_field_value` already exists
+                          type: string
+                        source:
+                          additionalProperties: false
+                          properties:
+                            pointer:
+                              example: /data/attributes/some_field
+                              type: string
+                          type: object
+                        status:
+                          example: '409'
+                          type: string
+                        title:
+                          example: Field `some_field` conflicted
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Conflict
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      summary: Update a Task
+      tags:
+      - Tasks
+      x-released: true
+  /tasks/{task_id}/languages:
+    summary: List task languages
+    get:
+      description: Get the list of all languages of a task.
+      parameters:
+      - description: Format of composite id should be `o:organization_slug:p:project_slug:t:task_hash`.
+        in: path
+        name: task_id
+        required: true
+        schema:
+          description: Task identifier.
+          example: o:organization_slug:p:project_slug:t:task_hash
+          pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:t:[a-zA-Z0-9_-]+$
+          type: string
+      - description: 'The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.
+
+          '
+        in: query
+        name: page[cursor]
+        schema:
+          type: string
+      - in: query
+        name: filter[task_type]
+        required: false
+        schema:
+          description: Required task type to uniquely identify the task, language and task type combination.
+          enum:
+          - TRANSLATION
+          - REVIEW
+          - PROOFREAD
+          - TQI_ALL
+          - TQI_TRANSLATED
+          - TQI_REVIEWED
+          - TQI_PROOFREAD
+          example: TRANSLATION
+          type: string
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    items:
+                      properties:
+                        attributes:
+                          additionalProperties: false
+                          properties:
+                            completed_words:
+                              example: 10
+                              type: integer
+                            completed_words_percentage:
+                              example: 34.45
+                              type: number
+                            due_date:
+                              example: XXXX-XX-XXTXX:XX:XXZ
+                              format: date-time
+                              type: string
+                            identifier:
+                              description: The identifier of the task language.
+                              example: project_slug:task_number:language_code:type
+                              pattern: ^[a-zA-Z0-9._-]+:[0-9]+:[a-zA-Z0-9._-]+:(translation|review|proofread)$
+                              type: string
+                            task_type:
+                              enum:
+                              - TRANSLATION
+                              - REVIEW
+                              - PROOFREAD
+                              - TQI_ALL
+                              - TQI_TRANSLATED
+                              - TQI_REVIEWED
+                              - TQI_PROOFREAD
+                              type: string
+                            total_words:
+                              example: 2
+                              type: integer
+                          required:
+                          - task_type
+                          - total_words
+                          - completed_words
+                          - completed_words_percentage
+                          - due_date
+                          - identifier
+                          type: object
+                        relationships:
+                          properties:
+                            language:
+                              properties:
+                                data:
+                                  allOf:
+                                  - additionalProperties: false
+                                    description: Language data container.
+                                    properties:
+                                      id:
+                                        description: Language identifier.
+                                        example: l:en_US
+                                        pattern: ^l:[a-zA-Z0-9@_.-]+$
+                                        type: string
+                                      type:
+                                        enum:
+                                        - languages
+                                        type: string
+                                    required:
+                                    - type
+                                    - id
+                                    type: object
+                                links:
+                                  allOf:
+                                  - additionalProperties: false
+                                    description: Language related link.
+                                    properties:
+                                      related:
+                                        description: Language details link.
+                                        example: /languages/l:en_US
+                                        type: string
+                                    required:
+                                    - related
+                                    type: object
+                              type: object
+                          required:
+                          - language
+                          type: object
+                        type:
+                          enum:
+                          - task_languages
+                          type: string
+                      required:
+                      - type
+                      - attributes
+                      - relationships
+                      type: object
+                    type: array
+                  links:
+                    additionalProperties: false
+                    properties:
+                      next:
+                        example: /tasks/o:organization_slug:p:project_slug:t:task_hash/languages?page[cursor]=XXX
+                        nullable: true
+                        type: string
+                      previous:
+                        example: /tasks/o:organization_slug:p:project_slug:t:task_hash/languages?page[cursor]=XXX
+                        nullable: true
+                        type: string
+                      self:
+                        example: /tasks/o:organization_slug:p:project_slug:t:task_hash/languages
+                        type: string
+                    required:
+                    - self
+                    - previous
+                    - next
+                    type: object
+                required:
+                - data
+                - links
+                type: object
+          description: Successful Response.
+        '400':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: invalid
+                          type: string
+                        detail:
+                          example: Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens
+                          type: string
+                        source:
+                          anyOf:
+                          - properties:
+                              pointer:
+                                example: /data/attributes/name
+                                type: string
+                          - properties:
+                              parameter:
+                                example: ?filter[foo]
+                                type: string
+                        status:
+                          example: '400'
+                          type: string
+                        title:
+                          example: Field `name` is invalid
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Invalid
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '403':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: true
+                      properties:
+                        code:
+                          example: forbidden
+                          type: string
+                        detail:
+                          example: You do not have permissions to perform this action
+                          type: string
+                        status:
+                          example: '403'
+                          type: string
+                        title:
+                          example: Operation not allowed
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Forbidden
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '409':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: conflict
+                          type: string
+                        detail:
+                          example: Value `some_field_value` already exists
+                          type: string
+                        source:
+                          additionalProperties: false
+                          properties:
+                            pointer:
+                              example: /data/attributes/some_field
+                              type: string
+                          type: object
+                        status:
+                          example: '409'
+                          type: string
+                        title:
+                          example: Field `some_field` conflicted
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Conflict
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      summary: List task languages
+      tags:
+      - Tasks
+      x-released: true
+  /tasks/{task_id}/languages/{language_id}/assignees:
+    summary: List task assignees
+    get:
+      description: List assignees for given task language
+      parameters:
+      - description: Format of composite id should be `o:organization_slug:p:project_slug:t:task_hash`.
+        in: path
+        name: task_id
+        required: true
+        schema:
+          description: Task identifier.
+          example: o:organization_slug:p:project_slug:t:task_hash
+          pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:t:[a-zA-Z0-9_-]+$
+          type: string
+      - description: Format of the language id should be `l:language_code`.
+        in: path
+        name: language_id
+        required: true
+        schema:
+          description: Language identifier.
+          example: l:en_US
+          pattern: ^l:[a-zA-Z0-9@_.-]+$
+          type: string
+      - in: query
+        name: filter[task_type]
+        required: true
+        schema:
+          description: Required task type to uniquely identify the task, language and task type combination.
+          enum:
+          - TRANSLATION
+          - REVIEW
+          - PROOFREAD
+          - TQI_ALL
+          - TQI_TRANSLATED
+          - TQI_REVIEWED
+          - TQI_PROOFREAD
+          example: TRANSLATION
+          type: string
+      - description: 'The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.
+
+          '
+        in: query
+        name: page[cursor]
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    items:
+                      allOf:
+                      - description: User id.
+                        properties:
+                          id:
+                            description: User identifier.
+                            example: u:user_1
+                            pattern: ^u:[\w.-]+$
+                            type: string
+                          type:
+                            enum:
+                            - users
+                            type: string
+                        required:
+                        - type
+                        - id
+                        type: object
+                      - properties:
+                          attributes:
+                            additionalProperties: false
+                            description: User attributes.
+                            properties:
+                              username:
+                                description: The username.
+                                example: user_1
+                                type: string
+                            required:
+                            - username
+                            type: object
+                          links:
+                            additionalProperties: false
+                            description: User links.
+                            properties:
+                              self:
+                                description: User details link.
+                                example: /users/u:user_1
+                                type: string
+                            required:
+                            - self
+                            type: object
+                        required:
+                        - attributes
+                        - links
+                        type: object
+                    type: array
+                  links:
+                    additionalProperties: false
+                    properties:
+                      next:
+                        example: /tasks/o:organization_slug:p:project_slug:t:task_hash/languages/l:code/assignees?page[cursor]=XXX
+                        nullable: true
+                        type: string
+                      previous:
+                        example: /tasks/o:organization_slug:p:project_slug:t:task_hash/languages/l:code/assignees?page[cursor]=XXX
+                        nullable: true
+                        type: string
+                      self:
+                        example: /tasks/o:organization_slug:p:project_slug:t:task_hash/languages/l:code/assignees
+                        type: string
+                    required:
+                    - self
+                    - previous
+                    - next
+                    type: object
+                required:
+                - data
+                - links
+                type: object
+          description: Successful Response.
+        '400':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: invalid
+                          type: string
+                        detail:
+                          example: Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens
+                          type: string
+                        source:
+                          anyOf:
+                          - properties:
+                              pointer:
+                                example: /data/attributes/name
+                                type: string
+                          - properties:
+                              parameter:
+                                example: ?filter[foo]
+                                type: string
+                        status:
+                          example: '400'
+                          type: string
+                        title:
+                          example: Field `name` is invalid
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Invalid
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '403':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: true
+                      properties:
+                        code:
+                          example: forbidden
+                          type: string
+                        detail:
+                          example: You do not have permissions to perform this action
+                          type: string
+                        status:
+                          example: '403'
+                          type: string
+                        title:
+                          example: Operation not allowed
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Forbidden
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      summary: List task assignees
+      tags:
+      - Tasks
+      x-released: true
+  /tasks/{task_id}/languages/{language_id}/relationships/assignees:
+    parameters:
+    - description: Format of composite id should be `o:organization_slug:p:project_slug:t:task_hash`.
+      in: path
+      name: task_id
+      required: true
+      schema:
+        description: Task identifier.
+        example: o:organization_slug:p:project_slug:t:task_hash
+        pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:t:[a-zA-Z0-9_-]+$
+        type: string
+    - description: Format of the language id should be `l:language_code`.
+      in: path
+      name: language_id
+      required: true
+      schema:
+        description: Language identifier.
+        example: l:en_US
+        pattern: ^l:[a-zA-Z0-9@_.-]+$
+        type: string
+    summary: Manage task assignee relationships
+    get:
+      description: List task assignee relationships.
+      parameters:
+      - in: query
+        name: filter[task_type]
+        required: true
+        schema:
+          description: Required task type to uniquely identify the task, language and task type combination.
+          enum:
+          - TRANSLATION
+          - REVIEW
+          - PROOFREAD
+          - TQI_ALL
+          - TQI_TRANSLATED
+          - TQI_REVIEWED
+          - TQI_PROOFREAD
+          example: TRANSLATION
+          type: string
+      - description: 'The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.
+
+          '
+        in: query
+        name: page[cursor]
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    items:
+                      description: User id.
+                      properties:
+                        id:
+                          description: User identifier.
+                          example: u:user_1
+                          pattern: ^u:[\w.-]+$
+                          type: string
+                        type:
+                          enum:
+                          - users
+                          type: string
+                      required:
+                      - type
+                      - id
+                      type: object
+                    type: array
+                  links:
+                    additionalProperties: false
+                    properties:
+                      next:
+                        example: /projects/o:organization_slug:p:project_slug:t:task_hash/relationships/languages/l:code/assignees?page[cursor]=XXX
+                        nullable: true
+                        type: string
+                      previous:
+                        example: /projects/o:organization_slug:p:project_slug:t:task_hash/relationships/languages/l:code/assignees?page[cursor]=XXX
+                        nullable: true
+                        type: string
+                      self:
+                        example: /projects/o:organization_slug:p:project_slug:t:task_hash/languages/l:code/relationships/assignees
+                        type: string
+                    required:
+                    - self
+                    - previous
+                    - next
+                    type: object
+                required:
+                - data
+                - links
+                type: object
+          description: Successful Response.
+        '400':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: invalid
+                          type: string
+                        detail:
+                          example: Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens
+                          type: string
+                        source:
+                          anyOf:
+                          - properties:
+                              pointer:
+                                example: /data/attributes/name
+                                type: string
+                          - properties:
+                              parameter:
+                                example: ?filter[foo]
+                                type: string
+                        status:
+                          example: '400'
+                          type: string
+                        title:
+                          example: Field `name` is invalid
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Invalid
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '402':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: payment_required
+                          type: string
+                        detail:
+                          example: 'Your plan doesn''t cover the requested feature, please upgrade
+
+                            '
+                          type: string
+                        status:
+                          example: '402'
+                          type: string
+                        title:
+                          example: Payment required
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Payment required
+        '403':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: true
+                      properties:
+                        code:
+                          example: forbidden
+                          type: string
+                        detail:
+                          example: You do not have permissions to perform this action
+                          type: string
+                        status:
+                          example: '403'
+                          type: string
+                        title:
+                          example: Operation not allowed
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Forbidden
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      summary: List task assignee relationships
+      tags:
+      - Tasks
+      x-released: true
+    patch:
+      description: 'Completely replace task assignees.
+
+
+        _**Warning**: This is a highly destructive operation._
+
+        '
+      parameters:
+      - in: query
+        name: filter[task_type]
+        required: true
+        schema:
+          description: Required task type to uniquely identify the task, language and task type combination.
+          enum:
+          - TRANSLATION
+          - REVIEW
+          - PROOFREAD
+          - TQI_ALL
+          - TQI_TRANSLATED
+          - TQI_REVIEWED
+          - TQI_PROOFREAD
+          example: TRANSLATION
+          type: string
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              additionalProperties: false
+              properties:
+                data:
+                  items:
+                    description: User id.
+                    properties:
+                      id:
+                        description: User identifier.
+                        example: u:user_1
+                        pattern: ^u:[\w.-]+$
+                        type: string
+                      type:
+                        enum:
+                        - users
+                        type: string
+                    required:
+                    - type
+                    - id
+                    type: object
+                  type: array
+              required:
+              - data
+              type: object
+        required: true
+      responses:
+        '204':
+          description: No content.
+        '400':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: invalid
+                          type: string
+                        detail:
+                          example: Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens
+                          type: string
+                        source:
+                          anyOf:
+                          - properties:
+                              pointer:
+                                example: /data/attributes/name
+                                type: string
+                          - properties:
+                              parameter:
+                                example: ?filter[foo]
+                                type: string
+                        status:
+                          example: '400'
+                          type: string
+                        title:
+                          example: Field `name` is invalid
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Invalid
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '403':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: true
+                      properties:
+                        code:
+                          example: forbidden
+                          type: string
+                        detail:
+                          example: You do not have permissions to perform this action
+                          type: string
+                        status:
+                          example: '403'
+                          type: string
+                        title:
+                          example: Operation not allowed
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Forbidden
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '409':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: conflict
+                          type: string
+                        detail:
+                          example: Value `some_field_value` already exists
+                          type: string
+                        source:
+                          additionalProperties: false
+                          properties:
+                            pointer:
+                              example: /data/attributes/some_field
+                              type: string
+                          type: object
+                        status:
+                          example: '409'
+                          type: string
+                        title:
+                          example: Field `some_field` conflicted
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Conflict
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      summary: Update task assignees
+      tags:
+      - Tasks
+      x-released: true
+components:
+  securitySchemes:
+    bearerAuth:
+      description: 'To use the API you need to authenticate your requests using Token Authentication. Specifically, you need to
+
+
+        * Acquire an authentication token from the Transifex (under user settings)
+
+        * Uses the `Bearer` keyword and  prepend the token when passing the header.
+
+
+        For example, if the authentication token is `1/0b4e75552e481aeae813aebad53f3de3fcc67ccd`, then the HTTP header should look like this:
+
+
+        `Authorization: Bearer 1/0b4e75552e481aeae813aebad53f3de3fcc67ccd`
+
+
+        To create an API token:
+
+
+        1. Head to your User Settings by going to the main navigation, and clicking on your profile image in the top right corner.
+
+
+        2. In the left menu, click on API token.
+
+
+        3. Click Generate a token.
+
+
+        Once you''ve generated a token, you can edit its name so it''s easier to remember where you use the token.
+
+
+        To keep your API token secure, we''ll only show it once, so please be sure to save it somewhere secure.
+
+        In case you lose your API token, you can regenerate a new one at any time. However, when you regenerate
+
+        a new token, you''ll need to update your applications and replace the old token with the new one.
+
+        '
+      scheme: bearer
+      type: http

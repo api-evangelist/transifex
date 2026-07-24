@@ -1,0 +1,2588 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@transifex.com
+    name: Transifex Support
+  description: "<br/>\n<br/>\n\n# Introduction\n\nThis API is based on **{json:api}**.\n\n{json:api} is a specification that follows shared conventions and standards. This specification enables API discoverability and partial\nself-descriptiveness through conventions. The Json Api specification exposes resources and their relationships representations with\nunique uris and all CRUD operations are performed on those endpoints. With it's simplified approach it assists the API uniformity.\n\nRead more: https://jsonapi.org/\n\nAdditionally, this API is defined using OpenAPI (ex Swagger). This means that you can easily:\n* Generate clients in your preferred: https://swagger.io/tools/swagger-codegen/\n* Download the specification file (see above) and use it in clients like Postman etc\n\n<br />\n<br />\n\n# Pagination\n\nAll list endpoints include pagination to guarantee performant responses. Those endpoints will return `next` and `previous` links in the\nresponse payload (`links` section). The client does not have to construct any pagination specific URLs or headers, just follow those\nlinks.\n\nPage size is fixed to 150 items per page.\n\n<br />\n<br />\n\n# Content Negotiation\n\nThe basic media type for the API is `application/vnd.api+json`. If you want to execute a request that includes data (`POST`, `PATCH`, `DELETE`)\nyou should include this media type in the `Content-Type` header. The only case where a different `Content-Type` header will be accepted is for\nendpoints that can accept file like objects where the media type used should be `multipart/form-data`.\n\nThe base media type this API responds is `application/vnd.api+json`. To retrieve the data in this media type you should include it in the `Accept`\nheader. The only case where the server will return another media type is for endpoint that return file like objects.\nIn this case the media type used should be `*/*` and the server will prioritize the negotiation to the media type dictated from the file.\nNote that `application/vnd.api+json` will be also available for accept header in these cases and will return a JSON serialized representation of the file.\n\nRead more here: https://jsonapi.org/format/#content-negotiation\n\n# File Uploads\n\nThere are three different methods for uploading file content to Transifex:\n* Using Content-Type `application/vnd.api+json` the content must\n    be JSON serializable.\n    - For content that is directly JSON serializable you can dump the content\n    of the file directly and set the `content_encoding` attribute  to `text`.\n    - For any content, even if it's not JSON serializable (eg .xlsx, .idml or .docx file extensions),\n    you can encode the file using the `base64` encoding and set the `content_encoding` attribute to `base64`.\n* Using Content-Type `multipart/form-data` the content can be any raw file, and can\n    be send without further processing.\n\n# Asynchronous Processing\n\nAsynchronous operations are triggered via a POST request. The response status in such cases is 202 Accepted, with a link in the Content-Location header.\nTo check the status of the operation, a client can send a request to the location given earlier.\nAn optional `callback_url` can be provided when the asynchronous operation is triggered. If such url is provided, upon completion\na HTTP POST request is executed containing all information required to identify the specific operation:\n\nExample request:\n```\nPOST callback_url HTTP/1.1\nContent-Type: application/json\n\n{\n  \"data\": {\n    \"type\": resource_strings_async_downloads\",\n    \"id\": \"xxxxxxxxx\",\n    \"attributes\": {\n      \"location\": \"https://rest.api.transifex.com/resource_strings_async_downloads/xxxxxxxxx\",\n      \"status\": \"succeeded\"\n    }\n  }\n}\n```\n\n# Restrictions\n\nThe following Plan based restrictions apply:\n* [Activity Reports](#tag/Activity-Reports) are available to Premium and up\n* [XLIFF export](#tag/Resource-Translations/paths/~1resource_translations_async_downloads/post) is available to Premium and up.\n* [Screenshots](#tag/Context-Screenshots) are available to Premium and up\n\n# Rate Limit\n\nTo maintain optimal performance and availability of the API, we limit the request rate to 500\nrequests/min or 30,000 requests / 5 minutes / IP. Polling endpoints like\n`resource_translations_async_downloads/{resource_translations_async_download_id}` and\n`resource_strings_async_downloads/{resource_strings_async_download_id}` have a rate limit of 1,200 requests/min.\nOnce past the respective limit, requests will be throttled and you will get a 429 Throttled response.\n\n\nExample response:\n```\n{\n  \"errors\": [\n    {\n      \"code\": \"Throttled\",\n      \"detail\": \"Request was throttled. Expected available in 60 seconds.\",\n      \"status\": \"429\",\n      \"title\": \"Throttled\"\n    }\n  ]\n}\n```\n\n# Authentication\n<!-- ReDoc-Inject: <security-definitions> -->\n"
+  title: Transifex Activity Reports Context Screenshots API
+  version: '3.0'
+  x-logo:
+    altText: Transifex logo
+    backgroundColor: '#FFFFFF'
+    url: transifex-blue-logo.svg
+servers:
+- url: https://rest.api.transifex.com
+security:
+- bearerAuth: []
+tags:
+- name: Context Screenshots
+paths:
+  /context_screenshot_maps:
+    get:
+      description: Get the context screenshots maps for a project. You can further narrow down the list using the available filters.
+      parameters:
+      - description: Filter results by a project
+        in: query
+        name: filter[project]
+        required: true
+        schema:
+          description: Project identifier.
+          example: o:organization_slug:p:project_slug
+          pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+$
+          type: string
+      - description: Filter results by a resource
+        in: query
+        name: filter[resource]
+        required: false
+        schema:
+          description: Resource identifier.
+          example: o:organization_slug:p:project_slug:r:resource_slug
+          pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:r:[a-zA-Z0-9_-]+$
+          type: string
+      - in: query
+        name: filter[resource_string]
+        required: false
+        schema:
+          description: Resource String identifier.
+          example: o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52
+          pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:r:[a-zA-Z0-9_-]+:s:[0-9a-f]{32}
+          type: string
+      - description: Retrieve maps related to a specific context screenshot
+        in: query
+        name: filter[context_screenshot]
+        required: false
+        schema:
+          description: Context screenshot identifier
+          example: o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+          pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:s:([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$
+          type: string
+      - description: 'The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.
+
+          '
+        in: query
+        name: page[cursor]
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        attributes:
+                          additionalProperties: false
+                          properties:
+                            coordinate_x:
+                              description: coordinate of the string position in the screenshot determined by measuring parallel to an x-axis, measured in pixels.
+                              example: 423
+                              nullable: true
+                              type: number
+                            coordinate_y:
+                              description: coordinate of the string position in the screenshot determined by measuring parallel to an y-axis, measured in pixels.
+                              example: 261
+                              nullable: true
+                              type: number
+                            datetime_created:
+                              example: XXXX-XX-XXTXX:XX:XXZ
+                              format: date-time
+                              type: string
+                            datetime_modified:
+                              example: XXXX-XX-XXTXX:XX:XXZ
+                              format: date-time
+                              type: string
+                            height:
+                              description: height of the string in screenshot, measured in pixels.
+                              example: 59
+                              nullable: true
+                              type: number
+                            width:
+                              description: width of the string in screenshot, measured in pixels.
+                              example: 372
+                              nullable: true
+                              type: number
+                          required:
+                          - datetime_created
+                          - datetime_modified
+                          type: object
+                        id:
+                          description: Context screenshot map identifier.
+                          example: o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:r:resource_slug:m:4abfc726-6a27-4c33-9d99-e5254c8df748
+                          pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:s:([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}):r:[a-zA-Z0-9._-]+:m:([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$
+                          type: string
+                        links:
+                          additionalProperties: false
+                          properties:
+                            self:
+                              example: /context_screenshots_maps/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:r:resource_slug:m:4abfc726-6a27-4c33-9d99-e5254c8df748
+                              type: string
+                          required:
+                          - self
+                          type: object
+                        relationships:
+                          additionalProperties: false
+                          properties:
+                            context_screenshot:
+                              additionalProperties: false
+                              properties:
+                                data:
+                                  additionalProperties: false
+                                  description: Context Screenshot identifier data container
+                                  properties:
+                                    id:
+                                      description: Context screenshot identifier
+                                      example: o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                                      pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:s:([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$
+                                      type: string
+                                    type:
+                                      enum:
+                                      - context_screenshots
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                                  type: object
+                                links:
+                                  additionalProperties: false
+                                  description: Context screenshot related link.
+                                  properties:
+                                    related:
+                                      description: Context screenshot details link.
+                                      example: /context_screenshots/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                                      type: string
+                                  required:
+                                  - related
+                                  type: object
+                              required:
+                              - links
+                              - data
+                              type: object
+                            resource_string:
+                              additionalProperties: false
+                              properties:
+                                data:
+                                  additionalProperties: false
+                                  description: Resource String data container.
+                                  properties:
+                                    id:
+                                      description: Resource String identifier.
+                                      example: o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52
+                                      pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:r:[a-zA-Z0-9_-]+:s:[0-9a-f]{32}
+                                      type: string
+                                    type:
+                                      enum:
+                                      - resource_strings
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                                  type: object
+                                links:
+                                  additionalProperties: false
+                                  description: Resource String related link.
+                                  properties:
+                                    related:
+                                      description: Resource String details link.
+                                      example: /resource_strings/o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52
+                                      type: string
+                                  required:
+                                  - related
+                                  type: object
+                              required:
+                              - links
+                              - data
+                              type: object
+                          required:
+                          - resource_string
+                          - context_screenshot
+                          type: object
+                        type:
+                          enum:
+                          - context_screenshot_map
+                          type: string
+                      required:
+                      - type
+                      - id
+                      - attributes
+                      - relationships
+                      - links
+                      type: object
+                    type: array
+                  links:
+                    additionalProperties: false
+                    description: Pagination links.
+                    properties:
+                      next:
+                        description: Context screenshot cursor link.
+                        example: /context_screenshots_maps/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:r:resource_slug:m:4abfc726-6a27-4c33-9d99-e5254c8df748&page[cursor]=4abfc7266a274c339d99e5254c8df748
+                        nullable: true
+                        type: string
+                      previous:
+                        description: Context screenshot cursor link.
+                        example: /context_screenshots_maps/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:r:resource_slug:m:4abfc726-6a27-4c33-9d99-e5254c8df748&page[cursor]=4abfc7266a274c339d99e5254c8df748
+                        nullable: true
+                        type: string
+                      self:
+                        description: Context screenshot map details link.
+                        example: /context_screenshots_maps/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:r:resource_slug:m:4abfc726-6a27-4c33-9d99-e5254c8df748
+                        type: string
+                    required:
+                    - self
+                    - next
+                    - previous
+                    type: object
+                required:
+                - data
+                - links
+                type: object
+          description: Success
+        '400':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: invalid
+                          type: string
+                        detail:
+                          example: Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens
+                          type: string
+                        source:
+                          anyOf:
+                          - properties:
+                              pointer:
+                                example: /data/attributes/name
+                                type: string
+                          - properties:
+                              parameter:
+                                example: ?filter[foo]
+                                type: string
+                        status:
+                          example: '400'
+                          type: string
+                        title:
+                          example: Field `name` is invalid
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Invalid
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '409':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: conflict
+                          type: string
+                        detail:
+                          example: Value `some_field_value` already exists
+                          type: string
+                        source:
+                          additionalProperties: false
+                          properties:
+                            pointer:
+                              example: /data/attributes/some_field
+                              type: string
+                          type: object
+                        status:
+                          example: '409'
+                          type: string
+                        title:
+                          example: Field `some_field` conflicted
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Conflict
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      security:
+      - bearerAuth: []
+      summary: Get project context screenshot map collection.
+      tags:
+      - Context Screenshots
+      x-released: true
+    post:
+      description: Upload screenshot map.
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              additionalProperties: false
+              properties:
+                data:
+                  additionalProperties: false
+                  description: Create context screenshot map body request details.
+                  properties:
+                    attributes:
+                      additionalProperties: false
+                      properties:
+                        coordinate_x:
+                          description: coordinate of the string position in the screenshot determined by measuring parallel to an x-axis, measured in pixels.
+                          example: 423
+                          nullable: true
+                          type: number
+                        coordinate_y:
+                          description: coordinate of the string position in the screenshot determined by measuring parallel to an y-axis, measured in pixels.
+                          example: 261
+                          nullable: true
+                          type: number
+                        height:
+                          description: height of the string in screenshot, measured in pixels.
+                          example: 59
+                          nullable: true
+                          type: number
+                        width:
+                          description: width of the string in screenshot, measured in pixels.
+                          example: 372
+                          nullable: true
+                          type: number
+                      type: object
+                    relationships:
+                      additionalProperties: false
+                      description: Context screenshot map parent relationships
+                      properties:
+                        context_screenshot:
+                          additionalProperties: false
+                          description: The `context_screenshot` the resource_string belongs to.
+                          properties:
+                            data:
+                              additionalProperties: false
+                              description: Context Screenshot identifier data container
+                              properties:
+                                id:
+                                  description: Context screenshot identifier
+                                  example: o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                                  pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:s:([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$
+                                  type: string
+                                type:
+                                  enum:
+                                  - context_screenshots
+                                  type: string
+                              required:
+                              - type
+                              - id
+                              type: object
+                          required:
+                          - data
+                          type: object
+                        resource_string:
+                          additionalProperties: false
+                          description: The `resource_string` context screenshot map refers to.
+                          properties:
+                            data:
+                              additionalProperties: false
+                              description: Resource String data container.
+                              properties:
+                                id:
+                                  description: Resource String identifier.
+                                  example: o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52
+                                  pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:r:[a-zA-Z0-9_-]+:s:[0-9a-f]{32}
+                                  type: string
+                                type:
+                                  enum:
+                                  - resource_strings
+                                  type: string
+                              required:
+                              - type
+                              - id
+                              type: object
+                          required:
+                          - data
+                          type: object
+                      required:
+                      - context_screenshot
+                      - resource_string
+                      type: object
+                    type:
+                      enum:
+                      - context_screenshot_maps
+                      type: string
+                  required:
+                  - type
+                  - attributes
+                  - relationships
+                  type: object
+              required:
+              - data
+              type: object
+        required: true
+      responses:
+        '201':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    additionalProperties: false
+                    properties:
+                      attributes:
+                        additionalProperties: false
+                        properties:
+                          coordinate_x:
+                            description: coordinate of the string position in the screenshot determined by measuring parallel to an x-axis, measured in pixels.
+                            example: 423
+                            nullable: true
+                            type: number
+                          coordinate_y:
+                            description: coordinate of the string position in the screenshot determined by measuring parallel to an y-axis, measured in pixels.
+                            example: 261
+                            nullable: true
+                            type: number
+                          datetime_created:
+                            example: XXXX-XX-XXTXX:XX:XXZ
+                            format: date-time
+                            type: string
+                          datetime_modified:
+                            example: XXXX-XX-XXTXX:XX:XXZ
+                            format: date-time
+                            type: string
+                          height:
+                            description: height of the string in screenshot, measured in pixels.
+                            example: 59
+                            nullable: true
+                            type: number
+                          width:
+                            description: width of the string in screenshot, measured in pixels.
+                            example: 372
+                            nullable: true
+                            type: number
+                        required:
+                        - datetime_created
+                        - datetime_modified
+                        type: object
+                      id:
+                        description: Context screenshot map identifier.
+                        example: o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:r:resource_slug:m:4abfc726-6a27-4c33-9d99-e5254c8df748
+                        pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:s:([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}):r:[a-zA-Z0-9._-]+:m:([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$
+                        type: string
+                      links:
+                        additionalProperties: false
+                        properties:
+                          self:
+                            example: /context_screenshots_maps/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:r:resource_slug:m:4abfc726-6a27-4c33-9d99-e5254c8df748
+                            type: string
+                        required:
+                        - self
+                        type: object
+                      relationships:
+                        additionalProperties: false
+                        properties:
+                          context_screenshot:
+                            additionalProperties: false
+                            properties:
+                              data:
+                                additionalProperties: false
+                                description: Context Screenshot identifier data container
+                                properties:
+                                  id:
+                                    description: Context screenshot identifier
+                                    example: o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                                    pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:s:([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$
+                                    type: string
+                                  type:
+                                    enum:
+                                    - context_screenshots
+                                    type: string
+                                required:
+                                - type
+                                - id
+                                type: object
+                              links:
+                                additionalProperties: false
+                                description: Context screenshot related link.
+                                properties:
+                                  related:
+                                    description: Context screenshot details link.
+                                    example: /context_screenshots/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            - data
+                            type: object
+                          resource_string:
+                            additionalProperties: false
+                            properties:
+                              data:
+                                additionalProperties: false
+                                description: Resource String data container.
+                                properties:
+                                  id:
+                                    description: Resource String identifier.
+                                    example: o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52
+                                    pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:r:[a-zA-Z0-9_-]+:s:[0-9a-f]{32}
+                                    type: string
+                                  type:
+                                    enum:
+                                    - resource_strings
+                                    type: string
+                                required:
+                                - type
+                                - id
+                                type: object
+                              links:
+                                additionalProperties: false
+                                description: Resource String related link.
+                                properties:
+                                  related:
+                                    description: Resource String details link.
+                                    example: /resource_strings/o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            - data
+                            type: object
+                        required:
+                        - resource_string
+                        - context_screenshot
+                        type: object
+                      type:
+                        enum:
+                        - context_screenshot_map
+                        type: string
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    - relationships
+                    - links
+                    type: object
+                type: object
+          description: Created
+          headers:
+            Location:
+              schema:
+                description: Context screenshot map details link.
+                example: /context_screenshots_maps/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:r:resource_slug:m:4abfc726-6a27-4c33-9d99-e5254c8df748
+                type: string
+        '400':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: invalid
+                          type: string
+                        detail:
+                          example: Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens
+                          type: string
+                        source:
+                          anyOf:
+                          - properties:
+                              pointer:
+                                example: /data/attributes/name
+                                type: string
+                          - properties:
+                              parameter:
+                                example: ?filter[foo]
+                                type: string
+                        status:
+                          example: '400'
+                          type: string
+                        title:
+                          example: Field `name` is invalid
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Invalid
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '409':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: conflict
+                          type: string
+                        detail:
+                          example: Value `some_field_value` already exists
+                          type: string
+                        source:
+                          additionalProperties: false
+                          properties:
+                            pointer:
+                              example: /data/attributes/some_field
+                              type: string
+                          type: object
+                        status:
+                          example: '409'
+                          type: string
+                        title:
+                          example: Field `some_field` conflicted
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Conflict
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      security:
+      - bearerAuth: []
+      summary: Upload a new context screenshot map to a resource_string.
+      tags:
+      - Context Screenshots
+      x-released: true
+  /context_screenshot_maps/{context_screenshot_map_id}:
+    parameters:
+    - example: o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:r:resource_slug:m:4abfc726-6a27-4c33-9d99-e5254c8df748
+      in: path
+      name: context_screenshot_map_id
+      required: true
+      schema:
+        type: string
+    delete:
+      description: Delete a context screenshot map.
+      responses:
+        '204':
+          description: No Content.
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '409':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: conflict
+                          type: string
+                        detail:
+                          example: Value `some_field_value` already exists
+                          type: string
+                        source:
+                          additionalProperties: false
+                          properties:
+                            pointer:
+                              example: /data/attributes/some_field
+                              type: string
+                          type: object
+                        status:
+                          example: '409'
+                          type: string
+                        title:
+                          example: Field `some_field` conflicted
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Conflict
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      security:
+      - bearerAuth: []
+      summary: Delete screenshot map.
+      tags:
+      - Context Screenshots
+      x-released: true
+    get:
+      description: Get details for a context screenshot map.
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    additionalProperties: false
+                    properties:
+                      attributes:
+                        additionalProperties: false
+                        properties:
+                          coordinate_x:
+                            description: coordinate of the string position in the screenshot determined by measuring parallel to an x-axis, measured in pixels.
+                            example: 423
+                            nullable: true
+                            type: number
+                          coordinate_y:
+                            description: coordinate of the string position in the screenshot determined by measuring parallel to an y-axis, measured in pixels.
+                            example: 261
+                            nullable: true
+                            type: number
+                          datetime_created:
+                            example: XXXX-XX-XXTXX:XX:XXZ
+                            format: date-time
+                            type: string
+                          datetime_modified:
+                            example: XXXX-XX-XXTXX:XX:XXZ
+                            format: date-time
+                            type: string
+                          height:
+                            description: height of the string in screenshot, measured in pixels.
+                            example: 59
+                            nullable: true
+                            type: number
+                          width:
+                            description: width of the string in screenshot, measured in pixels.
+                            example: 372
+                            nullable: true
+                            type: number
+                        required:
+                        - datetime_created
+                        - datetime_modified
+                        type: object
+                      id:
+                        description: Context screenshot map identifier.
+                        example: o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:r:resource_slug:m:4abfc726-6a27-4c33-9d99-e5254c8df748
+                        pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:s:([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}):r:[a-zA-Z0-9._-]+:m:([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$
+                        type: string
+                      links:
+                        additionalProperties: false
+                        properties:
+                          self:
+                            example: /context_screenshots_maps/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:r:resource_slug:m:4abfc726-6a27-4c33-9d99-e5254c8df748
+                            type: string
+                        required:
+                        - self
+                        type: object
+                      relationships:
+                        additionalProperties: false
+                        properties:
+                          context_screenshot:
+                            additionalProperties: false
+                            properties:
+                              data:
+                                additionalProperties: false
+                                description: Context Screenshot identifier data container
+                                properties:
+                                  id:
+                                    description: Context screenshot identifier
+                                    example: o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                                    pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:s:([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$
+                                    type: string
+                                  type:
+                                    enum:
+                                    - context_screenshots
+                                    type: string
+                                required:
+                                - type
+                                - id
+                                type: object
+                              links:
+                                additionalProperties: false
+                                description: Context screenshot related link.
+                                properties:
+                                  related:
+                                    description: Context screenshot details link.
+                                    example: /context_screenshots/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            - data
+                            type: object
+                          resource_string:
+                            additionalProperties: false
+                            properties:
+                              data:
+                                additionalProperties: false
+                                description: Resource String data container.
+                                properties:
+                                  id:
+                                    description: Resource String identifier.
+                                    example: o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52
+                                    pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:r:[a-zA-Z0-9_-]+:s:[0-9a-f]{32}
+                                    type: string
+                                  type:
+                                    enum:
+                                    - resource_strings
+                                    type: string
+                                required:
+                                - type
+                                - id
+                                type: object
+                              links:
+                                additionalProperties: false
+                                description: Resource String related link.
+                                properties:
+                                  related:
+                                    description: Resource String details link.
+                                    example: /resource_strings/o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            - data
+                            type: object
+                        required:
+                        - resource_string
+                        - context_screenshot
+                        type: object
+                      type:
+                        enum:
+                        - context_screenshot_map
+                        type: string
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    - relationships
+                    - links
+                    type: object
+                required:
+                - data
+                type: object
+          description: Successful response
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '409':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: conflict
+                          type: string
+                        detail:
+                          example: Value `some_field_value` already exists
+                          type: string
+                        source:
+                          additionalProperties: false
+                          properties:
+                            pointer:
+                              example: /data/attributes/some_field
+                              type: string
+                          type: object
+                        status:
+                          example: '409'
+                          type: string
+                        title:
+                          example: Field `some_field` conflicted
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Conflict
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      security:
+      - bearerAuth: []
+      summary: Get context screenshot map.
+      tags:
+      - Context Screenshots
+      x-released: true
+  /context_screenshots:
+    summary: Get project context screenshot collection.
+    get:
+      description: Get the context screenshots for a project.
+      parameters:
+      - description: Filter results by a project
+        in: query
+        name: filter[project]
+        required: true
+        schema:
+          description: Project identifier.
+          example: o:organization_slug:p:project_slug
+          pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+$
+          type: string
+      - description: 'The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.
+
+          '
+        in: query
+        name: page[cursor]
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        attributes:
+                          additionalProperties: false
+                          properties:
+                            datetime_created:
+                              example: XXXX-XX-XXTXX:XX:XXZ
+                              format: date-time
+                              type: string
+                            datetime_modified:
+                              example: XXXX-XX-XXTXX:XX:XXZ
+                              format: date-time
+                              type: string
+                            media_url:
+                              description: the URL of the screenshot'
+                              example: https://s3-eu-west-1.amazonaws.com/transifex-context/transifex/transifex/1cb3ff6c-65fa-4a41-8384-4eacaed7da3d_original
+                              type: string
+                            name:
+                              description: name of the screenshot
+                              example: Home page
+                              type: string
+                            thumb_url:
+                              description: the URL of the screenshot's thumbnail
+                              example: https://s3-eu-west-1.amazonaws.com/transifex-context/transifex/transifex/1cb3ff6c-65fa-4a41-8384-4eacaed7da3d_resized
+                              type: string
+                          required:
+                          - name
+                          - media_url
+                          - thumb_url
+                          - datetime_created
+                          - datetime_modified
+                          type: object
+                        id:
+                          description: Context screenshot identifier
+                          example: o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                          pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:s:([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$
+                          type: string
+                        links:
+                          additionalProperties: false
+                          properties:
+                            self:
+                              example: /context_screenshots/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                              type: string
+                          required:
+                          - self
+                          type: object
+                        relationships:
+                          additionalProperties: false
+                          properties:
+                            context_screenshots_maps:
+                              additionalProperties: false
+                              properties:
+                                links:
+                                  additionalProperties: false
+                                  description: Context screenshot maps related link.
+                                  properties:
+                                    related:
+                                      description: Context screenshot maps relation link.
+                                      example: /context_screenshots_maps/?filter[project]=o:organization_slug:p:project_slug&filter[context_screenshot]=o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                                      type: string
+                                  required:
+                                  - related
+                                  type: object
+                              required:
+                              - links
+                              type: object
+                            project:
+                              additionalProperties: false
+                              properties:
+                                data:
+                                  additionalProperties: false
+                                  description: Project data container.
+                                  properties:
+                                    id:
+                                      description: Project identifier.
+                                      example: o:organization_slug:p:project_slug
+                                      pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+$
+                                      type: string
+                                    type:
+                                      enum:
+                                      - projects
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                                  type: object
+                                links:
+                                  additionalProperties: false
+                                  description: Project links.
+                                  properties:
+                                    related:
+                                      description: Project details link.
+                                      example: /projects/o:organization_slug:p:project_slug
+                                      type: string
+                                  required:
+                                  - related
+                                  type: object
+                              required:
+                              - links
+                              - data
+                              type: object
+                          required:
+                          - project
+                          - context_screenshots_maps
+                          type: object
+                        type:
+                          enum:
+                          - context_screenshots
+                          type: string
+                      required:
+                      - type
+                      - id
+                      - attributes
+                      - relationships
+                      - links
+                      type: object
+                    type: array
+                  links:
+                    additionalProperties: false
+                    description: Pagination links.
+                    properties:
+                      next:
+                        description: Context screenshot cursor link.
+                        example: /context_screenshots/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748&page[cursor]=4abfc7266a274c339d99e5254c8df748
+                        nullable: true
+                        type: string
+                      previous:
+                        description: Context screenshot cursor link.
+                        example: /context_screenshots/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748&page[cursor]=4abfc7266a274c339d99e5254c8df748
+                        nullable: true
+                        type: string
+                      self:
+                        description: Context screenshot details link.
+                        example: /context_screenshots/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                        type: string
+                    required:
+                    - self
+                    - next
+                    - previous
+                    type: object
+                required:
+                - links
+                - data
+                type: object
+          description: Success
+        '400':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: invalid
+                          type: string
+                        detail:
+                          example: Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens
+                          type: string
+                        source:
+                          anyOf:
+                          - properties:
+                              pointer:
+                                example: /data/attributes/name
+                                type: string
+                          - properties:
+                              parameter:
+                                example: ?filter[foo]
+                                type: string
+                        status:
+                          example: '400'
+                          type: string
+                        title:
+                          example: Field `name` is invalid
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Invalid
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '409':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: conflict
+                          type: string
+                        detail:
+                          example: Value `some_field_value` already exists
+                          type: string
+                        source:
+                          additionalProperties: false
+                          properties:
+                            pointer:
+                              example: /data/attributes/some_field
+                              type: string
+                          type: object
+                        status:
+                          example: '409'
+                          type: string
+                        title:
+                          example: Field `some_field` conflicted
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Conflict
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      security:
+      - bearerAuth: []
+      summary: Get project context screenshot collection.
+      tags:
+      - Context Screenshots
+      x-released: true
+  /context_screenshots/{context_screenshot_id}:
+    parameters:
+    - example: o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+      in: path
+      name: context_screenshot_id
+      required: true
+      schema:
+        type: string
+    delete:
+      description: Delete a project context screenshot.
+      responses:
+        '204':
+          description: No Content.
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '409':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: conflict
+                          type: string
+                        detail:
+                          example: Value `some_field_value` already exists
+                          type: string
+                        source:
+                          additionalProperties: false
+                          properties:
+                            pointer:
+                              example: /data/attributes/some_field
+                              type: string
+                          type: object
+                        status:
+                          example: '409'
+                          type: string
+                        title:
+                          example: Field `some_field` conflicted
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Conflict
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      security:
+      - bearerAuth: []
+      summary: Delete screenshot.
+      tags:
+      - Context Screenshots
+      x-released: true
+    get:
+      description: Get details for a context screenshot.
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    additionalProperties: false
+                    properties:
+                      attributes:
+                        additionalProperties: false
+                        properties:
+                          datetime_created:
+                            example: XXXX-XX-XXTXX:XX:XXZ
+                            format: date-time
+                            type: string
+                          datetime_modified:
+                            example: XXXX-XX-XXTXX:XX:XXZ
+                            format: date-time
+                            type: string
+                          media_url:
+                            description: the URL of the screenshot'
+                            example: https://s3-eu-west-1.amazonaws.com/transifex-context/transifex/transifex/1cb3ff6c-65fa-4a41-8384-4eacaed7da3d_original
+                            type: string
+                          name:
+                            description: name of the screenshot
+                            example: Home page
+                            type: string
+                          thumb_url:
+                            description: the URL of the screenshot's thumbnail
+                            example: https://s3-eu-west-1.amazonaws.com/transifex-context/transifex/transifex/1cb3ff6c-65fa-4a41-8384-4eacaed7da3d_resized
+                            type: string
+                        required:
+                        - name
+                        - media_url
+                        - thumb_url
+                        - datetime_created
+                        - datetime_modified
+                        type: object
+                      id:
+                        description: Context screenshot identifier
+                        example: o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                        pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:s:([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$
+                        type: string
+                      links:
+                        additionalProperties: false
+                        properties:
+                          self:
+                            example: /context_screenshots/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                            type: string
+                        required:
+                        - self
+                        type: object
+                      relationships:
+                        additionalProperties: false
+                        properties:
+                          context_screenshots_maps:
+                            additionalProperties: false
+                            properties:
+                              links:
+                                additionalProperties: false
+                                description: Context screenshot maps related link.
+                                properties:
+                                  related:
+                                    description: Context screenshot maps relation link.
+                                    example: /context_screenshots_maps/?filter[project]=o:organization_slug:p:project_slug&filter[context_screenshot]=o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            type: object
+                          project:
+                            additionalProperties: false
+                            properties:
+                              data:
+                                additionalProperties: false
+                                description: Project data container.
+                                properties:
+                                  id:
+                                    description: Project identifier.
+                                    example: o:organization_slug:p:project_slug
+                                    pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+$
+                                    type: string
+                                  type:
+                                    enum:
+                                    - projects
+                                    type: string
+                                required:
+                                - type
+                                - id
+                                type: object
+                              links:
+                                additionalProperties: false
+                                description: Project links.
+                                properties:
+                                  related:
+                                    description: Project details link.
+                                    example: /projects/o:organization_slug:p:project_slug
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            - data
+                            type: object
+                        required:
+                        - project
+                        - context_screenshots_maps
+                        type: object
+                      type:
+                        enum:
+                        - context_screenshots
+                        type: string
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    - relationships
+                    - links
+                    type: object
+                required:
+                - data
+                type: object
+          description: Successful response.
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '409':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: conflict
+                          type: string
+                        detail:
+                          example: Value `some_field_value` already exists
+                          type: string
+                        source:
+                          additionalProperties: false
+                          properties:
+                            pointer:
+                              example: /data/attributes/some_field
+                              type: string
+                          type: object
+                        status:
+                          example: '409'
+                          type: string
+                        title:
+                          example: Field `some_field` conflicted
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Conflict
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      security:
+      - bearerAuth: []
+      summary: Get context screenshot.
+      tags:
+      - Context Screenshots
+      x-released: true
+    patch:
+      description: Update details of a context screenshot.
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              additionalProperties: false
+              properties:
+                data:
+                  additionalProperties: false
+                  description: Update resource body request details.
+                  properties:
+                    attributes:
+                      additionalProperties: false
+                      properties:
+                        name:
+                          description: name of the screenshot
+                          example: Home page
+                          type: string
+                      required:
+                      - name
+                      type: object
+                    id:
+                      description: Context screenshot identifier
+                      example: o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                      pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:s:([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$
+                      type: string
+                    type:
+                      enum:
+                      - context_screenshots
+                      type: string
+                  required:
+                  - type
+                  - id
+                  - attributes
+                  type: object
+              required:
+              - data
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    additionalProperties: false
+                    properties:
+                      attributes:
+                        additionalProperties: false
+                        properties:
+                          datetime_created:
+                            example: XXXX-XX-XXTXX:XX:XXZ
+                            format: date-time
+                            type: string
+                          datetime_modified:
+                            example: XXXX-XX-XXTXX:XX:XXZ
+                            format: date-time
+                            type: string
+                          media_url:
+                            description: the URL of the screenshot'
+                            example: https://s3-eu-west-1.amazonaws.com/transifex-context/transifex/transifex/1cb3ff6c-65fa-4a41-8384-4eacaed7da3d_original
+                            type: string
+                          name:
+                            description: name of the screenshot
+                            example: Home page
+                            type: string
+                          thumb_url:
+                            description: the URL of the screenshot's thumbnail
+                            example: https://s3-eu-west-1.amazonaws.com/transifex-context/transifex/transifex/1cb3ff6c-65fa-4a41-8384-4eacaed7da3d_resized
+                            type: string
+                        required:
+                        - name
+                        - media_url
+                        - thumb_url
+                        - datetime_created
+                        - datetime_modified
+                        type: object
+                      id:
+                        description: Context screenshot identifier
+                        example: o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                        pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:s:([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$
+                        type: string
+                      links:
+                        additionalProperties: false
+                        properties:
+                          self:
+                            example: /context_screenshots/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                            type: string
+                        required:
+                        - self
+                        type: object
+                      relationships:
+                        additionalProperties: false
+                        properties:
+                          context_screenshots_maps:
+                            additionalProperties: false
+                            properties:
+                              links:
+                                additionalProperties: false
+                                description: Context screenshot maps related link.
+                                properties:
+                                  related:
+                                    description: Context screenshot maps relation link.
+                                    example: /context_screenshots_maps/?filter[project]=o:organization_slug:p:project_slug&filter[context_screenshot]=o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            type: object
+                          project:
+                            additionalProperties: false
+                            properties:
+                              data:
+                                additionalProperties: false
+                                description: Project data container.
+                                properties:
+                                  id:
+                                    description: Project identifier.
+                                    example: o:organization_slug:p:project_slug
+                                    pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+$
+                                    type: string
+                                  type:
+                                    enum:
+                                    - projects
+                                    type: string
+                                required:
+                                - type
+                                - id
+                                type: object
+                              links:
+                                additionalProperties: false
+                                description: Project links.
+                                properties:
+                                  related:
+                                    description: Project details link.
+                                    example: /projects/o:organization_slug:p:project_slug
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            - data
+                            type: object
+                        required:
+                        - project
+                        - context_screenshots_maps
+                        type: object
+                      type:
+                        enum:
+                        - context_screenshots
+                        type: string
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    - relationships
+                    - links
+                    type: object
+                required:
+                - data
+                type: object
+          description: Successful Response.
+        '400':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: invalid
+                          type: string
+                        detail:
+                          example: Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens
+                          type: string
+                        source:
+                          anyOf:
+                          - properties:
+                              pointer:
+                                example: /data/attributes/name
+                                type: string
+                          - properties:
+                              parameter:
+                                example: ?filter[foo]
+                                type: string
+                        status:
+                          example: '400'
+                          type: string
+                        title:
+                          example: Field `name` is invalid
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Invalid
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '409':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: conflict
+                          type: string
+                        detail:
+                          example: Value `some_field_value` already exists
+                          type: string
+                        source:
+                          additionalProperties: false
+                          properties:
+                            pointer:
+                              example: /data/attributes/some_field
+                              type: string
+                          type: object
+                        status:
+                          example: '409'
+                          type: string
+                        title:
+                          example: Field `some_field` conflicted
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Conflict
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      security:
+      - bearerAuth: []
+      summary: Update context screenshot.
+      tags:
+      - Context Screenshots
+      x-released: true
+  /context_screenshots/{project_id}:
+    parameters:
+    - description: Format of composite id should be `o:organization_slug:p:project_slug`.
+      in: path
+      name: project_id
+      required: true
+      schema:
+        description: Project identifier.
+        example: o:organization_slug:p:project_slug
+        pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+$
+        type: string
+    summary: Upload a new context screenshot file to a project.
+    post:
+      description: Upload screenshot.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              additionalProperties: false
+              properties:
+                content:
+                  description: The context screenshot file to upload.
+                  example: FILE
+                  format: binary
+                  type: string
+                name:
+                  description: name of the screenshot
+                  example: Home page
+                  type: string
+              required:
+              - content
+              - name
+        required: true
+      responses:
+        '201':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    additionalProperties: false
+                    properties:
+                      attributes:
+                        additionalProperties: false
+                        properties:
+                          datetime_created:
+                            example: XXXX-XX-XXTXX:XX:XXZ
+                            format: date-time
+                            type: string
+                          datetime_modified:
+                            example: XXXX-XX-XXTXX:XX:XXZ
+                            format: date-time
+                            type: string
+                          media_url:
+                            description: the URL of the screenshot'
+                            example: https://s3-eu-west-1.amazonaws.com/transifex-context/transifex/transifex/1cb3ff6c-65fa-4a41-8384-4eacaed7da3d_original
+                            type: string
+                          name:
+                            description: name of the screenshot
+                            example: Home page
+                            type: string
+                          thumb_url:
+                            description: the URL of the screenshot's thumbnail
+                            example: https://s3-eu-west-1.amazonaws.com/transifex-context/transifex/transifex/1cb3ff6c-65fa-4a41-8384-4eacaed7da3d_resized
+                            type: string
+                        required:
+                        - name
+                        - media_url
+                        - thumb_url
+                        - datetime_created
+                        - datetime_modified
+                        type: object
+                      id:
+                        description: Context screenshot identifier
+                        example: o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                        pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+:s:([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$
+                        type: string
+                      links:
+                        additionalProperties: false
+                        properties:
+                          self:
+                            example: /context_screenshots/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                            type: string
+                        required:
+                        - self
+                        type: object
+                      relationships:
+                        additionalProperties: false
+                        properties:
+                          context_screenshots_maps:
+                            additionalProperties: false
+                            properties:
+                              links:
+                                additionalProperties: false
+                                description: Context screenshot maps related link.
+                                properties:
+                                  related:
+                                    description: Context screenshot maps relation link.
+                                    example: /context_screenshots_maps/?filter[project]=o:organization_slug:p:project_slug&filter[context_screenshot]=o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            type: object
+                          project:
+                            additionalProperties: false
+                            properties:
+                              data:
+                                additionalProperties: false
+                                description: Project data container.
+                                properties:
+                                  id:
+                                    description: Project identifier.
+                                    example: o:organization_slug:p:project_slug
+                                    pattern: ^o:[a-zA-Z0-9._-]+:p:[a-zA-Z0-9_-]+$
+                                    type: string
+                                  type:
+                                    enum:
+                                    - projects
+                                    type: string
+                                required:
+                                - type
+                                - id
+                                type: object
+                              links:
+                                additionalProperties: false
+                                description: Project links.
+                                properties:
+                                  related:
+                                    description: Project details link.
+                                    example: /projects/o:organization_slug:p:project_slug
+                                    type: string
+                                required:
+                                - related
+                                type: object
+                            required:
+                            - links
+                            - data
+                            type: object
+                        required:
+                        - project
+                        - context_screenshots_maps
+                        type: object
+                      type:
+                        enum:
+                        - context_screenshots
+                        type: string
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    - relationships
+                    - links
+                    type: object
+                required:
+                - data
+                type: object
+          description: Created.
+          headers:
+            Location:
+              schema:
+                description: Context screenshot details link.
+                example: /context_screenshots/o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748
+                type: string
+        '400':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: invalid
+                          type: string
+                        detail:
+                          example: Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens
+                          type: string
+                        source:
+                          anyOf:
+                          - properties:
+                              pointer:
+                                example: /data/attributes/name
+                                type: string
+                          - properties:
+                              parameter:
+                                example: ?filter[foo]
+                                type: string
+                        status:
+                          example: '400'
+                          type: string
+                        title:
+                          example: Field `name` is invalid
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Invalid
+        '401':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: unauthorized
+                          type: string
+                        detail:
+                          example: Please verify your credentials
+                          type: string
+                        status:
+                          example: '401'
+                          type: string
+                        title:
+                          example: Unauthorized
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: not found
+                          type: string
+                        detail:
+                          example: Object not found. It may have been deleted or not been created yet
+                          type: string
+                        status:
+                          example: '404'
+                          type: string
+                        title:
+                          example: Object not found
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Not found
+        '409':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: conflict
+                          type: string
+                        detail:
+                          example: Value `some_field_value` already exists
+                          type: string
+                        source:
+                          additionalProperties: false
+                          properties:
+                            pointer:
+                              example: /data/attributes/some_field
+                              type: string
+                          type: object
+                        status:
+                          example: '409'
+                          type: string
+                        title:
+                          example: Field `some_field` conflicted
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Conflict
+        '500':
+          content:
+            application/vnd.api+json:
+              schema:
+                additionalProperties: false
+                properties:
+                  errors:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        code:
+                          example: server error
+                          type: string
+                        detail:
+                          example: Something went wrong, please try again
+                          type: string
+                        status:
+                          example: '500'
+                          type: string
+                        title:
+                          example: Something went wrong
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: Internal Error
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://usermedia.transifex.com
+      summary: Upload a new context screenshot file to a project.
+      tags:
+      - Context Screenshots
+      x-released: true
+components:
+  securitySchemes:
+    bearerAuth:
+      description: 'To use the API you need to authenticate your requests using Token Authentication. Specifically, you need to
+
+
+        * Acquire an authentication token from the Transifex (under user settings)
+
+        * Uses the `Bearer` keyword and  prepend the token when passing the header.
+
+
+        For example, if the authentication token is `1/0b4e75552e481aeae813aebad53f3de3fcc67ccd`, then the HTTP header should look like this:
+
+
+        `Authorization: Bearer 1/0b4e75552e481aeae813aebad53f3de3fcc67ccd`
+
+
+        To create an API token:
+
+
+        1. Head to your User Settings by going to the main navigation, and clicking on your profile image in the top right corner.
+
+
+        2. In the left menu, click on API token.
+
+
+        3. Click Generate a token.
+
+
+        Once you''ve generated a token, you can edit its name so it''s easier to remember where you use the token.
+
+
+        To keep your API token secure, we''ll only show it once, so please be sure to save it somewhere secure.
+
+        In case you lose your API token, you can regenerate a new one at any time. However, when you regenerate
+
+        a new token, you''ll need to update your applications and replace the old token with the new one.
+
+        '
+      scheme: bearer
+      type: http
