@@ -11,7 +11,20 @@ description: 'Transifex is a cloud-based localization management platform that e
 
   '
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/transifex.png
 url: https://raw.githubusercontent.com/api-evangelist/transifex/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -25,29 +38,18 @@ tags:
 - Content Management
 - Workflow Automation
 apis:
-- aid: transifex:transifex-api
-  name: Transifex API
-  description: 'The Transifex REST API v3 provides full programmatic control over
-    localization operations including project management, resource handling, translation
-    memory, language team administration, and automated workflow triggers. The API
-    follows JSON:API specification and uses bearer token authentication.
-
-    '
+- aid: transifex:transifex-activity-reports-api
+  name: Transifex Activity Reports API
+  description: The Activity Reports API from Transifex — 9 operation(s) for activity reports.
   humanURL: https://developers.transifex.com/reference/
   baseURL: https://rest.api.transifex.com
   tags:
-  - Localization
-  - Translation
-  - Projects
-  - Resources
-  - Language Teams
+  - Activity Reports
   properties:
+  - type: OpenAPI
+    url: openapi/transifex-activity-reports-api-openapi.yml
   - type: Documentation
     url: https://developers.transifex.com/reference/
-  - type: OpenAPI
-    url: https://transifex.github.io/openapi/
-  - type: OpenAPI
-    url: openapi/transifex-transifex-api-openapi.yml
   - type: JSONSchema
     url: json-schema/transifex-schema.json
   - type: Vocabulary
@@ -58,8 +60,444 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - url: graphql/transifex-graphql.md
-    type: GraphQL
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
+- aid: transifex:transifex-context-screenshots-api
+  name: Transifex Context Screenshots API
+  description: The Context Screenshots API from Transifex — 5 operation(s) for context screenshots.
+  humanURL: https://developers.transifex.com/reference/
+  baseURL: https://rest.api.transifex.com
+  tags:
+  - Context Screenshots
+  properties:
+  - type: OpenAPI
+    url: openapi/transifex-context-screenshots-api-openapi.yml
+  - type: Documentation
+    url: https://developers.transifex.com/reference/
+  - type: JSONSchema
+    url: json-schema/transifex-schema.json
+  - type: Vocabulary
+    url: vocabulary/transifex-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transifex-context.jsonld
+  - type: Authentication
+    url: https://developers.transifex.com/reference/api-authentication
+  - type: RateLimits
+    url: https://developers.transifex.com/reference/rate-limit
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
+- aid: transifex:transifex-glossaries-api
+  name: Transifex Glossaries API
+  description: Glossaries
+  humanURL: https://developers.transifex.com/reference/
+  baseURL: https://rest.api.transifex.com
+  tags:
+  - Glossaries
+  properties:
+  - type: OpenAPI
+    url: openapi/transifex-glossaries-api-openapi.yml
+  - type: Documentation
+    url: https://developers.transifex.com/reference/
+  - type: JSONSchema
+    url: json-schema/transifex-schema.json
+  - type: Vocabulary
+    url: vocabulary/transifex-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transifex-context.jsonld
+  - type: Authentication
+    url: https://developers.transifex.com/reference/api-authentication
+  - type: RateLimits
+    url: https://developers.transifex.com/reference/rate-limit
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
+- aid: transifex:transifex-i18n-formats-api
+  name: Transifex I18n Formats API
+  description: Internationalization formats supported by Transifex.
+  humanURL: https://developers.transifex.com/reference/
+  baseURL: https://rest.api.transifex.com
+  tags:
+  - I18n Formats
+  properties:
+  - type: OpenAPI
+    url: openapi/transifex-i18n-formats-api-openapi.yml
+  - type: Documentation
+    url: https://developers.transifex.com/reference/
+  - type: JSONSchema
+    url: json-schema/transifex-schema.json
+  - type: Vocabulary
+    url: vocabulary/transifex-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transifex-context.jsonld
+  - type: Authentication
+    url: https://developers.transifex.com/reference/api-authentication
+  - type: RateLimits
+    url: https://developers.transifex.com/reference/rate-limit
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
+- aid: transifex:transifex-languages-api
+  name: Transifex Languages API
+  description: Languages objects represent each available language in Transifex.
+  humanURL: https://developers.transifex.com/reference/
+  baseURL: https://rest.api.transifex.com
+  tags:
+  - Languages
+  properties:
+  - type: OpenAPI
+    url: openapi/transifex-languages-api-openapi.yml
+  - type: Documentation
+    url: https://developers.transifex.com/reference/
+  - type: JSONSchema
+    url: json-schema/transifex-schema.json
+  - type: Vocabulary
+    url: vocabulary/transifex-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transifex-context.jsonld
+  - type: Authentication
+    url: https://developers.transifex.com/reference/api-authentication
+  - type: RateLimits
+    url: https://developers.transifex.com/reference/rate-limit
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
+- aid: transifex:transifex-organizations-api
+  name: Transifex Organizations API
+  description: >-
+    Represents Transifex's organizations. Every user can be a member of one or multiple organizations.
+    Only the organizations the authenticated user belongs to will appear here.
+  humanURL: https://developers.transifex.com/reference/
+  baseURL: https://rest.api.transifex.com
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/transifex-organizations-api-openapi.yml
+  - type: Documentation
+    url: https://developers.transifex.com/reference/
+  - type: JSONSchema
+    url: json-schema/transifex-schema.json
+  - type: Vocabulary
+    url: vocabulary/transifex-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transifex-context.jsonld
+  - type: Authentication
+    url: https://developers.transifex.com/reference/api-authentication
+  - type: RateLimits
+    url: https://developers.transifex.com/reference/rate-limit
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
+- aid: transifex:transifex-project-webhooks-api
+  name: Transifex Project Webhooks API
+  description: >-
+    Project Webhooks lets you specify actions which will trigger some notification event. When that event
+    occurs, Transfex application will make a HTTP request to the URL configured for the webhook (callback_url).
+    The request is done as a HTTP POST request.
+
+    For example a callback url will be triggered whenever a target language of a resource has fully been
+    translated, enabling the client to implement a custom workflow to pull translations as soon as they
+    are ready, without having to constantly check Transifex for updates.
+  humanURL: https://developers.transifex.com/reference/
+  baseURL: https://rest.api.transifex.com
+  tags:
+  - Project Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/transifex-project-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://developers.transifex.com/reference/
+  - type: JSONSchema
+    url: json-schema/transifex-schema.json
+  - type: Vocabulary
+    url: vocabulary/transifex-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transifex-context.jsonld
+  - type: Authentication
+    url: https://developers.transifex.com/reference/api-authentication
+  - type: RateLimits
+    url: https://developers.transifex.com/reference/rate-limit
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
+- aid: transifex:transifex-projects-api
+  name: Transifex Projects API
+  description: Represents projects, as used within Transifex. Each project belongs to an organization.
+  humanURL: https://developers.transifex.com/reference/
+  baseURL: https://rest.api.transifex.com
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/transifex-projects-api-openapi.yml
+  - type: Documentation
+    url: https://developers.transifex.com/reference/
+  - type: JSONSchema
+    url: json-schema/transifex-schema.json
+  - type: Vocabulary
+    url: vocabulary/transifex-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transifex-context.jsonld
+  - type: Authentication
+    url: https://developers.transifex.com/reference/api-authentication
+  - type: RateLimits
+    url: https://developers.transifex.com/reference/rate-limit
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
+- aid: transifex:transifex-resource-string-comments-api
+  name: Transifex Resource String Comments API
+  description: >-
+    Represents comments on resource strings. These are the same comments exposed in the Transifex Editor
+    under the "Comments" tab.
+
+
+    A comment can also be flagged as an **issue**. In this case, some extra functionality is available
+      * You can change an issue's status
+      * You can change it's category
+      * You can assign a priority
+
+    Categories can be configured per organization. To configure the available categories for your organization,
+    contact
+
+    <a href="https://www.transifex.com/contact/">Transifex Support</a>.
+
+
+    For further details & examples, take a look below.
+  humanURL: https://developers.transifex.com/reference/
+  baseURL: https://rest.api.transifex.com
+  tags:
+  - Resource String Comments
+  properties:
+  - type: OpenAPI
+    url: openapi/transifex-resource-string-comments-api-openapi.yml
+  - type: Documentation
+    url: https://developers.transifex.com/reference/
+  - type: JSONSchema
+    url: json-schema/transifex-schema.json
+  - type: Vocabulary
+    url: vocabulary/transifex-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transifex-context.jsonld
+  - type: Authentication
+    url: https://developers.transifex.com/reference/api-authentication
+  - type: RateLimits
+    url: https://developers.transifex.com/reference/rate-limit
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
+- aid: transifex:transifex-resource-strings-api
+  name: Transifex Resource Strings API
+  description: Resource Strings
+  humanURL: https://developers.transifex.com/reference/
+  baseURL: https://rest.api.transifex.com
+  tags:
+  - Resource Strings
+  properties:
+  - type: OpenAPI
+    url: openapi/transifex-resource-strings-api-openapi.yml
+  - type: Documentation
+    url: https://developers.transifex.com/reference/
+  - type: JSONSchema
+    url: json-schema/transifex-schema.json
+  - type: Vocabulary
+    url: vocabulary/transifex-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transifex-context.jsonld
+  - type: Authentication
+    url: https://developers.transifex.com/reference/api-authentication
+  - type: RateLimits
+    url: https://developers.transifex.com/reference/rate-limit
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
+- aid: transifex:transifex-resource-translations-api
+  name: Transifex Resource Translations API
+  description: The Resource Translations API from Transifex — 7 operation(s) for resource translations.
+  humanURL: https://developers.transifex.com/reference/
+  baseURL: https://rest.api.transifex.com
+  tags:
+  - Resource Translations
+  properties:
+  - type: OpenAPI
+    url: openapi/transifex-resource-translations-api-openapi.yml
+  - type: Documentation
+    url: https://developers.transifex.com/reference/
+  - type: JSONSchema
+    url: json-schema/transifex-schema.json
+  - type: Vocabulary
+    url: vocabulary/transifex-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transifex-context.jsonld
+  - type: Authentication
+    url: https://developers.transifex.com/reference/api-authentication
+  - type: RateLimits
+    url: https://developers.transifex.com/reference/rate-limit
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
+- aid: transifex:transifex-resources-api
+  name: Transifex Resources API
+  description: >-
+    Represents a resource that holds source strings. Resources belong to a specific project in Transifex.
+  humanURL: https://developers.transifex.com/reference/
+  baseURL: https://rest.api.transifex.com
+  tags:
+  - Resources
+  properties:
+  - type: OpenAPI
+    url: openapi/transifex-resources-api-openapi.yml
+  - type: Documentation
+    url: https://developers.transifex.com/reference/
+  - type: JSONSchema
+    url: json-schema/transifex-schema.json
+  - type: Vocabulary
+    url: vocabulary/transifex-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transifex-context.jsonld
+  - type: Authentication
+    url: https://developers.transifex.com/reference/api-authentication
+  - type: RateLimits
+    url: https://developers.transifex.com/reference/rate-limit
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
+- aid: transifex:transifex-statistics-api
+  name: Transifex Statistics API
+  description: The Statistics API from Transifex — 2 operation(s) for statistics.
+  humanURL: https://developers.transifex.com/reference/
+  baseURL: https://rest.api.transifex.com
+  tags:
+  - Statistics
+  properties:
+  - type: OpenAPI
+    url: openapi/transifex-statistics-api-openapi.yml
+  - type: Documentation
+    url: https://developers.transifex.com/reference/
+  - type: JSONSchema
+    url: json-schema/transifex-schema.json
+  - type: Vocabulary
+    url: vocabulary/transifex-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transifex-context.jsonld
+  - type: Authentication
+    url: https://developers.transifex.com/reference/api-authentication
+  - type: RateLimits
+    url: https://developers.transifex.com/reference/rate-limit
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
+- aid: transifex:transifex-tasks-api
+  name: Transifex Tasks API
+  description: >-
+    Tasks are work items that can be assigned to users within a project. They help organize and track
+    translation work.
+  humanURL: https://developers.transifex.com/reference/
+  baseURL: https://rest.api.transifex.com
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/transifex-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://developers.transifex.com/reference/
+  - type: JSONSchema
+    url: json-schema/transifex-schema.json
+  - type: Vocabulary
+    url: vocabulary/transifex-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transifex-context.jsonld
+  - type: Authentication
+    url: https://developers.transifex.com/reference/api-authentication
+  - type: RateLimits
+    url: https://developers.transifex.com/reference/rate-limit
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
+- aid: transifex:transifex-team-memberships-api
+  name: Transifex Team Memberships API
+  description: The Team Memberships API from Transifex — 2 operation(s) for team memberships.
+  humanURL: https://developers.transifex.com/reference/
+  baseURL: https://rest.api.transifex.com
+  tags:
+  - Team Memberships
+  properties:
+  - type: OpenAPI
+    url: openapi/transifex-team-memberships-api-openapi.yml
+  - type: Documentation
+    url: https://developers.transifex.com/reference/
+  - type: JSONSchema
+    url: json-schema/transifex-schema.json
+  - type: Vocabulary
+    url: vocabulary/transifex-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transifex-context.jsonld
+  - type: Authentication
+    url: https://developers.transifex.com/reference/api-authentication
+  - type: RateLimits
+    url: https://developers.transifex.com/reference/rate-limit
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
+- aid: transifex:transifex-teams-api
+  name: Transifex Teams API
+  description: The Teams API from Transifex — 4 operation(s) for teams.
+  humanURL: https://developers.transifex.com/reference/
+  baseURL: https://rest.api.transifex.com
+  tags:
+  - Teams
+  properties:
+  - type: OpenAPI
+    url: openapi/transifex-teams-api-openapi.yml
+  - type: Documentation
+    url: https://developers.transifex.com/reference/
+  - type: JSONSchema
+    url: json-schema/transifex-schema.json
+  - type: Vocabulary
+    url: vocabulary/transifex-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transifex-context.jsonld
+  - type: Authentication
+    url: https://developers.transifex.com/reference/api-authentication
+  - type: RateLimits
+    url: https://developers.transifex.com/reference/rate-limit
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
+- aid: transifex:transifex-translation-memory-api
+  name: Transifex Translation Memory API
+  description: The Translation Memory API from Transifex — 4 operation(s) for translation memory.
+  humanURL: https://developers.transifex.com/reference/
+  baseURL: https://rest.api.transifex.com
+  tags:
+  - Translation Memory
+  properties:
+  - type: OpenAPI
+    url: openapi/transifex-translation-memory-api-openapi.yml
+  - type: Documentation
+    url: https://developers.transifex.com/reference/
+  - type: JSONSchema
+    url: json-schema/transifex-schema.json
+  - type: Vocabulary
+    url: vocabulary/transifex-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transifex-context.jsonld
+  - type: Authentication
+    url: https://developers.transifex.com/reference/api-authentication
+  - type: RateLimits
+    url: https://developers.transifex.com/reference/rate-limit
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
+- aid: transifex:transifex-users-api
+  name: Transifex Users API
+  description: Represents Transifex's users.
+  humanURL: https://developers.transifex.com/reference/
+  baseURL: https://rest.api.transifex.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/transifex-users-api-openapi.yml
+  - type: Documentation
+    url: https://developers.transifex.com/reference/
+  - type: JSONSchema
+    url: json-schema/transifex-schema.json
+  - type: Vocabulary
+    url: vocabulary/transifex-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transifex-context.jsonld
+  - type: Authentication
+    url: https://developers.transifex.com/reference/api-authentication
+  - type: RateLimits
+    url: https://developers.transifex.com/reference/rate-limit
+  - type: GraphQL
+    url: graphql/transifex-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/transifex-agentic-access.yml
