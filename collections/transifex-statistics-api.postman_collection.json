@@ -1,0 +1,833 @@
+{
+  "item": [
+    {
+      "id": "40390e90-438c-48ce-b4bd-a005e31f0f48",
+      "name": "Statistics",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4af8f43a-3490-42c2-aa46-9e54f6d7f80b",
+          "name": "Get resource language stats collection",
+          "request": {
+            "name": "Get resource language stats collection",
+            "description": {
+              "content": "Get the statistics for a set of resources. You must specify at least a project\nand optionally a language / resource to filter against.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "resource_language_stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[project]",
+                  "value": "<string>",
+                  "description": "(Required) Filter results by a project"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[resource]",
+                  "value": "<string>",
+                  "description": "Filter results by a resource"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[language]",
+                  "value": "<string>",
+                  "description": "Filter results by a language"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[cursor]",
+                  "value": "<string>",
+                  "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8183da67-97bc-4f1e-b519-26c72f0383da",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_language_stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[project]",
+                      "value": "o:organization_slug:p:project_slug"
+                    },
+                    {
+                      "key": "filter[resource]",
+                      "value": "o:organization_slug:p:project_slug:r:resource_slug"
+                    },
+                    {
+                      "key": "filter[language]",
+                      "value": "l:en_US"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"resource_language_stats\",\n      \"id\": \"o:organization_slug:p:project_slug:r:resource_slug:l:language_slug\",\n      \"attributes\": {\n        \"untranslated_words\": 10,\n        \"translated_words\": 10,\n        \"reviewed_words\": 10,\n        \"proofread_words\": 10,\n        \"total_words\": 10,\n        \"untranslated_strings\": 10,\n        \"translated_strings\": 10,\n        \"reviewed_strings\": 10,\n        \"proofread_strings\": 10,\n        \"total_strings\": 10,\n        \"last_update\": \"1996-09-09T03:18:10.087Z\",\n        \"last_translation_update\": \"2011-12-02T07:53:04.100Z\",\n        \"last_review_update\": \"2001-02-06T11:37:09.730Z\",\n        \"last_proofread_update\": \"2025-02-18T05:57:35.275Z\"\n      },\n      \"links\": {\n        \"self\": \"/resource_stats/o:organization_slug:p:project_slug:r:resource_slug:l:language_code\"\n      },\n      \"relationships\": {\n        \"resource\": {\n          \"data\": {\n            \"type\": \"resources\",\n            \"id\": \"o:organization_slug:p:project_slug:r:resource_slug\"\n          },\n          \"links\": {\n            \"related\": \"/resources/o:organization_slug:p:project_slug:r:resource_slug\"\n          }\n        },\n        \"language\": {\n          \"data\": {\n            \"type\": \"languages\",\n            \"id\": \"l:en_US\"\n          },\n          \"links\": {\n            \"related\": \"/languages/l:en_US\"\n          }\n        }\n      }\n    },\n    {\n      \"type\": \"resource_language_stats\",\n      \"id\": \"o:organization_slug:p:project_slug:r:resource_slug:l:language_slug\",\n      \"attributes\": {\n        \"untranslated_words\": 10,\n        \"translated_words\": 10,\n        \"reviewed_words\": 10,\n        \"proofread_words\": 10,\n        \"total_words\": 10,\n        \"untranslated_strings\": 10,\n        \"translated_strings\": 10,\n        \"reviewed_strings\": 10,\n        \"proofread_strings\": 10,\n        \"total_strings\": 10,\n        \"last_update\": \"1947-03-18T02:01:46.191Z\",\n        \"last_translation_update\": \"2019-11-02T19:41:41.435Z\",\n        \"last_review_update\": \"2003-01-27T18:45:53.294Z\",\n        \"last_proofread_update\": \"2020-08-23T20:13:38.805Z\"\n      },\n      \"links\": {\n        \"self\": \"/resource_stats/o:organization_slug:p:project_slug:r:resource_slug:l:language_code\"\n      },\n      \"relationships\": {\n        \"resource\": {\n          \"data\": {\n            \"type\": \"resources\",\n            \"id\": \"o:organization_slug:p:project_slug:r:resource_slug\"\n          },\n          \"links\": {\n            \"related\": \"/resources/o:organization_slug:p:project_slug:r:resource_slug\"\n          }\n        },\n        \"language\": {\n          \"data\": {\n            \"type\": \"languages\",\n            \"id\": \"l:en_US\"\n          },\n          \"links\": {\n            \"related\": \"/languages/l:en_US\"\n          }\n        }\n      }\n    }\n  ],\n  \"links\": {\n    \"last\": \"/resource_language_stats/o:organization_slug:p:project_slug:r:resource_slug:l:language_code&page[cursor]=XXX\",\n    \"next\": \"/resource_language_stats/o:organization_slug:p:project_slug:r:resource_slug:l:language_code&page[cursor]=XXX\",\n    \"self\": \"/resource_language_stats/o:organization_slug:p:project_slug:r:resource_slug:l:language_code\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a424cf2d-7e28-45db-8a5c-9f7abfa63b9d",
+              "name": "Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_language_stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[project]",
+                      "value": "o:organization_slug:p:project_slug"
+                    },
+                    {
+                      "key": "filter[resource]",
+                      "value": "o:organization_slug:p:project_slug:r:resource_slug"
+                    },
+                    {
+                      "key": "filter[language]",
+                      "value": "l:en_US"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    },\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b228f4b1-fd15-4b9a-a82b-57089fb1c245",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_language_stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[project]",
+                      "value": "o:organization_slug:p:project_slug"
+                    },
+                    {
+                      "key": "filter[resource]",
+                      "value": "o:organization_slug:p:project_slug:r:resource_slug"
+                    },
+                    {
+                      "key": "filter[language]",
+                      "value": "l:en_US"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a78d2028-9e1e-4367-82eb-25566a9e7f53",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_language_stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[project]",
+                      "value": "o:organization_slug:p:project_slug"
+                    },
+                    {
+                      "key": "filter[resource]",
+                      "value": "o:organization_slug:p:project_slug:r:resource_slug"
+                    },
+                    {
+                      "key": "filter[language]",
+                      "value": "l:en_US"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "408b29be-8c4b-4e3a-ab9d-b931673a3509",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_language_stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[project]",
+                      "value": "o:organization_slug:p:project_slug"
+                    },
+                    {
+                      "key": "filter[resource]",
+                      "value": "o:organization_slug:p:project_slug:r:resource_slug"
+                    },
+                    {
+                      "key": "filter[language]",
+                      "value": "l:en_US"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    },\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8df514e-20b0-425a-bcb1-967ea492f071",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_language_stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[project]",
+                      "value": "o:organization_slug:p:project_slug"
+                    },
+                    {
+                      "key": "filter[resource]",
+                      "value": "o:organization_slug:p:project_slug:r:resource_slug"
+                    },
+                    {
+                      "key": "filter[language]",
+                      "value": "l:en_US"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d0eda64-2a51-4629-968d-cd254eb18001",
+          "name": "Get resource language stats",
+          "request": {
+            "name": "Get resource language stats",
+            "description": {
+              "content": "Get information for a specific supported language.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "resource_language_stats",
+                ":resource_language_stats_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resource_language_stats_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "704867be-0606-41a5-a814-5a73ad5be2ac",
+              "name": "Successful Response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_language_stats",
+                    ":resource_language_stats_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource_language_stats_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"resource_language_stats\",\n    \"id\": \"o:organization_slug:p:project_slug:r:resource_slug:l:language_slug\",\n    \"attributes\": {\n      \"untranslated_words\": 10,\n      \"translated_words\": 10,\n      \"reviewed_words\": 10,\n      \"proofread_words\": 10,\n      \"total_words\": 10,\n      \"untranslated_strings\": 10,\n      \"translated_strings\": 10,\n      \"reviewed_strings\": 10,\n      \"proofread_strings\": 10,\n      \"total_strings\": 10,\n      \"last_update\": \"1959-07-25T03:58:18.333Z\",\n      \"last_translation_update\": \"1969-10-11T13:47:55.537Z\",\n      \"last_review_update\": \"2006-08-19T22:16:56.523Z\",\n      \"last_proofread_update\": \"2000-01-03T23:39:57.257Z\"\n    },\n    \"links\": {\n      \"self\": \"/resource_stats/o:organization_slug:p:project_slug:r:resource_slug:l:language_code\"\n    },\n    \"relationships\": {\n      \"resource\": {\n        \"data\": {\n          \"type\": \"resources\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug\"\n        },\n        \"links\": {\n          \"related\": \"/resources/o:organization_slug:p:project_slug:r:resource_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"languages\",\n          \"id\": \"l:en_US\"\n        },\n        \"links\": {\n          \"related\": \"/languages/l:en_US\"\n        }\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e5f20aa-0e78-4490-a415-d70c40f5ceb6",
+              "name": "Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_language_stats",
+                    ":resource_language_stats_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource_language_stats_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    },\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2243293-13c0-4671-bbc0-07c33af8922c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_language_stats",
+                    ":resource_language_stats_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource_language_stats_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "041820fe-891c-4080-9024-6d6491481ad4",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_language_stats",
+                    ":resource_language_stats_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource_language_stats_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 2242,\n      \"key_1\": 7086.028163312069\n    },\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 5729.7416381776275,\n      \"key_1\": \"string\",\n      \"key_2\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfe3c5c6-899d-43dc-835b-e220e56c5da4",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_language_stats",
+                    ":resource_language_stats_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource_language_stats_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "034a3f48-0d92-47f7-896f-e09505983195",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_language_stats",
+                    ":resource_language_stats_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource_language_stats_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://rest.api.transifex.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d162db0d-dd28-4903-a2ba-a9d9d314cd19",
+    "name": "Transifex Activity Reports Statistics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "<br/>\n<br/>\n\n# Introduction\n\nThis API is based on **{json:api}**.\n\n{json:api} is a specification that follows shared conventions and standards. This specification enables API discoverability and partial\nself-descriptiveness through conventions. The Json Api specification exposes resources and their relationships representations with\nunique uris and all CRUD operations are performed on those endpoints. With it's simplified approach it assists the API uniformity.\n\nRead more: https://jsonapi.org/\n\nAdditionally, this API is defined using OpenAPI (ex Swagger). This means that you can easily:\n* Generate clients in your preferred: https://swagger.io/tools/swagger-codegen/\n* Download the specification file (see above) and use it in clients like Postman etc\n\n<br />\n<br />\n\n# Pagination\n\nAll list endpoints include pagination to guarantee performant responses. Those endpoints will return `next` and `previous` links in the\nresponse payload (`links` section). The client does not have to construct any pagination specific URLs or headers, just follow those\nlinks.\n\nPage size is fixed to 150 items per page.\n\n<br />\n<br />\n\n# Content Negotiation\n\nThe basic media type for the API is `application/vnd.api+json`. If you want to execute a request that includes data (`POST`, `PATCH`, `DELETE`)\nyou should include this media type in the `Content-Type` header. The only case where a different `Content-Type` header will be accepted is for\nendpoints that can accept file like objects where the media type used should be `multipart/form-data`.\n\nThe base media type this API responds is `application/vnd.api+json`. To retrieve the data in this media type you should include it in the `Accept`\nheader. The only case where the server will return another media type is for endpoint that return file like objects.\nIn this case the media type used should be `*/*` and the server will prioritize the negotiation to the media type dictated from the file.\nNote that `application/vnd.api+json` will be also available for accept header in these cases and will return a JSON serialized representation of the file.\n\nRead more here: https://jsonapi.org/format/#content-negotiation\n\n# File Uploads\n\nThere are three different methods for uploading file content to Transifex:\n* Using Content-Type `application/vnd.api+json` the content must\n    be JSON serializable.\n    - For content that is directly JSON serializable you can dump the content\n    of the file directly and set the `content_encoding` attribute  to `text`.\n    - For any content, even if it's not JSON serializable (eg .xlsx, .idml or .docx file extensions),\n    you can encode the file using the `base64` encoding and set the `content_encoding` attribute to `base64`.\n* Using Content-Type `multipart/form-data` the content can be any raw file, and can\n    be send without further processing.\n\n# Asynchronous Processing\n\nAsynchronous operations are triggered via a POST request. The response status in such cases is 202 Accepted, with a link in the Content-Location header.\nTo check the status of the operation, a client can send a request to the location given earlier.\nAn optional `callback_url` can be provided when the asynchronous operation is triggered. If such url is provided, upon completion\na HTTP POST request is executed containing all information required to identify the specific operation:\n\nExample request:\n```\nPOST callback_url HTTP/1.1\nContent-Type: application/json\n\n{\n  \"data\": {\n    \"type\": resource_strings_async_downloads\",\n    \"id\": \"xxxxxxxxx\",\n    \"attributes\": {\n      \"location\": \"https://rest.api.transifex.com/resource_strings_async_downloads/xxxxxxxxx\",\n      \"status\": \"succeeded\"\n    }\n  }\n}\n```\n\n# Restrictions\n\nThe following Plan based restrictions apply:\n* [Activity Reports](#tag/Activity-Reports) are available to Premium and up\n* [XLIFF export](#tag/Resource-Translations/paths/~1resource_translations_async_downloads/post) is available to Premium and up.\n* [Screenshots](#tag/Context-Screenshots) are available to Premium and up\n\n# Rate Limit\n\nTo maintain optimal performance and availability of the API, we limit the request rate to 500\nrequests/min or 30,000 requests / 5 minutes / IP. Polling endpoints like\n`resource_translations_async_downloads/{resource_translations_async_download_id}` and\n`resource_strings_async_downloads/{resource_strings_async_download_id}` have a rate limit of 1,200 requests/min.\nOnce past the respective limit, requests will be throttled and you will get a 429 Throttled response.\n\n\nExample response:\n```\n{\n  \"errors\": [\n    {\n      \"code\": \"Throttled\",\n      \"detail\": \"Request was throttled. Expected available in 60 seconds.\",\n      \"status\": \"429\",\n      \"title\": \"Throttled\"\n    }\n  ]\n}\n```\n\n# Authentication\n<!-- ReDoc-Inject: <security-definitions> -->\n\n\nContact Support:\n Name: Transifex Support\n Email: support@transifex.com",
+      "type": "text/plain"
+    }
+  }
+}

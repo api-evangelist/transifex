@@ -1,0 +1,1783 @@
+{
+  "item": [
+    {
+      "id": "b0e483f0-58dd-4721-866b-6ad580b63628",
+      "name": "Glossaries",
+      "description": {
+        "content": "Glossaries",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "08cd50db-17ff-4f72-8974-ba9765ab914a",
+          "name": "List glossaries",
+          "request": {
+            "name": "List glossaries",
+            "description": {
+              "content": "Get the list of glossaries that belong to a single organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "glossaries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[organization]",
+                  "value": "<string>",
+                  "description": "(Required) Filter results by an organization"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[cursor]",
+                  "value": "<string>",
+                  "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[slug]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[name]",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f7e9c940-c319-4567-a864-a220d2cfe84c",
+              "name": "Get a list of all glossaries for a given organization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[organization]",
+                      "value": "o:org_123"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[slug]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"/glossaries/o:organization_slug:g:glossary_slug\",\n    \"next\": \"/glossaries?filter[organization]=o:organization_slug&page[cursor]=XXX\",\n    \"previous\": \"/glossaries?filter[organization]=o:organization_slug&page[cursor]=XXX\"\n  },\n  \"data\": [\n    {\n      \"type\": \"glossaries\",\n      \"id\": \"o:organization_slug:g:glossary_slug\",\n      \"attributes\": {\n        \"slug\": \"glossary_slug\",\n        \"name\": \"Product glossary\",\n        \"datetime_created\": \"1991-12-24T08:49:50.517Z\",\n        \"datetime_modified\": \"1976-04-25T21:37:32.962Z\"\n      },\n      \"relationships\": {\n        \"source_language\": {\n          \"links\": {\n            \"related\": \"/languages/l:en_US\"\n          },\n          \"data\": {\n            \"type\": \"languages\",\n            \"id\": \"l:en_US\"\n          }\n        },\n        \"organization\": {\n          \"links\": {\n            \"related\": \"/organizations/o:organization_slug\"\n          },\n          \"data\": {\n            \"type\": \"organizations\",\n            \"id\": \"o:org_123\"\n          }\n        }\n      },\n      \"links\": {\n        \"self\": \"/glossaries/o:organization_slug:g:glossary_slug\"\n      }\n    },\n    {\n      \"type\": \"glossaries\",\n      \"id\": \"o:organization_slug:g:glossary_slug\",\n      \"attributes\": {\n        \"slug\": \"glossary_slug\",\n        \"name\": \"Product glossary\",\n        \"datetime_created\": \"1953-12-02T15:55:24.928Z\",\n        \"datetime_modified\": \"2018-05-08T19:43:05.018Z\"\n      },\n      \"relationships\": {\n        \"source_language\": {\n          \"links\": {\n            \"related\": \"/languages/l:en_US\"\n          },\n          \"data\": {\n            \"type\": \"languages\",\n            \"id\": \"l:en_US\"\n          }\n        },\n        \"organization\": {\n          \"links\": {\n            \"related\": \"/organizations/o:organization_slug\"\n          },\n          \"data\": {\n            \"type\": \"organizations\",\n            \"id\": \"o:org_123\"\n          }\n        }\n      },\n      \"links\": {\n        \"self\": \"/glossaries/o:organization_slug:g:glossary_slug\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "560aefd8-366a-427b-808d-2965eeafd1ea",
+              "name": "Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[organization]",
+                      "value": "o:org_123"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[slug]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    },\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23673c18-e795-4c11-af8a-f40ecde3e921",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[organization]",
+                      "value": "o:org_123"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[slug]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "377d4b58-4498-4caa-9882-7a5784e6385c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[organization]",
+                      "value": "o:org_123"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[slug]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 3801,\n      \"key_1\": 9731.435527639978\n    },\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 6777,\n      \"key_1\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4854696c-5d9d-497a-a566-e3af6cd23481",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[organization]",
+                      "value": "o:org_123"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[slug]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b918a6dd-0d4e-4c76-ac9f-755ffcb2259d",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[organization]",
+                      "value": "o:org_123"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[slug]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    },\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd743bdb-af9c-4587-93b0-d4b0b243228d",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[organization]",
+                      "value": "o:org_123"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[slug]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91d16bed-66e1-4349-8f73-c82d305ce5c3",
+          "name": "Get glossary details",
+          "request": {
+            "name": "Get glossary details",
+            "description": {
+              "content": "Get the details of a specific glossary.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "glossaries",
+                ":glossary_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "glossary_id",
+                  "description": "(Required) Format of composite id should be `o:organization_slug:g:glossary_slug`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c3e22d23-12ab-4acc-8ac0-6c391c24f8e8",
+              "name": "Successful Response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries",
+                    ":glossary_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "glossary_id",
+                      "description": "(Required) Format of composite id should be `o:organization_slug:g:glossary_slug`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"glossaries\",\n    \"id\": \"o:organization_slug:g:glossary_slug\",\n    \"attributes\": {\n      \"slug\": \"glossary_slug\",\n      \"name\": \"Product glossary\",\n      \"datetime_created\": \"2019-05-11T06:21:11.464Z\",\n      \"datetime_modified\": \"1966-05-18T11:52:17.071Z\"\n    },\n    \"relationships\": {\n      \"source_language\": {\n        \"links\": {\n          \"related\": \"/languages/l:en_US\"\n        },\n        \"data\": {\n          \"type\": \"languages\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"organization\": {\n        \"links\": {\n          \"related\": \"/organizations/o:organization_slug\"\n        },\n        \"data\": {\n          \"type\": \"organizations\",\n          \"id\": \"o:org_123\"\n        }\n      }\n    },\n    \"links\": {\n      \"self\": \"/glossaries/o:organization_slug:g:glossary_slug\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60f2d931-4f01-4ed4-a12e-e187b682817e",
+              "name": "Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries",
+                    ":glossary_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "glossary_id",
+                      "description": "(Required) Format of composite id should be `o:organization_slug:g:glossary_slug`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    },\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30d08fd2-99e4-4a5d-8e96-f9d63ec9cf7a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries",
+                    ":glossary_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "glossary_id",
+                      "description": "(Required) Format of composite id should be `o:organization_slug:g:glossary_slug`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cad1ba92-863d-4b7a-9811-8812b68d04ca",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries",
+                    ":glossary_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "glossary_id",
+                      "description": "(Required) Format of composite id should be `o:organization_slug:g:glossary_slug`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 3801,\n      \"key_1\": 9731.435527639978\n    },\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 6777,\n      \"key_1\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b00023ef-ee3d-4bb0-9b86-e7500fb1d0b1",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries",
+                    ":glossary_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "glossary_id",
+                      "description": "(Required) Format of composite id should be `o:organization_slug:g:glossary_slug`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc9d79e9-2245-4cb4-ba81-ad89f61f1b42",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries",
+                    ":glossary_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "glossary_id",
+                      "description": "(Required) Format of composite id should be `o:organization_slug:g:glossary_slug`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "578faa00-f755-47e8-964b-1154ed759126",
+          "name": "Create a glossary file download action",
+          "request": {
+            "name": "Create a glossary file download action",
+            "description": {
+              "content": "The response represents the glossary file download job. Check the job's\nstatus and download the file itself once that is completed.\n\nThe downloaded file will be in CSV format containing glossary terms, their\ntranslations, and optionally translation comments.\n\nIf no language relationship is provided, the CSV will include all glossary\nlanguages the authenticated user can view.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "glossaries_async_downloads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"relationships\": {\n      \"glossary\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      }\n    },\n    \"attributes\": {\n      \"callback_url\": null,\n      \"include_translation_comments\": false\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c0ca7ad1-4e74-44d3-891e-5587a479db51",
+              "name": "Accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"relationships\": {\n      \"glossary\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:g:glossary_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      }\n    },\n    \"attributes\": {\n      \"callback_url\": null,\n      \"include_translation_comments\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The location of the glossary download.",
+                  "key": "Content-Location",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"glossaries_async_downloads\",\n    \"id\": \"4abfc726-6a27-4c33-9d99-e5254c8df748\",\n    \"attributes\": {\n      \"status\": \"failed\",\n      \"errors\": [\n        {\n          \"code\": \"csv_generation_error\",\n          \"detail\": \"Could not decode JSON object\"\n        },\n        {\n          \"code\": \"csv_generation_error\",\n          \"detail\": \"Could not decode JSON object\"\n        }\n      ],\n      \"date_created\": \"1972-12-24T02:06:34.335Z\",\n      \"date_modified\": \"1996-09-27T18:35:01.437Z\"\n    },\n    \"relationships\": {\n      \"glossary\": {\n        \"links\": {\n          \"related\": \"/glossaries/o:organization_slug:g:glossary_slug\"\n        },\n        \"data\": {\n          \"type\": \"glossaries\",\n          \"id\": \"o:organization_slug:g:glossary_slug\"\n        }\n      },\n      \"language\": {\n        \"links\": {\n          \"related\": \"/languages/l:en_US\"\n        },\n        \"data\": {\n          \"type\": \"languages\",\n          \"id\": \"l:en_US\"\n        }\n      }\n    },\n    \"links\": {\n      \"self\": \"/glossaries_async_downloads/4abfc726-6a27-4c33-9d99-e5254c8df748\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfb4ddba-34f5-41c5-9192-975ce0303aaf",
+              "name": "Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"relationships\": {\n      \"glossary\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:g:glossary_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      }\n    },\n    \"attributes\": {\n      \"callback_url\": null,\n      \"include_translation_comments\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    },\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "643b2092-05cd-46e5-9c9d-21ee98e03e61",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"relationships\": {\n      \"glossary\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:g:glossary_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      }\n    },\n    \"attributes\": {\n      \"callback_url\": null,\n      \"include_translation_comments\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fe82b72-b073-4699-97c6-1e83ee00868b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"relationships\": {\n      \"glossary\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:g:glossary_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      }\n    },\n    \"attributes\": {\n      \"callback_url\": null,\n      \"include_translation_comments\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 3801,\n      \"key_1\": 9731.435527639978\n    },\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 6777,\n      \"key_1\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7136e16-871d-4c24-8a88-6113a83ca623",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"relationships\": {\n      \"glossary\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:g:glossary_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      }\n    },\n    \"attributes\": {\n      \"callback_url\": null,\n      \"include_translation_comments\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a98ccdf-5dbf-40fc-a7c1-e1d648826016",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"relationships\": {\n      \"glossary\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:g:glossary_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      }\n    },\n    \"attributes\": {\n      \"callback_url\": null,\n      \"include_translation_comments\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    },\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdd00977-6ffe-494d-a577-c5cbba2c25d0",
+              "name": "Throttled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"relationships\": {\n      \"glossary\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:g:glossary_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      }\n    },\n    \"attributes\": {\n      \"callback_url\": null,\n      \"include_translation_comments\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"Throttled\",\n      \"detail\": \"Request was throttled. Expected available in 60 seconds.\",\n      \"status\": \"429\",\n      \"title\": \"Throttled\"\n    },\n    {\n      \"code\": \"Throttled\",\n      \"detail\": \"Request was throttled. Expected available in 60 seconds.\",\n      \"status\": \"429\",\n      \"title\": \"Throttled\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95905258-f5e9-43c0-974c-8135fb258819",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"relationships\": {\n      \"glossary\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:g:glossary_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      }\n    },\n    \"attributes\": {\n      \"callback_url\": null,\n      \"include_translation_comments\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e95b420-f5a4-4ba4-aa6a-91e29dc499ff",
+          "name": "Get glossary file download status",
+          "request": {
+            "name": "Get glossary file download status",
+            "description": {
+              "content": "With this endpoint, you can inquire about the status of a glossary download job.\n\n- If the value of the 'status' attribute is 'pending' or 'processing', you\n  should check this endpoint again later.\n- If the 'status' is 'failed', the glossary file has failed to be compiled.\n- In case the download job has been successful, you will receive a \"303 - See\n  Other\" response and you can follow its `Location` to\n  [download the file](#tag/File-Downloads/paths/get)\n  that have been extracted from your file.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "glossaries_async_downloads",
+                ":glossaries_async_download_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "glossaries_async_download_id",
+                  "description": "(Required) Format of the glossaries_async_download_id should be a UUID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c1e1e2df-a623-4cbd-aa99-9bb0f43d3d44",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries_async_downloads",
+                    ":glossaries_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "glossaries_async_download_id",
+                      "description": "(Required) Format of the glossaries_async_download_id should be a UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"glossaries_async_downloads\",\n    \"id\": \"4abfc726-6a27-4c33-9d99-e5254c8df748\",\n    \"attributes\": {\n      \"status\": \"failed\",\n      \"errors\": [\n        {\n          \"code\": \"csv_generation_error\",\n          \"detail\": \"Could not decode JSON object\"\n        },\n        {\n          \"code\": \"csv_generation_error\",\n          \"detail\": \"Could not decode JSON object\"\n        }\n      ],\n      \"date_created\": \"1972-12-24T02:06:34.335Z\",\n      \"date_modified\": \"1996-09-27T18:35:01.437Z\"\n    },\n    \"relationships\": {\n      \"glossary\": {\n        \"links\": {\n          \"related\": \"/glossaries/o:organization_slug:g:glossary_slug\"\n        },\n        \"data\": {\n          \"type\": \"glossaries\",\n          \"id\": \"o:organization_slug:g:glossary_slug\"\n        }\n      },\n      \"language\": {\n        \"links\": {\n          \"related\": \"/languages/l:en_US\"\n        },\n        \"data\": {\n          \"type\": \"languages\",\n          \"id\": \"l:en_US\"\n        }\n      }\n    },\n    \"links\": {\n      \"self\": \"/glossaries_async_downloads/4abfc726-6a27-4c33-9d99-e5254c8df748\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "caf1af28-198a-4e6e-9180-1d7f5e5759e7",
+              "name": "See other",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries_async_downloads",
+                    ":glossaries_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "glossaries_async_download_id",
+                      "description": "(Required) Format of the glossaries_async_download_id should be a UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "See Other",
+              "code": 303,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The location of the glossary file.",
+                  "key": "Location",
+                  "value": "https://storage.svc.transifex.net/files/663a7a83-cb15-4c72-a37d-125dfb8432a6-file?auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZXMiOiJkb3dubG9hZCIsIm1ldGFkYXRhIjpudWxsLCJmaWxlX2lkcyI6IjY2M2E3YTgzLWNiMTUtNGM3Mi1hMzdkLTEyNWRmYjg0MzJhNi1maWxlIiwiZXhwIjoxNTg0NzE3NTkzLCJwcm92aWRlciI6InR4YyJ9.IHgLS4gtL0A6YZd-2zKkrg__geitcvs9DV8LcE8-1io"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d92988a-109f-4e15-b6ae-7c816ed8d5fe",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries_async_downloads",
+                    ":glossaries_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "glossaries_async_download_id",
+                      "description": "(Required) Format of the glossaries_async_download_id should be a UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78ccaa6d-50b3-4b19-ae6c-c3c2eb4f1e82",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries_async_downloads",
+                    ":glossaries_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "glossaries_async_download_id",
+                      "description": "(Required) Format of the glossaries_async_download_id should be a UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 3801,\n      \"key_1\": 9731.435527639978\n    },\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 6777,\n      \"key_1\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "845f0c54-c6a9-4fbb-8df7-d9e60d1609c8",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries_async_downloads",
+                    ":glossaries_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "glossaries_async_download_id",
+                      "description": "(Required) Format of the glossaries_async_download_id should be a UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3984fa8e-cbf3-4330-b812-9d9d560805af",
+              "name": "Throttled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries_async_downloads",
+                    ":glossaries_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "glossaries_async_download_id",
+                      "description": "(Required) Format of the glossaries_async_download_id should be a UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"Throttled\",\n      \"detail\": \"Request was throttled. Expected available in 60 seconds.\",\n      \"status\": \"429\",\n      \"title\": \"Throttled\"\n    },\n    {\n      \"code\": \"Throttled\",\n      \"detail\": \"Request was throttled. Expected available in 60 seconds.\",\n      \"status\": \"429\",\n      \"title\": \"Throttled\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08fe723a-236d-4d93-8a84-79d2874b0223",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "glossaries_async_downloads",
+                    ":glossaries_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "glossaries_async_download_id",
+                      "description": "(Required) Format of the glossaries_async_download_id should be a UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://rest.api.transifex.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "af3fbcfd-e1cd-4fe0-ae02-50f0f34e18c0",
+    "name": "Transifex Activity Reports Glossaries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "<br/>\n<br/>\n\n# Introduction\n\nThis API is based on **{json:api}**.\n\n{json:api} is a specification that follows shared conventions and standards. This specification enables API discoverability and partial\nself-descriptiveness through conventions. The Json Api specification exposes resources and their relationships representations with\nunique uris and all CRUD operations are performed on those endpoints. With it's simplified approach it assists the API uniformity.\n\nRead more: https://jsonapi.org/\n\nAdditionally, this API is defined using OpenAPI (ex Swagger). This means that you can easily:\n* Generate clients in your preferred: https://swagger.io/tools/swagger-codegen/\n* Download the specification file (see above) and use it in clients like Postman etc\n\n<br />\n<br />\n\n# Pagination\n\nAll list endpoints include pagination to guarantee performant responses. Those endpoints will return `next` and `previous` links in the\nresponse payload (`links` section). The client does not have to construct any pagination specific URLs or headers, just follow those\nlinks.\n\nPage size is fixed to 150 items per page.\n\n<br />\n<br />\n\n# Content Negotiation\n\nThe basic media type for the API is `application/vnd.api+json`. If you want to execute a request that includes data (`POST`, `PATCH`, `DELETE`)\nyou should include this media type in the `Content-Type` header. The only case where a different `Content-Type` header will be accepted is for\nendpoints that can accept file like objects where the media type used should be `multipart/form-data`.\n\nThe base media type this API responds is `application/vnd.api+json`. To retrieve the data in this media type you should include it in the `Accept`\nheader. The only case where the server will return another media type is for endpoint that return file like objects.\nIn this case the media type used should be `*/*` and the server will prioritize the negotiation to the media type dictated from the file.\nNote that `application/vnd.api+json` will be also available for accept header in these cases and will return a JSON serialized representation of the file.\n\nRead more here: https://jsonapi.org/format/#content-negotiation\n\n# File Uploads\n\nThere are three different methods for uploading file content to Transifex:\n* Using Content-Type `application/vnd.api+json` the content must\n    be JSON serializable.\n    - For content that is directly JSON serializable you can dump the content\n    of the file directly and set the `content_encoding` attribute  to `text`.\n    - For any content, even if it's not JSON serializable (eg .xlsx, .idml or .docx file extensions),\n    you can encode the file using the `base64` encoding and set the `content_encoding` attribute to `base64`.\n* Using Content-Type `multipart/form-data` the content can be any raw file, and can\n    be send without further processing.\n\n# Asynchronous Processing\n\nAsynchronous operations are triggered via a POST request. The response status in such cases is 202 Accepted, with a link in the Content-Location header.\nTo check the status of the operation, a client can send a request to the location given earlier.\nAn optional `callback_url` can be provided when the asynchronous operation is triggered. If such url is provided, upon completion\na HTTP POST request is executed containing all information required to identify the specific operation:\n\nExample request:\n```\nPOST callback_url HTTP/1.1\nContent-Type: application/json\n\n{\n  \"data\": {\n    \"type\": resource_strings_async_downloads\",\n    \"id\": \"xxxxxxxxx\",\n    \"attributes\": {\n      \"location\": \"https://rest.api.transifex.com/resource_strings_async_downloads/xxxxxxxxx\",\n      \"status\": \"succeeded\"\n    }\n  }\n}\n```\n\n# Restrictions\n\nThe following Plan based restrictions apply:\n* [Activity Reports](#tag/Activity-Reports) are available to Premium and up\n* [XLIFF export](#tag/Resource-Translations/paths/~1resource_translations_async_downloads/post) is available to Premium and up.\n* [Screenshots](#tag/Context-Screenshots) are available to Premium and up\n\n# Rate Limit\n\nTo maintain optimal performance and availability of the API, we limit the request rate to 500\nrequests/min or 30,000 requests / 5 minutes / IP. Polling endpoints like\n`resource_translations_async_downloads/{resource_translations_async_download_id}` and\n`resource_strings_async_downloads/{resource_strings_async_download_id}` have a rate limit of 1,200 requests/min.\nOnce past the respective limit, requests will be throttled and you will get a 429 Throttled response.\n\n\nExample response:\n```\n{\n  \"errors\": [\n    {\n      \"code\": \"Throttled\",\n      \"detail\": \"Request was throttled. Expected available in 60 seconds.\",\n      \"status\": \"429\",\n      \"title\": \"Throttled\"\n    }\n  ]\n}\n```\n\n# Authentication\n<!-- ReDoc-Inject: <security-definitions> -->\n\n\nContact Support:\n Name: Transifex Support\n Email: support@transifex.com",
+      "type": "text/plain"
+    }
+  }
+}

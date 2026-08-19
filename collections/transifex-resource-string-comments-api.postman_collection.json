@@ -1,0 +1,2040 @@
+{
+  "item": [
+    {
+      "id": "584c5753-d83a-42f1-ba43-9cb2a861e31c",
+      "name": "Resource String Comments",
+      "description": {
+        "content": "Represents comments on resource strings. These are the same comments exposed in the Transifex Editor under the \"Comments\" tab.\n\nA comment can also be flagged as an **issue**. In this case, some extra functionality is available\n  * You can change an issue's status\n  * You can change it's category\n  * You can assign a priority\n\nCategories can be configured per organization. To configure the available categories for your organization, contact\n<a href=\"https://www.transifex.com/contact/\">Transifex Support</a>.\n\nFor further details & examples, take a look below.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bf4899da-39c1-4ebc-8f93-f8df794e41fb",
+          "name": "List resource string comments",
+          "request": {
+            "name": "List resource string comments",
+            "description": {
+              "content": "Get a list of all resource string comments for an organization. You can further narrow down the list using the available filters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "resource_string_comments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[organization]",
+                  "value": "<string>",
+                  "description": "(Required) Filter results by an organization"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[project]",
+                  "value": "<string>",
+                  "description": "Filter results by a project"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[cursor]",
+                  "value": "<string>",
+                  "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[category]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[author]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[datetime_created][gte]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[datetime_created][lt]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[priority]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[resource]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[resource_string]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[status]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[type]",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d0c3179-fb69-4ae0-83f8-2f930b8e9cc2",
+              "name": "List of resource string comments ordered by creation date in descending order",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[organization]",
+                      "value": "o:org_123"
+                    },
+                    {
+                      "key": "filter[project]",
+                      "value": "o:organization_slug:p:project_slug"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[category]",
+                      "value": "frontpage"
+                    },
+                    {
+                      "key": "filter[author]",
+                      "value": "u:username"
+                    },
+                    {
+                      "key": "filter[datetime_created][gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter[datetime_created][lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter[priority]",
+                      "value": "critical"
+                    },
+                    {
+                      "key": "filter[resource]",
+                      "value": "o:organization_slug:p:project_slug:r:resource_slug"
+                    },
+                    {
+                      "key": "filter[resource_string]",
+                      "value": "o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "open"
+                    },
+                    {
+                      "key": "filter[type]",
+                      "value": "issue"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"resource_string_comments\",\n      \"id\": \"o:8rP:p:4T6swfJ:r:Id6:s:af5293fcdb2488e7f6649ec1a7af4c8c:c:dddffb4d-0905-6425-427b-e6a60d34b32d\",\n      \"attributes\": {\n        \"category\": \"frontpage\",\n        \"datetime_created\": \"1969-10-04T01:39:55.039Z\",\n        \"datetime_modified\": \"1954-07-15T04:35:39.085Z\",\n        \"datetime_resolved\": \"1987-12-01T22:29:56.165Z\",\n        \"message\": \"the key is wrong\",\n        \"priority\": \"normal\",\n        \"status\": \"resolved\",\n        \"type\": \"issue\"\n      },\n      \"links\": {\n        \"self\": \"/resource_string_comments/o:organization_slug:p:project_slug:r:resource_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:c:4abfc726-6a27-4c33-9d99-e5254c8df748\"\n      },\n      \"relationships\": {\n        \"resource_string\": {\n          \"data\": {\n            \"type\": \"resource_strings\",\n            \"id\": \"o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52\"\n          },\n          \"links\": {\n            \"related\": \"/resource_strings/o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52\"\n          }\n        },\n        \"resource\": {\n          \"data\": {\n            \"type\": \"resources\",\n            \"id\": \"o:organization_slug:p:project_slug:r:resource_slug\"\n          },\n          \"links\": {\n            \"related\": \"/resources/o:organization_slug:p:project_slug:r:resource_slug\"\n          }\n        },\n        \"language\": {\n          \"data\": {\n            \"type\": \"languages\",\n            \"id\": \"l:en_US\"\n          },\n          \"links\": {\n            \"related\": \"/languages/l:en_US\"\n          }\n        },\n        \"author\": {\n          \"data\": {\n            \"type\": \"users\",\n            \"id\": \"u:user_1\"\n          },\n          \"links\": {\n            \"related\": \"/users/u:user_1\"\n          }\n        },\n        \"resolver\": {\n          \"data\": {\n            \"type\": \"users\",\n            \"id\": \"u:user_1\"\n          },\n          \"links\": {\n            \"related\": \"/users/u:user_1\"\n          }\n        }\n      }\n    },\n    {\n      \"type\": \"resource_string_comments\",\n      \"id\": \"o:7Iua5:p:BR0aT:r:Z8i0GaBI5:s:a7576b2d4b69a6da3457b98987e8fb5d:c:df6b186e-9a4a-dce3-520a-d375469d5d55\",\n      \"attributes\": {\n        \"category\": \"frontpage\",\n        \"datetime_created\": \"1947-03-14T06:19:37.004Z\",\n        \"datetime_modified\": \"2023-09-23T05:08:30.688Z\",\n        \"datetime_resolved\": \"1957-03-29T10:45:26.406Z\",\n        \"message\": \"the key is wrong\",\n        \"priority\": \"normal\",\n        \"status\": \"resolved\",\n        \"type\": \"issue\"\n      },\n      \"links\": {\n        \"self\": \"/resource_string_comments/o:organization_slug:p:project_slug:r:resource_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:c:4abfc726-6a27-4c33-9d99-e5254c8df748\"\n      },\n      \"relationships\": {\n        \"resource_string\": {\n          \"data\": {\n            \"type\": \"resource_strings\",\n            \"id\": \"o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52\"\n          },\n          \"links\": {\n            \"related\": \"/resource_strings/o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52\"\n          }\n        },\n        \"resource\": {\n          \"data\": {\n            \"type\": \"resources\",\n            \"id\": \"o:organization_slug:p:project_slug:r:resource_slug\"\n          },\n          \"links\": {\n            \"related\": \"/resources/o:organization_slug:p:project_slug:r:resource_slug\"\n          }\n        },\n        \"language\": {\n          \"data\": {\n            \"type\": \"languages\",\n            \"id\": \"l:en_US\"\n          },\n          \"links\": {\n            \"related\": \"/languages/l:en_US\"\n          }\n        },\n        \"author\": {\n          \"data\": {\n            \"type\": \"users\",\n            \"id\": \"u:user_1\"\n          },\n          \"links\": {\n            \"related\": \"/users/u:user_1\"\n          }\n        },\n        \"resolver\": {\n          \"data\": {\n            \"type\": \"users\",\n            \"id\": \"u:user_1\"\n          },\n          \"links\": {\n            \"related\": \"/users/u:user_1\"\n          }\n        }\n      }\n    }\n  ],\n  \"links\": {\n    \"next\": \"/resource_strings_comments?filter[organization]=o:organization_slug&page[cursor]=XXX\",\n    \"previous\": \"/resource_strings_comments?filter[organization]=o:organization_slug&page[cursor]=XXX\",\n    \"self\": \"/resource_strings_comments?filter[organization]=o:organization_slug&page[cursor]=XXX\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c706035b-9958-41dd-88fb-e222cafcef3b",
+              "name": "Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[organization]",
+                      "value": "o:org_123"
+                    },
+                    {
+                      "key": "filter[project]",
+                      "value": "o:organization_slug:p:project_slug"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[category]",
+                      "value": "frontpage"
+                    },
+                    {
+                      "key": "filter[author]",
+                      "value": "u:username"
+                    },
+                    {
+                      "key": "filter[datetime_created][gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter[datetime_created][lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter[priority]",
+                      "value": "critical"
+                    },
+                    {
+                      "key": "filter[resource]",
+                      "value": "o:organization_slug:p:project_slug:r:resource_slug"
+                    },
+                    {
+                      "key": "filter[resource_string]",
+                      "value": "o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "open"
+                    },
+                    {
+                      "key": "filter[type]",
+                      "value": "issue"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    },\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "468d62dc-5fda-42d7-a570-d606f6308c26",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[organization]",
+                      "value": "o:org_123"
+                    },
+                    {
+                      "key": "filter[project]",
+                      "value": "o:organization_slug:p:project_slug"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[category]",
+                      "value": "frontpage"
+                    },
+                    {
+                      "key": "filter[author]",
+                      "value": "u:username"
+                    },
+                    {
+                      "key": "filter[datetime_created][gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter[datetime_created][lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter[priority]",
+                      "value": "critical"
+                    },
+                    {
+                      "key": "filter[resource]",
+                      "value": "o:organization_slug:p:project_slug:r:resource_slug"
+                    },
+                    {
+                      "key": "filter[resource_string]",
+                      "value": "o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "open"
+                    },
+                    {
+                      "key": "filter[type]",
+                      "value": "issue"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4dc1e1c3-74ad-47f6-8139-8da3f7359f94",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[organization]",
+                      "value": "o:org_123"
+                    },
+                    {
+                      "key": "filter[project]",
+                      "value": "o:organization_slug:p:project_slug"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[category]",
+                      "value": "frontpage"
+                    },
+                    {
+                      "key": "filter[author]",
+                      "value": "u:username"
+                    },
+                    {
+                      "key": "filter[datetime_created][gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter[datetime_created][lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter[priority]",
+                      "value": "critical"
+                    },
+                    {
+                      "key": "filter[resource]",
+                      "value": "o:organization_slug:p:project_slug:r:resource_slug"
+                    },
+                    {
+                      "key": "filter[resource_string]",
+                      "value": "o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "open"
+                    },
+                    {
+                      "key": "filter[type]",
+                      "value": "issue"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1bfacf0f-c417-49ab-b14f-9c7e97a9c966",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[organization]",
+                      "value": "o:org_123"
+                    },
+                    {
+                      "key": "filter[project]",
+                      "value": "o:organization_slug:p:project_slug"
+                    },
+                    {
+                      "key": "page[cursor]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[category]",
+                      "value": "frontpage"
+                    },
+                    {
+                      "key": "filter[author]",
+                      "value": "u:username"
+                    },
+                    {
+                      "key": "filter[datetime_created][gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter[datetime_created][lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter[priority]",
+                      "value": "critical"
+                    },
+                    {
+                      "key": "filter[resource]",
+                      "value": "o:organization_slug:p:project_slug:r:resource_slug"
+                    },
+                    {
+                      "key": "filter[resource_string]",
+                      "value": "o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "open"
+                    },
+                    {
+                      "key": "filter[type]",
+                      "value": "issue"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc9fd6b9-36cb-40ae-8f08-5f000561fc53",
+          "name": "Create resource string comments",
+          "request": {
+            "name": "Create resource string comments",
+            "description": {
+              "content": "Create a new resource string comment. This needs to be associated with a resource string and a target language.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "resource_string_comments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"message\": \"<string>\",\n      \"type\": \"<string>\",\n      \"category\": \"<string>\",\n      \"priority\": \"normal\"\n    },\n    \"relationships\": {\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      },\n      \"resource_string\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bbf3f5c8-520a-4a3a-b774-c7ae5a8a53b8",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"message\": \"the key is wrong\",\n      \"type\": \"issue\",\n      \"category\": \"frontpage\",\n      \"priority\": \"normal\"\n    },\n    \"relationships\": {\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"resource_string\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Location",
+                  "value": "/resource_string_comments/o:organization_slug:p:project_slug:r:resource_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:c:4abfc726-6a27-4c33-9d99-e5254c8df748",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"resource_string_comments\",\n    \"id\": \"o:L-uWPXSLD:p:1-eIiHe:r:k9f2h:s:335afa7642eb9004211307e5e12ec49a:c:e5b7e810-831b-0052-0075-accd4a61893a\",\n    \"attributes\": {\n      \"category\": \"frontpage\",\n      \"datetime_created\": \"1948-07-06T15:57:22.098Z\",\n      \"datetime_modified\": \"2022-02-20T11:46:42.902Z\",\n      \"datetime_resolved\": \"1976-05-10T21:34:55.465Z\",\n      \"message\": \"the key is wrong\",\n      \"priority\": \"normal\",\n      \"status\": \"resolved\",\n      \"type\": \"issue\"\n    },\n    \"links\": {\n      \"self\": \"/resource_string_comments/o:organization_slug:p:project_slug:r:resource_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:c:4abfc726-6a27-4c33-9d99-e5254c8df748\"\n    },\n    \"relationships\": {\n      \"resource_string\": {\n        \"data\": {\n          \"type\": \"resource_strings\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52\"\n        },\n        \"links\": {\n          \"related\": \"/resource_strings/o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52\"\n        }\n      },\n      \"resource\": {\n        \"data\": {\n          \"type\": \"resources\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug\"\n        },\n        \"links\": {\n          \"related\": \"/resources/o:organization_slug:p:project_slug:r:resource_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"languages\",\n          \"id\": \"l:en_US\"\n        },\n        \"links\": {\n          \"related\": \"/languages/l:en_US\"\n        }\n      },\n      \"author\": {\n        \"data\": {\n          \"type\": \"users\",\n          \"id\": \"u:user_1\"\n        },\n        \"links\": {\n          \"related\": \"/users/u:user_1\"\n        }\n      },\n      \"resolver\": {\n        \"data\": {\n          \"type\": \"users\",\n          \"id\": \"u:user_1\"\n        },\n        \"links\": {\n          \"related\": \"/users/u:user_1\"\n        }\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd733e78-3f8c-4c43-8a49-66ee3797b0ce",
+              "name": "Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"message\": \"the key is wrong\",\n      \"type\": \"issue\",\n      \"category\": \"frontpage\",\n      \"priority\": \"normal\"\n    },\n    \"relationships\": {\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"resource_string\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    },\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ba5f225-164b-4521-9ef1-f737f9ba33c3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"message\": \"the key is wrong\",\n      \"type\": \"issue\",\n      \"category\": \"frontpage\",\n      \"priority\": \"normal\"\n    },\n    \"relationships\": {\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"resource_string\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9d8111d-a08b-4cdc-a555-b78f66366e70",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"message\": \"the key is wrong\",\n      \"type\": \"issue\",\n      \"category\": \"frontpage\",\n      \"priority\": \"normal\"\n    },\n    \"relationships\": {\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"resource_string\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\"\n    },\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": true,\n      \"key_1\": 6357.911071400498\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae7eea96-b2db-4f47-a9ad-bda9b729e1cd",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"message\": \"the key is wrong\",\n      \"type\": \"issue\",\n      \"category\": \"frontpage\",\n      \"priority\": \"normal\"\n    },\n    \"relationships\": {\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"resource_string\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec784c83-0511-46c5-9064-b3a8c37cf0f7",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"message\": \"the key is wrong\",\n      \"type\": \"issue\",\n      \"category\": \"frontpage\",\n      \"priority\": \"normal\"\n    },\n    \"relationships\": {\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"resource_string\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    },\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c70c7cfa-0435-4d1b-8bf8-3c934736d4a9",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"message\": \"the key is wrong\",\n      \"type\": \"issue\",\n      \"category\": \"frontpage\",\n      \"priority\": \"normal\"\n    },\n    \"relationships\": {\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"resource_string\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b44d9c50-6fde-4be1-a10f-80661a39f3ea",
+          "name": "Delete resource string comment",
+          "request": {
+            "name": "Delete resource string comment",
+            "description": {
+              "content": "Delete a resource string comment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "resource_string_comments",
+                ":comment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "comment_id",
+                  "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "002eb3c5-abcf-4933-bde3-9e312b25d867",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0151c300-a473-472e-be0c-70aa6d6eb407",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6303e918-a995-4cec-aaaf-4f3dbd2e526c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\"\n    },\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": true,\n      \"key_1\": 6357.911071400498\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63f2b803-1598-4570-b931-8c43b73b2879",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "584001b2-0c01-4611-b932-0ea3aebd49f3",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec063844-143f-4376-86d0-36c745c60c04",
+          "name": "Get resource string comment",
+          "request": {
+            "name": "Get resource string comment",
+            "description": {
+              "content": "Get details for a comment related to a specific resource string",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "resource_string_comments",
+                ":comment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "comment_id",
+                  "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8dd4288a-a4de-484f-8497-f490c940b822",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"resource_string_comments\",\n    \"id\": \"o:Sy_tIy61H:p:qwbchiW:r:qgDVi-:s:a4eb03d824195cff4e47bd516c74f54e:c:0585a449-f56d-0325-5c61-7e170d1d29df\",\n    \"attributes\": {\n      \"category\": \"frontpage\",\n      \"datetime_created\": \"1970-12-18T07:57:23.700Z\",\n      \"datetime_modified\": \"1975-02-19T09:58:23.621Z\",\n      \"datetime_resolved\": \"2024-05-28T00:59:20.281Z\",\n      \"message\": \"the key is wrong\",\n      \"priority\": \"normal\",\n      \"status\": \"resolved\",\n      \"type\": \"issue\"\n    },\n    \"links\": {\n      \"self\": \"/resource_string_comments/o:organization_slug:p:project_slug:r:resource_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:c:4abfc726-6a27-4c33-9d99-e5254c8df748\"\n    },\n    \"relationships\": {\n      \"resource_string\": {\n        \"data\": {\n          \"type\": \"resource_strings\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52\"\n        },\n        \"links\": {\n          \"related\": \"/resource_strings/o:organization_slug:p:project_slug:r:resource_slug:s:2e354ef120752c67afa1b6855aa80c52\"\n        }\n      },\n      \"resource\": {\n        \"data\": {\n          \"type\": \"resources\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug\"\n        },\n        \"links\": {\n          \"related\": \"/resources/o:organization_slug:p:project_slug:r:resource_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"languages\",\n          \"id\": \"l:en_US\"\n        },\n        \"links\": {\n          \"related\": \"/languages/l:en_US\"\n        }\n      },\n      \"author\": {\n        \"data\": {\n          \"type\": \"users\",\n          \"id\": \"u:user_1\"\n        },\n        \"links\": {\n          \"related\": \"/users/u:user_1\"\n        }\n      },\n      \"resolver\": {\n        \"data\": {\n          \"type\": \"users\",\n          \"id\": \"u:user_1\"\n        },\n        \"links\": {\n          \"related\": \"/users/u:user_1\"\n        }\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66101dbf-bc67-4640-93d0-26e99b444ff6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01464a29-ec79-4b1c-a4a3-52627bbf5103",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ecf1bc6-c547-4ec8-a963-c7ab5ed5d6ef",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d5319ed-c17b-4738-8b7a-c2735297b4ec",
+          "name": "Update resource string comment",
+          "request": {
+            "name": "Update resource string comment",
+            "description": {
+              "content": "Change a resource string comment. You can update it's status, change it to an issue or edit the description.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "resource_string_comments",
+                ":comment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "comment_id",
+                  "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"resource_string_comments\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"category\": \"<string>\",\n      \"message\": \"<string>\",\n      \"priority\": \"<string>\",\n      \"status\": \"open\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "24a32da6-50e0-494e-9bcd-9109f84290f4",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"resource_string_comments\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"category\": \"frontpage\",\n      \"message\": \"the key is wrong\",\n      \"priority\": \"<string>\",\n      \"status\": \"resolved\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5f5da2c-9f5f-47fa-bd3b-ee6d3198bf1d",
+              "name": "Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"resource_string_comments\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"category\": \"frontpage\",\n      \"message\": \"the key is wrong\",\n      \"priority\": \"<string>\",\n      \"status\": \"resolved\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    },\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e2c675b-5c8e-4046-a2d2-45c7c6e5d7d5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"resource_string_comments\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"category\": \"frontpage\",\n      \"message\": \"the key is wrong\",\n      \"priority\": \"<string>\",\n      \"status\": \"resolved\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d1cce3b-54ca-4dca-a08c-8d8278b83ab6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"resource_string_comments\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"category\": \"frontpage\",\n      \"message\": \"the key is wrong\",\n      \"priority\": \"<string>\",\n      \"status\": \"resolved\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\"\n    },\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": true,\n      \"key_1\": 6357.911071400498\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c1c0b71-fd2b-412d-a0ee-5b379dc37339",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"resource_string_comments\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"category\": \"frontpage\",\n      \"message\": \"the key is wrong\",\n      \"priority\": \"<string>\",\n      \"status\": \"resolved\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5dac079-5f30-4caf-a92d-69f44bb34538",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"resource_string_comments\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"category\": \"frontpage\",\n      \"message\": \"the key is wrong\",\n      \"priority\": \"<string>\",\n      \"status\": \"resolved\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    },\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db2cb0f9-ae64-4272-9619-37545b12146f",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_string_comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"resource_string_comments\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"category\": \"frontpage\",\n      \"message\": \"the key is wrong\",\n      \"priority\": \"<string>\",\n      \"status\": \"resolved\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://rest.api.transifex.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fba6e10a-0641-49bf-8d9a-5db2d3ddda8a",
+    "name": "Transifex Activity Reports Resource String Comments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "<br/>\n<br/>\n\n# Introduction\n\nThis API is based on **{json:api}**.\n\n{json:api} is a specification that follows shared conventions and standards. This specification enables API discoverability and partial\nself-descriptiveness through conventions. The Json Api specification exposes resources and their relationships representations with\nunique uris and all CRUD operations are performed on those endpoints. With it's simplified approach it assists the API uniformity.\n\nRead more: https://jsonapi.org/\n\nAdditionally, this API is defined using OpenAPI (ex Swagger). This means that you can easily:\n* Generate clients in your preferred: https://swagger.io/tools/swagger-codegen/\n* Download the specification file (see above) and use it in clients like Postman etc\n\n<br />\n<br />\n\n# Pagination\n\nAll list endpoints include pagination to guarantee performant responses. Those endpoints will return `next` and `previous` links in the\nresponse payload (`links` section). The client does not have to construct any pagination specific URLs or headers, just follow those\nlinks.\n\nPage size is fixed to 150 items per page.\n\n<br />\n<br />\n\n# Content Negotiation\n\nThe basic media type for the API is `application/vnd.api+json`. If you want to execute a request that includes data (`POST`, `PATCH`, `DELETE`)\nyou should include this media type in the `Content-Type` header. The only case where a different `Content-Type` header will be accepted is for\nendpoints that can accept file like objects where the media type used should be `multipart/form-data`.\n\nThe base media type this API responds is `application/vnd.api+json`. To retrieve the data in this media type you should include it in the `Accept`\nheader. The only case where the server will return another media type is for endpoint that return file like objects.\nIn this case the media type used should be `*/*` and the server will prioritize the negotiation to the media type dictated from the file.\nNote that `application/vnd.api+json` will be also available for accept header in these cases and will return a JSON serialized representation of the file.\n\nRead more here: https://jsonapi.org/format/#content-negotiation\n\n# File Uploads\n\nThere are three different methods for uploading file content to Transifex:\n* Using Content-Type `application/vnd.api+json` the content must\n    be JSON serializable.\n    - For content that is directly JSON serializable you can dump the content\n    of the file directly and set the `content_encoding` attribute  to `text`.\n    - For any content, even if it's not JSON serializable (eg .xlsx, .idml or .docx file extensions),\n    you can encode the file using the `base64` encoding and set the `content_encoding` attribute to `base64`.\n* Using Content-Type `multipart/form-data` the content can be any raw file, and can\n    be send without further processing.\n\n# Asynchronous Processing\n\nAsynchronous operations are triggered via a POST request. The response status in such cases is 202 Accepted, with a link in the Content-Location header.\nTo check the status of the operation, a client can send a request to the location given earlier.\nAn optional `callback_url` can be provided when the asynchronous operation is triggered. If such url is provided, upon completion\na HTTP POST request is executed containing all information required to identify the specific operation:\n\nExample request:\n```\nPOST callback_url HTTP/1.1\nContent-Type: application/json\n\n{\n  \"data\": {\n    \"type\": resource_strings_async_downloads\",\n    \"id\": \"xxxxxxxxx\",\n    \"attributes\": {\n      \"location\": \"https://rest.api.transifex.com/resource_strings_async_downloads/xxxxxxxxx\",\n      \"status\": \"succeeded\"\n    }\n  }\n}\n```\n\n# Restrictions\n\nThe following Plan based restrictions apply:\n* [Activity Reports](#tag/Activity-Reports) are available to Premium and up\n* [XLIFF export](#tag/Resource-Translations/paths/~1resource_translations_async_downloads/post) is available to Premium and up.\n* [Screenshots](#tag/Context-Screenshots) are available to Premium and up\n\n# Rate Limit\n\nTo maintain optimal performance and availability of the API, we limit the request rate to 500\nrequests/min or 30,000 requests / 5 minutes / IP. Polling endpoints like\n`resource_translations_async_downloads/{resource_translations_async_download_id}` and\n`resource_strings_async_downloads/{resource_strings_async_download_id}` have a rate limit of 1,200 requests/min.\nOnce past the respective limit, requests will be throttled and you will get a 429 Throttled response.\n\n\nExample response:\n```\n{\n  \"errors\": [\n    {\n      \"code\": \"Throttled\",\n      \"detail\": \"Request was throttled. Expected available in 60 seconds.\",\n      \"status\": \"429\",\n      \"title\": \"Throttled\"\n    }\n  ]\n}\n```\n\n# Authentication\n<!-- ReDoc-Inject: <security-definitions> -->\n\n\nContact Support:\n Name: Transifex Support\n Email: support@transifex.com",
+      "type": "text/plain"
+    }
+  }
+}

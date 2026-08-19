@@ -1,0 +1,255 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Transifex Activity Reports Teams API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/teams",
+            "params": [
+              {
+                "name": "filter[organization]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by an organization"
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              },
+              {
+                "name": "filter[slug]",
+                "value": "",
+                "type": "query",
+                "description": "The slug of the team to get details"
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the list of teams that belong to a single organization."
+        },
+        {
+          "info": {
+            "name": "Create a Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/teams",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Team"
+        },
+        {
+          "info": {
+            "name": "Get team detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/teams/:team_id",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:t:team_slug`.\n"
+              }
+            ]
+          },
+          "docs": "Get the details of a single team."
+        },
+        {
+          "info": {
+            "name": "Update a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://rest.api.transifex.com/teams/:team_id",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:t:team_slug`.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a team"
+        },
+        {
+          "info": {
+            "name": "Delete team",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://rest.api.transifex.com/teams/:team_id",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:t:team_slug`.\n"
+              }
+            ]
+          },
+          "docs": "Delete a team."
+        },
+        {
+          "info": {
+            "name": "Get team managers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/teams/:team_id/managers",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:t:team_slug`.\n"
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              }
+            ]
+          },
+          "docs": "Get the managers of a team."
+        },
+        {
+          "info": {
+            "name": "Get team manager relationships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/teams/:team_id/relationships/managers",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:t:team_slug`.\n"
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              }
+            ]
+          },
+          "docs": "Get team manager relationships."
+        },
+        {
+          "info": {
+            "name": "Add managers to team",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/teams/:team_id/relationships/managers",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:t:team_slug`.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add managers to team."
+        },
+        {
+          "info": {
+            "name": "Update team managers",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://rest.api.transifex.com/teams/:team_id/relationships/managers",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:t:team_slug`.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completely replace team managers.\n\n_**Warning**: This is a highly destructive operation._\n"
+        },
+        {
+          "info": {
+            "name": "Remove managers from team",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://rest.api.transifex.com/teams/:team_id/relationships/managers",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:t:team_slug`.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove managers from team."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

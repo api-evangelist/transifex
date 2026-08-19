@@ -1,0 +1,201 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Transifex Activity Reports API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Activity Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an organization activity report file download action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/organization_activity_reports_async_downloads",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The response represents the organization activity report file download job.\nCheck the job's status and download the file itself once that is completed.\n"
+        },
+        {
+          "info": {
+            "name": "Get organization activity report download status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/organization_activity_reports_async_downloads/:organization_activity_reports_async_download_id",
+            "params": [
+              {
+                "name": "organization_activity_reports_async_download_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the organization_activity_reports_async_download_id should be\na UUID.\n"
+              }
+            ]
+          },
+          "docs": "With this endpoint, you can inquire about the status of an organization\nactivity report download job.\n\n- If the value of the 'status' attribute is 'pending' or 'processing', you\n  should check this endpoint again later.\n- If the 'status' is 'failed', the report has failed to be compiled.\n- In case the upload job has been successful, you will receive a \"303 - See\n  Other\" response and you can follow its `Location` to\n  [download the file](#tag/File-Downloads/paths/get) that have been\n  extracted "
+        },
+        {
+          "info": {
+            "name": "Create a project activity report file download action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/project_activity_reports_async_downloads",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The response represents the project activity report download job. Check the\njob's status and download the file itself once that is completed.\n"
+        },
+        {
+          "info": {
+            "name": "Get project activity report download status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/project_activity_reports_async_downloads/:project_activity_reports_async_download_id",
+            "params": [
+              {
+                "name": "project_activity_reports_async_download_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the project_activity_reports_async_download_id should be a\nUUID.\n"
+              }
+            ]
+          },
+          "docs": "With this endpoint, you can inquire about the status of a project activity\nreport download job.\n\n- If the value of the 'status' attribute is 'pending' or 'processing', you\n  should check this endpoint again later.\n- If the 'status' is 'failed', the report has failed to be compiled.\n- In case the upload job has been successful, you will receive a \"303 - See\n  Other\" response and you can follow its `Location` to\n  [download the file](#tag/File-Downloads/paths/get) that have been\n  extracted from y"
+        },
+        {
+          "info": {
+            "name": "Get project localization activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/project_localization_activity",
+            "params": [
+              {
+                "name": "filter[project]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a project"
+              },
+              {
+                "name": "filter[date][from]",
+                "value": "",
+                "type": "query",
+                "description": "Start date of the reporting period (inclusive), format YYYY-MM-DD."
+              },
+              {
+                "name": "filter[date][to]",
+                "value": "",
+                "type": "query",
+                "description": "End date of the reporting period (inclusive), format YYYY-MM-DD."
+              },
+              {
+                "name": "filter[language]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a language"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns aggregated word count activity (translated, reviewed, proofread)\nfor a project over a specified date range.\n\nUnlike the async activity report downloads, this endpoint returns a\nsynchronous JSON response with project-level totals rather than a\nper-user/language CSV breakdown.\n\nAccessible by organization administrators, team managers, and project\nmaintainers.\n"
+        },
+        {
+          "info": {
+            "name": "Create a resource activity report file download action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/resource_activity_reports_async_downloads",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The response represents the resource activity report download job. Check\nthe job's status and download the file itself once that is completed.\n"
+        },
+        {
+          "info": {
+            "name": "Get resource activity report download status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/resource_activity_reports_async_downloads/:resource_activity_reports_async_download_id",
+            "params": [
+              {
+                "name": "resource_activity_reports_async_download_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the resource_activity_reports_async_download_id should be a\nUUID.\n"
+              }
+            ]
+          },
+          "docs": "With this endpoint, you can inquire about the status of an resource\nactivity report download job.\n\n- If the value of the 'status' attribute is 'pending' or 'processing', you\n  should check this endpoint again later.\n- If the 'status' is 'failed', the report has failed to be compiled.\n- In case the upload job has been successful, you will receive a \"303 - See\n  Other\" response and you can follow its `Location` to\n  [download the file](#tag/File-Downloads/paths/get) that have been\n  extracted from"
+        },
+        {
+          "info": {
+            "name": "Create a team activity report file download action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/team_activity_reports_async_downloads",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The response represents the team activity report file download job.\nCheck the job's status and download the file itself once that is completed.\n"
+        },
+        {
+          "info": {
+            "name": "Get team activity report download status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/team_activity_reports_async_downloads/:team_activity_reports_async_download_id",
+            "params": [
+              {
+                "name": "team_activity_reports_async_download_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the team_activity_reports_async_download_id should be\na UUID.\n"
+              }
+            ]
+          },
+          "docs": "With this endpoint, you can inquire about the status of an team\nactivity report download job.\n\n- If the value of the 'status' attribute is 'pending' or 'processing', you\n  should check this endpoint again later.\n- If the 'status' is 'failed', the report has failed to be compiled.\n- In case the upload job has been successful, you will receive a \"303 - See\n  Other\" response and you can follow its `Location` to\n  [download the file](#tag/File-Downloads/paths/get) that have been\n  extracted from you"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Transifex Activity Reports Project Webhooks API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Project Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List project webhooks.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/project_webhooks",
+            "params": [
+              {
+                "name": "filter[organization]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by an organization"
+              },
+              {
+                "name": "filter[project]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a project"
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information for all the supported project webhooks."
+        },
+        {
+          "info": {
+            "name": "Create project webhook.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/project_webhooks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new webhook. This needs to be associated with a project."
+        },
+        {
+          "info": {
+            "name": "Get project webhooks details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/project_webhooks/:webhook_id",
+            "params": [
+              {
+                "name": "webhook_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:p:project_slug:w:4abfc726-6a27-4c33-9d99-e5254c8df748."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the details of the project webhook specified by the required path parameter `webhook_id`."
+        },
+        {
+          "info": {
+            "name": "Update project webhook.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://rest.api.transifex.com/project_webhooks/:webhook_id",
+            "params": [
+              {
+                "name": "webhook_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:p:project_slug:w:4abfc726-6a27-4c33-9d99-e5254c8df748."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "update a project webhook. You can for example modify its status."
+        },
+        {
+          "info": {
+            "name": "Delete project webhook.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://rest.api.transifex.com/project_webhooks/:webhook_id",
+            "params": [
+              {
+                "name": "webhook_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:p:project_slug:w:4abfc726-6a27-4c33-9d99-e5254c8df748."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a project webhook from an organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

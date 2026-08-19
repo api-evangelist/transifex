@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Transifex Activity Reports Languages API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Languages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List languages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/languages",
+            "params": [
+              {
+                "name": "filter[code]",
+                "value": "fr",
+                "type": "query",
+                "description": "The code of the language to get details"
+              },
+              {
+                "name": "filter[code][any]",
+                "value": "en,fr,az@Arab",
+                "type": "query",
+                "description": "A list of codes of the languages to get details. This will fetch any available."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information for all the supported languages."
+        },
+        {
+          "info": {
+            "name": "Get language details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/languages/:language_id",
+            "params": [
+              {
+                "name": "language_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the language id should be `l:language_code`."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information for a specific supported language."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

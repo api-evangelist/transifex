@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Transifex Activity Reports Statistics API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Statistics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get resource language stats collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/resource_language_stats",
+            "params": [
+              {
+                "name": "filter[project]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a project"
+              },
+              {
+                "name": "filter[resource]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a resource"
+              },
+              {
+                "name": "filter[language]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a language"
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the statistics for a set of resources. You must specify at least a project\nand optionally a language / resource to filter against.\n"
+        },
+        {
+          "info": {
+            "name": "Get resource language stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/resource_language_stats/:resource_language_stats_id",
+            "params": [
+              {
+                "name": "resource_language_stats_id",
+                "value": "o:organization_slug:p:project_slug:r:resource_slug:l:language_code",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information for a specific supported language."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

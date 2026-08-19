@@ -1,0 +1,325 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Transifex Activity Reports Tasks API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/tasks",
+            "params": [
+              {
+                "name": "filter[organization]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by an organization"
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              },
+              {
+                "name": "filter[project]",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by a project"
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by a task name"
+              },
+              {
+                "name": "filter[statuses]",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by a task status"
+              },
+              {
+                "name": "filter[assignees]",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by a task assignee(s0)"
+              },
+              {
+                "name": "filter[creators]",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by a task creator(s)"
+              },
+              {
+                "name": "filter[due_date][before]",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by a task due date before"
+              },
+              {
+                "name": "filter[due_date][after]",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by a task due date after"
+              },
+              {
+                "name": "filter[created_date][before]",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by a task created date before"
+              },
+              {
+                "name": "filter[created_date][after]",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by a task created date after"
+              },
+              {
+                "name": "filter[language_code]",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by a language code"
+              }
+            ]
+          },
+          "docs": "Get the list of tasks that belong to a single organization."
+        },
+        {
+          "info": {
+            "name": "Create new task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/tasks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Making a POST request to this endpoint creates a task for the given project, \nwith the provided language and source string attributes. If it is not set to auto assign the assignees,\nuse the following endpoint [tasks/<task_id>/languages/<language_id>/relationships/assignees]   \n"
+        },
+        {
+          "info": {
+            "name": "Get a task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/tasks/:task_id",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "Task identifier"
+              }
+            ]
+          },
+          "docs": "Get a single task by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://rest.api.transifex.com/tasks/:task_id",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "Task identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Task"
+        },
+        {
+          "info": {
+            "name": "Delete Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://rest.api.transifex.com/tasks/:task_id",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "Task identifier"
+              }
+            ]
+          },
+          "docs": "Delete a task."
+        },
+        {
+          "info": {
+            "name": "List task languages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/tasks/:task_id/languages",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:p:project_slug:t:task_hash`."
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              },
+              {
+                "name": "filter[task_type]",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the list of all languages of a task."
+        },
+        {
+          "info": {
+            "name": "List task assignees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/tasks/:task_id/languages/:language_id/assignees",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:p:project_slug:t:task_hash`."
+              },
+              {
+                "name": "language_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the language id should be `l:language_code`."
+              },
+              {
+                "name": "filter[task_type]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              }
+            ]
+          },
+          "docs": "List assignees for given task language"
+        },
+        {
+          "info": {
+            "name": "List task assignee relationships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/tasks/:task_id/languages/:language_id/relationships/assignees",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:p:project_slug:t:task_hash`."
+              },
+              {
+                "name": "language_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the language id should be `l:language_code`."
+              },
+              {
+                "name": "filter[task_type]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              }
+            ]
+          },
+          "docs": "List task assignee relationships."
+        },
+        {
+          "info": {
+            "name": "Update task assignees",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://rest.api.transifex.com/tasks/:task_id/languages/:language_id/relationships/assignees",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:p:project_slug:t:task_hash`."
+              },
+              {
+                "name": "language_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the language id should be `l:language_code`."
+              },
+              {
+                "name": "filter[task_type]",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completely replace task assignees.\n\n_**Warning**: This is a highly destructive operation._\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

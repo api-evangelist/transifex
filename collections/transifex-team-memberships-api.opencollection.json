@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Transifex Activity Reports Team Memberships API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Team Memberships",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List team memberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/team_memberships",
+            "params": [
+              {
+                "name": "filter[organization]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by an organization"
+              },
+              {
+                "name": "filter[team]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a team"
+              },
+              {
+                "name": "filter[language]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a language"
+              },
+              {
+                "name": "filter[user]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a user"
+              },
+              {
+                "name": "filter[role]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by role"
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List team memberships."
+        },
+        {
+          "info": {
+            "name": "Create a new team membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/team_memberships",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new team membership."
+        },
+        {
+          "info": {
+            "name": "Get single team membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/team_memberships/:team_membership_id",
+            "params": [
+              {
+                "name": "team_membership_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get single team membership."
+        },
+        {
+          "info": {
+            "name": "Update a membership's role",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://rest.api.transifex.com/team_memberships/:team_membership_id",
+            "params": [
+              {
+                "name": "team_membership_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a membership's role.\n\nYou are only allowed to change the role. If you wish to change one of the\nrelationships, you should delete the existing membership and create a new\none with the desired relationships.\n\nThe corresponding action in the UI is described\n[here](https://help.transifex.com/en/articles/6223458-managing-and-removing-collaborators#h_66d1be4260)\n"
+        },
+        {
+          "info": {
+            "name": "Delete team membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://rest.api.transifex.com/team_memberships/:team_membership_id",
+            "params": [
+              {
+                "name": "team_membership_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete team membership."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

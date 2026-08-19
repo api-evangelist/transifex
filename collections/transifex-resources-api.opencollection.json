@@ -1,0 +1,197 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Transifex Activity Reports Resources API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create new resources merge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/resource_async_merges",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Merge git based branch\n"
+        },
+        {
+          "info": {
+            "name": "Get resource merge status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/resource_async_merges_:resource_async_merge_id",
+            "params": [
+              {
+                "name": "resource_async_merge_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the resource_async_merge_id should be a UUID."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "With this endpoint, you can inquire about the status of a resource merge job.\n\n- If the value of the 'status' attribute is 'pending' or 'processing', you\n  should check this endpoint again later.\n- If the 'status' is 'failed', the merge has failed to complete.\n- In case the upload job has been successful, you will receive a \"200\"\n"
+        },
+        {
+          "info": {
+            "name": "List resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/resources",
+            "params": [
+              {
+                "name": "filter[project]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a project"
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              },
+              {
+                "name": "filter[slug]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a list of all resources (in a specific project)."
+        },
+        {
+          "info": {
+            "name": "Create new resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/resources",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Making a POST request to this endpoint creates a resource without content.\nThis step is performed synchronously so you don't have to verify that\nresource creation succeeded afterwards. In order to upload content, see the\n[/resource_strings_async_uploads](#tag/Resource-Strings/paths/~1resource_strings_async_uploads/post)\nendpoint.\n"
+        },
+        {
+          "info": {
+            "name": "Get resource details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/resources/:resource_id",
+            "params": [
+              {
+                "name": "resource_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:p:project_slug:r:resource_slug`."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get details of a specific resource."
+        },
+        {
+          "info": {
+            "name": "Update resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://rest.api.transifex.com/resources/:resource_id",
+            "params": [
+              {
+                "name": "resource_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:p:project_slug:r:resource_slug`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update details of a resource."
+        },
+        {
+          "info": {
+            "name": "Delete resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://rest.api.transifex.com/resources/:resource_id",
+            "params": [
+              {
+                "name": "resource_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:p:project_slug:r:resource_slug`."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a resource of a project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

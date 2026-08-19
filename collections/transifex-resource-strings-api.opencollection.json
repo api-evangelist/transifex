@@ -1,0 +1,381 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Transifex Activity Reports Resource Strings API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Resource Strings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get resource strings collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/resource_strings",
+            "params": [
+              {
+                "name": "filter[resource]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a resource"
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              },
+              {
+                "name": "filter[strings_date_modified][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[strings_date_modified][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[key]",
+                "value": "",
+                "type": "query",
+                "description": "Exact match for the key of the resource string. This filter is case sensitive."
+              },
+              {
+                "name": "filter[tags][all]",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve source strings that contain all specified query tags."
+              },
+              {
+                "name": "filter[tags][any]",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve source strings containing any of the query tags. If the filter value is *, all strings with any tag will be returned. However, if you use * along with another tag value, such as *,tag1, only strings with either * or 'tag1' tags will be returned."
+              },
+              {
+                "name": "filter[tags][query]",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve translation strings based on specified query tags.\n\nTo filter strings, use a combination of tags with the following syntax:\n- Use an ampersand ('&') to signify 'AND' functionality, indicating that all specified\n  tags must be present.\n- Use a pipe ('|') to signify 'OR' functionality, meaning that at least one of\n  the specified tags must be present.\n- Use parentheses '(' to ')' to define the order of statement execution.\n- To use the above special characters as part of the query content, escape them with a\n  backslash ('\\\\')\n\nWhen combining AND and OR conditions, the query is evaluated from left to right, following operator precedence and respecting existing parentheses. Specifically, the AND operator (&) takes precedence over the OR operator (|).\n\nFor example, consider the query:\n'tag1&(tag2|tag3)'\n\nThis query is interpreted as follows:\ntag1 AND (tag2 OR tag3), and it returns strings that have both \"tag1\" and either \"tag2\" or \"tag3\"\n\nSimilarly, for the query:\n'tag1&tag2|tag3'\n\nThis query is read as follows:\n(tag1 AND tag2) OR tag3, and it returns strings that have both \"tag1\" and \"tag2\" or have \"tag3\"\n"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The page size limit. If not set, the default value is 150. <br> If set, the minimum value it can take is 150 and the maximum 1000."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get resource strings collection"
+        },
+        {
+          "info": {
+            "name": "Create resource string",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/resource_strings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new resource string. This path is valid only for file-less\nresources.\n"
+        },
+        {
+          "info": {
+            "name": "Bulk update a resource strings collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://rest.api.transifex.com/resource_strings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Bulk update a resource strings collection"
+        },
+        {
+          "info": {
+            "name": "Bulk-delete resource strings",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://rest.api.transifex.com/resource_strings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Include a payload with resource identifiers to all resource strings you\nwish to delete. Resource identifiers are objects with only the `type` and\n`id` fields.\n\n<b>Available only for file-less resources.</b>\n\nAll deleted resource strings need to belong to the same resource.\nBulk deletes do not support partial success, ie either all\nresource strings will be deleted, or none will.\n\nConsult the error response to figure out which resource strings\nyou need to fix or omit and try again. Don't forget to"
+        },
+        {
+          "info": {
+            "name": "Get resource string details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/resource_strings/:resource_string_id",
+            "params": [
+              {
+                "name": "resource_string_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the Resource String id should be `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash`."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the details of a specific resource string."
+        },
+        {
+          "info": {
+            "name": "Update resource string",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://rest.api.transifex.com/resource_strings/:resource_string_id",
+            "params": [
+              {
+                "name": "resource_string_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the Resource String id should be `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update resource string"
+        },
+        {
+          "info": {
+            "name": "Delete resource string",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://rest.api.transifex.com/resource_strings/:resource_string_id",
+            "params": [
+              {
+                "name": "resource_string_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the Resource String id should be `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash`."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a resource string.\n\n<b>Available only for file-less resources.</b>\n"
+        },
+        {
+          "info": {
+            "name": "Create a source file download action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/resource_strings_async_downloads",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "The response represents the file download job. Check the job's status\nand download the file itself once that is completed.\n"
+        },
+        {
+          "info": {
+            "name": "Get resource strings download status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/resource_strings_async_downloads/:resource_strings_async_download_id",
+            "params": [
+              {
+                "name": "resource_strings_async_download_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the resource_strings_async_download_id should be `o:organization_slug:p:project_slug:r:resource_slug`."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "With this endpoint, you can inquire about the status of a resource strings download job.\n\n- If the value of the 'status' attribute is 'pending' or 'processing', you\n  should check this endpoint again later.\n- If the 'status' is 'failed', the source file has failed to be compiled.\n- In case the download job has been successful, you will receive a \"303 - See\n  Other\" response and you can follow its `Location` to [download the file](#tag/File-Downloads/paths/get)\n  that have been extracted from you"
+        },
+        {
+          "info": {
+            "name": "Upload a new source file for a resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/resource_strings_async_uploads",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "callback_url",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "content",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "keep_translations",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "purge_added_strings",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "replace_edited_strings",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "resource",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "For more details about File uploads you can refer to [File Uploads](#section/File-Uploads) section\n\nThe response represents the file upload job. Look into the 'status'\nattribute to verify that the upload has completed successfuly. If the\nstatus is 'pending' or 'processing', then you will need to periodically\ninquire about its status. Use the 'self' link, which will get you to the\n[/resource_strings_async_uploads/{resource_strings_async_upload_id}](#tag/Resource-Strings/paths/~1resource_strings_a"
+        },
+        {
+          "info": {
+            "name": "Get source upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/resource_strings_async_uploads/:resource_strings_async_upload_id",
+            "params": [
+              {
+                "name": "resource_strings_async_upload_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the resource_strings_async_upload_id should be a UUID."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "With this endpoint, you can inquire about the status of a source upload job.\n\n- If the value of the 'status' attribute is 'pending' or 'processing', you\n  should check this endpoint again later.\n- If the 'status' is 'failed', the content has failed to be uploaded to the\n  resource.\n- If the 'status' is 'succeeded', you can get more details about the number\n  of strings created, deleted, skipped and updated in the `details` attribute\n  of the response.\n"
+        },
+        {
+          "info": {
+            "name": "Get revisions of resource strings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/resource_strings_revisions",
+            "params": [
+              {
+                "name": "filter[resource_string][resource]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a resource"
+              },
+              {
+                "name": "filter[resource_string][key]",
+                "value": "",
+                "type": "query",
+                "description": "Exact match for the key of the resource string. This filter is case sensitive."
+              },
+              {
+                "name": "filter[resource_string][tags][all]",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve source strings revisions containing all of the query tags."
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The page size limit. If not set, the default value is 150. <br> If set, the minimum value it can take is 150 and the maximum 1000."
+              }
+            ]
+          },
+          "docs": "Get revisions of resource strings"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

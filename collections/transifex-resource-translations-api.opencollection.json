@@ -1,0 +1,353 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Transifex Activity Reports Resource Translations API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Resource Translations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a Resource Translations collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/resource_translations",
+            "params": [
+              {
+                "name": "filter[resource]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a resource"
+              },
+              {
+                "name": "filter[language]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a language"
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              },
+              {
+                "name": "filter[date_translated][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[date_translated][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[resource_string][key]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[resource_string][date_modified][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[resource_string][date_modified][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[translated]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[reviewed]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[proofread]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[finalized]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[translator]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[origin]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[task_language_identifier]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Use the value `resource_string` to get the list of resource string objects in the response."
+              },
+              {
+                "name": "filter[resource_string][tags][all]",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve translation strings containing all of the query tags."
+              },
+              {
+                "name": "filter[resource_string][tags][any]",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve translation strings containing any of the query tags. If the filter value is *, all strings with any tag will be returned. However, if you use * along with another tag value, such as *,tag1, only strings with either * or 'tag1' tags will be returned."
+              },
+              {
+                "name": "filter[resource_string][tags][query]",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve translation strings based on specified query tags.\n\nTo filter strings, use a combination of tags with the following syntax:\n- Use an ampersand ('&') to signify 'AND' functionality, indicating that all specified\n  tags must be present.\n- Use a pipe ('|') to signify 'OR' functionality, meaning that at least one of\n  the specified tags must be present.\n- Use parentheses '(' to ')' to define the order of statement execution.\n- To use the above special characters as part of the query content, escape them with a\n  backslash ('\\\\')\n\nWhen combining AND and OR conditions, the query is evaluated from left to right, following operator precedence and respecting existing parentheses. Specifically, the AND operator (&) takes precedence over the OR operator (|).\n\nFor example, consider the query:\n'tag1&(tag2|tag3)'\n\nThis query is interpreted as follows:\ntag1 AND (tag2 OR tag3), and it returns strings that have both \"tag1\" and either \"tag2\" or \"tag3\"\n\nSimilarly, for the query:\n'tag1&tag2|tag3'\n\nThis query is read as follows:\n(tag1 AND tag2) OR tag3, and it returns strings that have both \"tag1\" and \"tag2\" or have \"tag3\"\n"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The page size limit. If not set, the default value is 150. <br> If set, the minimum value it can take is 150 and the maximum 1000."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a Resource Translations collection"
+        },
+        {
+          "info": {
+            "name": "Bulk update a resource's translations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://rest.api.transifex.com/resource_translations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Allows for bulk updating of translations up to 150 at a time.\nAll resource strings should belong to the same resource\nand target the same translation language.\n"
+        },
+        {
+          "info": {
+            "name": "Get a Resource Translation details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/resource_translations/:resource_translation_id",
+            "params": [
+              {
+                "name": "resource_translation_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the Resource Translation id. Should be `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:l:language_code`."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Use the value `resource_string` to get the list of resource string objects in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a Resource Translation details"
+        },
+        {
+          "info": {
+            "name": "Update a Resource Translation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://rest.api.transifex.com/resource_translations/:resource_translation_id",
+            "params": [
+              {
+                "name": "resource_translation_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the Resource Translation id. Should be `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:l:language_code`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Allows to add/update/remove content for Resource Translations as well as\nreviewing/unreviewing existing work.\n\nWhen not all of the attributes are supplied in the request, these are interpreted as\nif they were included with their current value.\nThe only exception in this rule is when `strings` are modified,\nthe resource translation is by default unreviewed unless otherwise specified\n(with the `reviewed`/`proofread` attributes on the request body).\n"
+        },
+        {
+          "info": {
+            "name": "Create a translation file download action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/resource_translations_async_downloads",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "The response represents the file download job. Check the job's status\nand download the file itself once that is completed.\n"
+        },
+        {
+          "info": {
+            "name": "Get translation download status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/resource_translations_async_downloads/:resource_translations_async_download_id",
+            "params": [
+              {
+                "name": "resource_translations_async_download_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the resource_translations_async_download_id should be a UUID."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "With this endpoint, you can inquire about the status of an translation download job.\n\n- If the value of the 'status' attribute is 'pending' or 'processing', you\n  should check this endpoint again later.\n- If the 'status' is 'failed', the translation has failed to be compiled.\n- In case the upload job has been successful, you will receive a \"303 - See\n  Other\" response and you can follow its `Location` to [download the file](#tag/File-Downloads/paths/get)\n  that have been extracted from your file"
+        },
+        {
+          "info": {
+            "name": "Create a resource translations fillup action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/resource_translations_async_fillups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Trigger an on demand fillup process for a resource's translations."
+        },
+        {
+          "info": {
+            "name": "Create a new resource translation upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/resource_translations_async_uploads",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "callback_url",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "content",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "file_type",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "language",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "resource",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upload a new resource translation file for a specific language.\n"
+        },
+        {
+          "info": {
+            "name": "Get resource translation async upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/resource_translations_async_uploads/:resource_translations_async_upload_id",
+            "params": [
+              {
+                "name": "resource_translations_async_upload_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the resource_translations_async_upload_id should be a UUID."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get details of a resource translations upload."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,176 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Transifex Activity Reports Resource String Comments API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Resource String Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List resource string comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/resource_string_comments",
+            "params": [
+              {
+                "name": "filter[organization]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by an organization"
+              },
+              {
+                "name": "filter[project]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a project"
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              },
+              {
+                "name": "filter[category]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[author]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[datetime_created][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[datetime_created][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[priority]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[resource]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[resource_string]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[status]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[type]",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get a list of all resource string comments for an organization. You can further narrow down the list using the available filters."
+        },
+        {
+          "info": {
+            "name": "Create resource string comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/resource_string_comments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new resource string comment. This needs to be associated with a resource string and a target language."
+        },
+        {
+          "info": {
+            "name": "Get resource string comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/resource_string_comments/:comment_id",
+            "params": [
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+              }
+            ]
+          },
+          "docs": "Get details for a comment related to a specific resource string"
+        },
+        {
+          "info": {
+            "name": "Update resource string comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://rest.api.transifex.com/resource_string_comments/:comment_id",
+            "params": [
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change a resource string comment. You can update it's status, change it to an issue or edit the description."
+        },
+        {
+          "info": {
+            "name": "Delete resource string comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://rest.api.transifex.com/resource_string_comments/:comment_id",
+            "params": [
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the command_id should be a `o:organization_slug:p:project_slug:r:resource_slug:s:string_hash:c:comment_hash`."
+              }
+            ]
+          },
+          "docs": "Delete a resource string comment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

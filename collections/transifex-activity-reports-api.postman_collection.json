@@ -1,0 +1,3561 @@
+{
+  "item": [
+    {
+      "id": "e6b26173-7e85-46e0-8395-93625ba22a9d",
+      "name": "Activity Reports",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0cb8e264-ed13-484b-b761-0230650f50bf",
+          "name": "Create an organization activity report file download action",
+          "request": {
+            "name": "Create an organization activity report file download action",
+            "description": {
+              "content": "The response represents the organization activity report file download job.\nCheck the job's status and download the file itself once that is completed.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organization_activity_reports_async_downloads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"organization\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e03b05f6-e1bc-4827-b8a8-63086981df5b",
+              "name": "Accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"organization\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:org_123\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The location of the organization activity report download.\n",
+                  "key": "Content-Location",
+                  "value": "/organization_activity_reports_async_downloads/4abfc726-6a27-4c33-9d99-e5254c8df748"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"attributes\": {\n      \"status\": \"pending\",\n      \"errors\": [\n        {\n          \"code\": \"parse_error\",\n          \"detail\": \"Could not decode JSON object\"\n        },\n        {\n          \"code\": \"parse_error\",\n          \"detail\": \"Could not decode JSON object\"\n        }\n      ],\n      \"datetime_created\": \"1979-12-25T06:47:47.741Z\",\n      \"datetime_modified\": \"1987-02-11T21:00:50.525Z\"\n    },\n    \"id\": \"4abfc726-6a27-4c33-9d99-e5254c8df748\",\n    \"links\": {\n      \"self\": \"/organization_activity_reports_async_downloads/4abfc726-6a27-4c33-9d99-e5254c8df748\"\n    },\n    \"relationships\": {\n      \"organization\": {\n        \"data\": {\n          \"type\": \"organizations\",\n          \"id\": \"o:org_123\"\n        },\n        \"links\": {\n          \"related\": \"/organizations/o:organization_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"languages\",\n          \"id\": \"l:en_US\"\n        },\n        \"links\": {\n          \"related\": \"/languages/l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"users\",\n          \"id\": \"u:user_1\"\n        },\n        \"links\": {\n          \"related\": \"/users/u:user_1\"\n        }\n      }\n    },\n    \"type\": \"organization_activity_reports_async_downloads\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df75f565-bcf4-4469-9253-5c5d75ed947a",
+              "name": "Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"organization\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:org_123\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    },\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af9e8c9e-9bdc-4b74-b4c6-e0119e021fb2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"organization\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:org_123\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11d54ed8-2029-4065-bd1f-0a0e90db67cc",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"organization\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:org_123\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": \"string\"\n    },\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 2345\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5967e65a-079d-494e-ac52-7122bf8a834f",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"organization\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:org_123\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b52f8d20-1afc-4eb1-a1c9-57b677bbb615",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"organization\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:org_123\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    },\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3cc55a79-804a-401d-904e-fcbb87bb1440",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"organization\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:org_123\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53413ecd-4fb9-4b21-85b7-5d0a1ee73b9f",
+          "name": "Get organization activity report download status",
+          "request": {
+            "name": "Get organization activity report download status",
+            "description": {
+              "content": "With this endpoint, you can inquire about the status of an organization\nactivity report download job.\n\n- If the value of the 'status' attribute is 'pending' or 'processing', you\n  should check this endpoint again later.\n- If the 'status' is 'failed', the report has failed to be compiled.\n- In case the upload job has been successful, you will receive a \"303 - See\n  Other\" response and you can follow its `Location` to\n  [download the file](#tag/File-Downloads/paths/get) that have been\n  extracted from your file.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organization_activity_reports_async_downloads",
+                ":organization_activity_reports_async_download_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_activity_reports_async_download_id",
+                  "description": "(Required) Format of the organization_activity_reports_async_download_id should be\na UUID.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3bac0020-7107-4eea-a2ce-d0ee73de6c15",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization_activity_reports_async_downloads",
+                    ":organization_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_activity_reports_async_download_id",
+                      "description": "(Required) Format of the organization_activity_reports_async_download_id should be\na UUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"attributes\": {\n      \"status\": \"pending\",\n      \"errors\": [\n        {\n          \"code\": \"parse_error\",\n          \"detail\": \"Could not decode JSON object\"\n        },\n        {\n          \"code\": \"parse_error\",\n          \"detail\": \"Could not decode JSON object\"\n        }\n      ],\n      \"datetime_created\": \"1979-12-25T06:47:47.741Z\",\n      \"datetime_modified\": \"1987-02-11T21:00:50.525Z\"\n    },\n    \"id\": \"4abfc726-6a27-4c33-9d99-e5254c8df748\",\n    \"links\": {\n      \"self\": \"/organization_activity_reports_async_downloads/4abfc726-6a27-4c33-9d99-e5254c8df748\"\n    },\n    \"relationships\": {\n      \"organization\": {\n        \"data\": {\n          \"type\": \"organizations\",\n          \"id\": \"o:org_123\"\n        },\n        \"links\": {\n          \"related\": \"/organizations/o:organization_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"languages\",\n          \"id\": \"l:en_US\"\n        },\n        \"links\": {\n          \"related\": \"/languages/l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"users\",\n          \"id\": \"u:user_1\"\n        },\n        \"links\": {\n          \"related\": \"/users/u:user_1\"\n        }\n      }\n    },\n    \"type\": \"organization_activity_reports_async_downloads\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56a66f3e-b022-4acb-8b72-64f83d667d27",
+              "name": "See other",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization_activity_reports_async_downloads",
+                    ":organization_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_activity_reports_async_download_id",
+                      "description": "(Required) Format of the organization_activity_reports_async_download_id should be\na UUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "See Other",
+              "code": 303,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The location of the file.",
+                  "key": "Location",
+                  "value": "https://storage.svc.transifex.net/files/663a7a83-cb15-4c72-a37d-125dfb8432a6-file?auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZXMiOiJkb3dubG9hZCIsIm1ldGFkYXRhIjpudWxsLCJmaWxlX2lkcyI6IjY2M2E3YTgzLWNiMTUtNGM3Mi1hMzdkLTEyNWRmYjg0MzJhNi1maWxlIiwiZXhwIjoxNTg0NzE3NTkzLCJwcm92aWRlciI6InR4YyJ9.IHgLS4gtL0A6YZd-2zKkrg__geitcvs9DV8LcE8-1io"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43d2146b-fe61-441f-a333-cf36c81aee47",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization_activity_reports_async_downloads",
+                    ":organization_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_activity_reports_async_download_id",
+                      "description": "(Required) Format of the organization_activity_reports_async_download_id should be\na UUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1efd1794-b691-4347-b43c-25770eabe0d8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization_activity_reports_async_downloads",
+                    ":organization_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_activity_reports_async_download_id",
+                      "description": "(Required) Format of the organization_activity_reports_async_download_id should be\na UUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": \"string\"\n    },\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 2345\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3485e70e-7a16-4880-8eab-e26aeee6854a",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization_activity_reports_async_downloads",
+                    ":organization_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_activity_reports_async_download_id",
+                      "description": "(Required) Format of the organization_activity_reports_async_download_id should be\na UUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2b78740-dec6-4310-b2d1-fbb4aecb1036",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization_activity_reports_async_downloads",
+                    ":organization_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_activity_reports_async_download_id",
+                      "description": "(Required) Format of the organization_activity_reports_async_download_id should be\na UUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "693fa399-b94a-4b73-a797-fbed071c57af",
+          "name": "Create a project activity report file download action",
+          "request": {
+            "name": "Create a project activity report file download action",
+            "description": {
+              "content": "The response represents the project activity report download job. Check the\njob's status and download the file itself once that is completed.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "project_activity_reports_async_downloads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"project\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c25bcd1b-a295-4eba-8659-16650979d70a",
+              "name": "Accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"project\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The location of the project activity report download.",
+                  "key": "Content-Location",
+                  "value": "/project_activity_reports_async_downloads/4abfc726-6a27-4c33-9d99-e5254c8df748"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"attributes\": {\n      \"status\": \"pending\",\n      \"errors\": [\n        {\n          \"code\": \"parse_error\",\n          \"detail\": \"Could not decode JSON object\"\n        },\n        {\n          \"code\": \"parse_error\",\n          \"detail\": \"Could not decode JSON object\"\n        }\n      ],\n      \"datetime_created\": \"2020-02-17T05:41:09.463Z\",\n      \"datetime_modified\": \"1963-10-03T17:59:06.122Z\"\n    },\n    \"id\": \"4abfc726-6a27-4c33-9d99-e5254c8df748\",\n    \"links\": {\n      \"self\": \"/project_activity_reports_async_downloads/4abfc726-6a27-4c33-9d99-e5254c8df748\"\n    },\n    \"relationships\": {\n      \"project\": {\n        \"data\": {\n          \"type\": \"projects\",\n          \"id\": \"o:organization_slug:p:project_slug\"\n        },\n        \"links\": {\n          \"related\": \"/projects/o:organization_slug:p:project_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"languages\",\n          \"id\": \"l:en_US\"\n        },\n        \"links\": {\n          \"related\": \"/languages/l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"users\",\n          \"id\": \"u:user_1\"\n        },\n        \"links\": {\n          \"related\": \"/users/u:user_1\"\n        }\n      }\n    },\n    \"type\": \"project_activity_reports_async_downloads\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f1dc943-d293-4de0-a287-64ff2d9be941",
+              "name": "Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"project\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    },\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66249f15-0015-4568-abab-2e0cdae4c07f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"project\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7bdf903-5069-4b87-a084-7e9e944c74d0",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"project\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": \"string\"\n    },\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 2345\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f315304-7f77-402b-af86-22b29a883bbb",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"project\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52054cf5-3022-4807-aa4b-7c47ecd3a71f",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"project\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    },\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbab0160-0dbc-43c9-af2d-0a1c85228ea9",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"project\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "26f48c47-44a1-4323-9a29-cd876ca6e7d2",
+          "name": "Get project activity report download status",
+          "request": {
+            "name": "Get project activity report download status",
+            "description": {
+              "content": "With this endpoint, you can inquire about the status of a project activity\nreport download job.\n\n- If the value of the 'status' attribute is 'pending' or 'processing', you\n  should check this endpoint again later.\n- If the 'status' is 'failed', the report has failed to be compiled.\n- In case the upload job has been successful, you will receive a \"303 - See\n  Other\" response and you can follow its `Location` to\n  [download the file](#tag/File-Downloads/paths/get) that have been\n  extracted from your file.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "project_activity_reports_async_downloads",
+                ":project_activity_reports_async_download_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_activity_reports_async_download_id",
+                  "description": "(Required) Format of the project_activity_reports_async_download_id should be a\nUUID.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7d8e7612-e97b-4914-b3ae-4ba5039a9945",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_activity_reports_async_downloads",
+                    ":project_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_activity_reports_async_download_id",
+                      "description": "(Required) Format of the project_activity_reports_async_download_id should be a\nUUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"attributes\": {\n      \"status\": \"pending\",\n      \"errors\": [\n        {\n          \"code\": \"parse_error\",\n          \"detail\": \"Could not decode JSON object\"\n        },\n        {\n          \"code\": \"parse_error\",\n          \"detail\": \"Could not decode JSON object\"\n        }\n      ],\n      \"datetime_created\": \"2020-02-17T05:41:09.463Z\",\n      \"datetime_modified\": \"1963-10-03T17:59:06.122Z\"\n    },\n    \"id\": \"4abfc726-6a27-4c33-9d99-e5254c8df748\",\n    \"links\": {\n      \"self\": \"/project_activity_reports_async_downloads/4abfc726-6a27-4c33-9d99-e5254c8df748\"\n    },\n    \"relationships\": {\n      \"project\": {\n        \"data\": {\n          \"type\": \"projects\",\n          \"id\": \"o:organization_slug:p:project_slug\"\n        },\n        \"links\": {\n          \"related\": \"/projects/o:organization_slug:p:project_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"languages\",\n          \"id\": \"l:en_US\"\n        },\n        \"links\": {\n          \"related\": \"/languages/l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"users\",\n          \"id\": \"u:user_1\"\n        },\n        \"links\": {\n          \"related\": \"/users/u:user_1\"\n        }\n      }\n    },\n    \"type\": \"project_activity_reports_async_downloads\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f58f1d03-71c3-415c-9c1b-4811edbe0995",
+              "name": "See other",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_activity_reports_async_downloads",
+                    ":project_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_activity_reports_async_download_id",
+                      "description": "(Required) Format of the project_activity_reports_async_download_id should be a\nUUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "See Other",
+              "code": 303,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The location of the file.",
+                  "key": "Location",
+                  "value": "https://storage.svc.transifex.net/files/663a7a83-cb15-4c72-a37d-125dfb8432a6-file?auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZXMiOiJkb3dubG9hZCIsIm1ldGFkYXRhIjpudWxsLCJmaWxlX2lkcyI6IjY2M2E3YTgzLWNiMTUtNGM3Mi1hMzdkLTEyNWRmYjg0MzJhNi1maWxlIiwiZXhwIjoxNTg0NzE3NTkzLCJwcm92aWRlciI6InR4YyJ9.IHgLS4gtL0A6YZd-2zKkrg__geitcvs9DV8LcE8-1io"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52642505-fb52-4d28-a1f8-2fb8ad8d8a07",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_activity_reports_async_downloads",
+                    ":project_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_activity_reports_async_download_id",
+                      "description": "(Required) Format of the project_activity_reports_async_download_id should be a\nUUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad0754dd-974d-4d57-982e-422a74c5ff0a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_activity_reports_async_downloads",
+                    ":project_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_activity_reports_async_download_id",
+                      "description": "(Required) Format of the project_activity_reports_async_download_id should be a\nUUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": \"string\"\n    },\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 2345\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d36c745-50a0-4712-ae51-d5a16f909fb2",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_activity_reports_async_downloads",
+                    ":project_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_activity_reports_async_download_id",
+                      "description": "(Required) Format of the project_activity_reports_async_download_id should be a\nUUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab5970f5-f9f8-4ccb-8a13-a9739fe3e508",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_activity_reports_async_downloads",
+                    ":project_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_activity_reports_async_download_id",
+                      "description": "(Required) Format of the project_activity_reports_async_download_id should be a\nUUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1898661-1627-47b6-b196-7a08a244eedf",
+          "name": "Get project localization activity",
+          "request": {
+            "name": "Get project localization activity",
+            "description": {
+              "content": "Returns aggregated word count activity (translated, reviewed, proofread)\nfor a project over a specified date range.\n\nUnlike the async activity report downloads, this endpoint returns a\nsynchronous JSON response with project-level totals rather than a\nper-user/language CSV breakdown.\n\nAccessible by organization administrators, team managers, and project\nmaintainers.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "project_localization_activity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[project]",
+                  "value": "<string>",
+                  "description": "(Required) Filter results by a project"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[date][from]",
+                  "value": "<date>",
+                  "description": "(Required) Start date of the reporting period (inclusive), format YYYY-MM-DD."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[date][to]",
+                  "value": "<date>",
+                  "description": "(Required) End date of the reporting period (inclusive), format YYYY-MM-DD."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[language]",
+                  "value": "<string>",
+                  "description": "Filter results by a language"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c2971432-9f63-493a-8dd1-9eb9bcb9410c",
+              "name": "Success.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_localization_activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[project]",
+                      "value": "o:organization_slug:p:project_slug"
+                    },
+                    {
+                      "key": "filter[date][from]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter[date][to]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter[language]",
+                      "value": "l:en_US"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"project_localization_activity\",\n    \"id\": \"o:organization_slug:p:project_slug\",\n    \"attributes\": {\n      \"date_from\": \"1974-03-30\",\n      \"date_to\": \"1983-07-30\",\n      \"translated_words\": {\n        \"new\": 500,\n        \"edited\": 200,\n        \"total\": 700\n      },\n      \"reviewed_words\": {\n        \"total\": 350\n      },\n      \"proofread_words\": {\n        \"total\": 280\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25c65e7d-6deb-4232-8487-5675c4d0d4a5",
+              "name": "Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_localization_activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[project]",
+                      "value": "o:organization_slug:p:project_slug"
+                    },
+                    {
+                      "key": "filter[date][from]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter[date][to]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter[language]",
+                      "value": "l:en_US"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    },\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da785809-541d-4d9e-aee6-c84f93977c3c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_localization_activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[project]",
+                      "value": "o:organization_slug:p:project_slug"
+                    },
+                    {
+                      "key": "filter[date][from]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter[date][to]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter[language]",
+                      "value": "l:en_US"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9313d11a-e1b7-4a66-93bc-a58014beb07b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_localization_activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[project]",
+                      "value": "o:organization_slug:p:project_slug"
+                    },
+                    {
+                      "key": "filter[date][from]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter[date][to]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter[language]",
+                      "value": "l:en_US"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": \"string\"\n    },\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 2345\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df740d36-d73d-49cd-bb4a-b3b98bd71e7f",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_localization_activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[project]",
+                      "value": "o:organization_slug:p:project_slug"
+                    },
+                    {
+                      "key": "filter[date][from]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter[date][to]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter[language]",
+                      "value": "l:en_US"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df4929cb-1bd1-4f29-8096-e55d499062a0",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "project_localization_activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[project]",
+                      "value": "o:organization_slug:p:project_slug"
+                    },
+                    {
+                      "key": "filter[date][from]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter[date][to]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter[language]",
+                      "value": "l:en_US"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cfd5db36-8ece-4995-8b25-9d633d4f3b60",
+          "name": "Create a resource activity report file download action",
+          "request": {
+            "name": "Create a resource activity report file download action",
+            "description": {
+              "content": "The response represents the resource activity report download job. Check\nthe job's status and download the file itself once that is completed.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "resource_activity_reports_async_downloads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"resource\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "646d383b-3cda-419c-a500-b1f4f8638c93",
+              "name": "Accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"resource\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The location of the resource activity report download.",
+                  "key": "Content-Location",
+                  "value": "/resource_activity_reports_async_downloads/4abfc726-6a27-4c33-9d99-e5254c8df748"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"attributes\": {\n      \"status\": \"pending\",\n      \"errors\": [\n        {\n          \"code\": \"parse_error\",\n          \"detail\": \"Could not decode JSON object\"\n        },\n        {\n          \"code\": \"parse_error\",\n          \"detail\": \"Could not decode JSON object\"\n        }\n      ],\n      \"datetime_created\": \"1997-07-29T16:49:40.731Z\",\n      \"datetime_modified\": \"1975-12-26T08:49:38.404Z\"\n    },\n    \"id\": \"4abfc726-6a27-4c33-9d99-e5254c8df748\",\n    \"links\": {\n      \"self\": \"/resource_activity_reports_async_downloads/4abfc726-6a27-4c33-9d99-e5254c8df748\"\n    },\n    \"relationships\": {\n      \"resource\": {\n        \"data\": {\n          \"type\": \"resources\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug\"\n        },\n        \"links\": {\n          \"related\": \"/resources/o:organization_slug:p:project_slug:r:resource_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"languages\",\n          \"id\": \"l:en_US\"\n        },\n        \"links\": {\n          \"related\": \"/languages/l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"users\",\n          \"id\": \"u:user_1\"\n        },\n        \"links\": {\n          \"related\": \"/users/u:user_1\"\n        }\n      }\n    },\n    \"type\": \"resource_activity_reports_async_downloads\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc136fb3-3342-4e15-aa8e-58d02dcc5a6e",
+              "name": "Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"resource\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    },\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7b3e8c0-2700-4e68-abb0-ce36ec23eb89",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"resource\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f71f1aae-3679-4ef4-ae5b-6139a7f51cb7",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"resource\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": \"string\"\n    },\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 2345\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41d6ddf5-5d03-43cc-815d-59d29ea84891",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"resource\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "daae7ed7-071c-4fc7-9962-52969c8c1d5b",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"resource\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    },\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "866ec457-82df-4713-a879-d0900994daa3",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"resource\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38340759-30a7-4848-838c-84b86288cabc",
+          "name": "Get resource activity report download status",
+          "request": {
+            "name": "Get resource activity report download status",
+            "description": {
+              "content": "With this endpoint, you can inquire about the status of an resource\nactivity report download job.\n\n- If the value of the 'status' attribute is 'pending' or 'processing', you\n  should check this endpoint again later.\n- If the 'status' is 'failed', the report has failed to be compiled.\n- In case the upload job has been successful, you will receive a \"303 - See\n  Other\" response and you can follow its `Location` to\n  [download the file](#tag/File-Downloads/paths/get) that have been\n  extracted from your file.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "resource_activity_reports_async_downloads",
+                ":resource_activity_reports_async_download_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resource_activity_reports_async_download_id",
+                  "description": "(Required) Format of the resource_activity_reports_async_download_id should be a\nUUID.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac9bcfdc-dc03-47e9-9ab2-798645910c62",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_activity_reports_async_downloads",
+                    ":resource_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource_activity_reports_async_download_id",
+                      "description": "(Required) Format of the resource_activity_reports_async_download_id should be a\nUUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"attributes\": {\n      \"status\": \"pending\",\n      \"errors\": [\n        {\n          \"code\": \"parse_error\",\n          \"detail\": \"Could not decode JSON object\"\n        },\n        {\n          \"code\": \"parse_error\",\n          \"detail\": \"Could not decode JSON object\"\n        }\n      ],\n      \"datetime_created\": \"1997-07-29T16:49:40.731Z\",\n      \"datetime_modified\": \"1975-12-26T08:49:38.404Z\"\n    },\n    \"id\": \"4abfc726-6a27-4c33-9d99-e5254c8df748\",\n    \"links\": {\n      \"self\": \"/resource_activity_reports_async_downloads/4abfc726-6a27-4c33-9d99-e5254c8df748\"\n    },\n    \"relationships\": {\n      \"resource\": {\n        \"data\": {\n          \"type\": \"resources\",\n          \"id\": \"o:organization_slug:p:project_slug:r:resource_slug\"\n        },\n        \"links\": {\n          \"related\": \"/resources/o:organization_slug:p:project_slug:r:resource_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"languages\",\n          \"id\": \"l:en_US\"\n        },\n        \"links\": {\n          \"related\": \"/languages/l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"users\",\n          \"id\": \"u:user_1\"\n        },\n        \"links\": {\n          \"related\": \"/users/u:user_1\"\n        }\n      }\n    },\n    \"type\": \"resource_activity_reports_async_downloads\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11bb69d5-6be3-4e70-9c5e-110df2a921ab",
+              "name": "See other",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_activity_reports_async_downloads",
+                    ":resource_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource_activity_reports_async_download_id",
+                      "description": "(Required) Format of the resource_activity_reports_async_download_id should be a\nUUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "See Other",
+              "code": 303,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The location of the file.",
+                  "key": "Location",
+                  "value": "https://storage.svc.transifex.net/files/663a7a83-cb15-4c72-a37d-125dfb8432a6-file?auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZXMiOiJkb3dubG9hZCIsIm1ldGFkYXRhIjpudWxsLCJmaWxlX2lkcyI6IjY2M2E3YTgzLWNiMTUtNGM3Mi1hMzdkLTEyNWRmYjg0MzJhNi1maWxlIiwiZXhwIjoxNTg0NzE3NTkzLCJwcm92aWRlciI6InR4YyJ9.IHgLS4gtL0A6YZd-2zKkrg__geitcvs9DV8LcE8-1io"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29a0d9bc-7dab-465b-bbfa-ee73ad2dfb8f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_activity_reports_async_downloads",
+                    ":resource_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource_activity_reports_async_download_id",
+                      "description": "(Required) Format of the resource_activity_reports_async_download_id should be a\nUUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "258eabed-1ecb-49f6-afa9-ead8d8c0a2d9",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_activity_reports_async_downloads",
+                    ":resource_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource_activity_reports_async_download_id",
+                      "description": "(Required) Format of the resource_activity_reports_async_download_id should be a\nUUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": \"string\"\n    },\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 2345\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d25e541-70cc-420c-bc58-9855e94d2df6",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_activity_reports_async_downloads",
+                    ":resource_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource_activity_reports_async_download_id",
+                      "description": "(Required) Format of the resource_activity_reports_async_download_id should be a\nUUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e9eb825-08c1-42ed-980a-30bbfcb7798f",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_activity_reports_async_downloads",
+                    ":resource_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource_activity_reports_async_download_id",
+                      "description": "(Required) Format of the resource_activity_reports_async_download_id should be a\nUUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18550bf6-0d75-4f11-af07-798635fb4e9f",
+          "name": "Create a team activity report file download action",
+          "request": {
+            "name": "Create a team activity report file download action",
+            "description": {
+              "content": "The response represents the team activity report file download job.\nCheck the job's status and download the file itself once that is completed.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team_activity_reports_async_downloads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"team\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d53c760-928f-4ca3-b143-fd4514310931",
+              "name": "Accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"team\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:t:team_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The location of the team activity report download.\n",
+                  "key": "Content-Location",
+                  "value": "/team_activity_reports_async_downloads/4abfc726-6a27-4c33-9d99-e5254c8df748"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"attributes\": {\n      \"status\": \"pending\",\n      \"errors\": [\n        {\n          \"code\": \"parse_error\",\n          \"detail\": \"Could not decode JSON object\"\n        },\n        {\n          \"code\": \"parse_error\",\n          \"detail\": \"Could not decode JSON object\"\n        }\n      ],\n      \"datetime_created\": \"2017-09-22T21:38:31.472Z\",\n      \"datetime_modified\": \"1984-07-23T04:20:58.193Z\"\n    },\n    \"id\": \"4abfc726-6a27-4c33-9d99-e5254c8df748\",\n    \"links\": {\n      \"self\": \"/team_activity_reports_async_downloads/4abfc726-6a27-4c33-9d99-e5254c8df748\"\n    },\n    \"relationships\": {\n      \"team\": {\n        \"data\": {\n          \"type\": \"teams\",\n          \"id\": \"o:organization_slug:t:team_slug\"\n        },\n        \"links\": {\n          \"related\": \"/teams/o:organization_slug:t:team_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"languages\",\n          \"id\": \"l:en_US\"\n        },\n        \"links\": {\n          \"related\": \"/languages/l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"users\",\n          \"id\": \"u:user_1\"\n        },\n        \"links\": {\n          \"related\": \"/users/u:user_1\"\n        }\n      }\n    },\n    \"type\": \"team_activity_reports_async_downloads\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5f2c925-384f-4aa6-b5d3-234c25899c4f",
+              "name": "Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"team\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:t:team_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    },\n    {\n      \"code\": \"invalid\",\n      \"detail\": \"Enter a valid `name` consisting of Unicode letters, numbers, underscores, or hyphens\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/name\"\n      },\n      \"status\": \"400\",\n      \"title\": \"Field `name` is invalid\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2f3cf02-a32d-44ae-b01d-cf274e5e1375",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"team\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:t:team_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3ebbce6-351f-4813-8b70-bc66410a7b5e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"team\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:t:team_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": \"string\"\n    },\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 2345\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17055a3f-a876-45a5-b7af-a074bdde2c9b",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"team\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:t:team_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3e0cd16-aa96-41b2-aefc-7c4039a9fbfe",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"team\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:t:team_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    },\n    {\n      \"code\": \"conflict\",\n      \"detail\": \"Value `some_field_value` already exists\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/some_field\"\n      },\n      \"status\": \"409\",\n      \"title\": \"Field `some_field` conflicted\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c06a701e-9c34-4839-a9b7-834f24bfecd5",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_activity_reports_async_downloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"date_from\": \"<date>\",\n      \"date_to\": \"<date>\",\n      \"first_time_edits\": false\n    },\n    \"relationships\": {\n      \"team\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"o:organization_slug:t:team_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"u:user_1\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0120d5b3-7bab-4564-829b-493ecf4db529",
+          "name": "Get team activity report download status",
+          "request": {
+            "name": "Get team activity report download status",
+            "description": {
+              "content": "With this endpoint, you can inquire about the status of an team\nactivity report download job.\n\n- If the value of the 'status' attribute is 'pending' or 'processing', you\n  should check this endpoint again later.\n- If the 'status' is 'failed', the report has failed to be compiled.\n- In case the upload job has been successful, you will receive a \"303 - See\n  Other\" response and you can follow its `Location` to\n  [download the file](#tag/File-Downloads/paths/get) that have been\n  extracted from your file.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team_activity_reports_async_downloads",
+                ":team_activity_reports_async_download_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "team_activity_reports_async_download_id",
+                  "description": "(Required) Format of the team_activity_reports_async_download_id should be\na UUID.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e3ab4cb5-4424-407f-9379-a34b2ee6feb6",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_activity_reports_async_downloads",
+                    ":team_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_activity_reports_async_download_id",
+                      "description": "(Required) Format of the team_activity_reports_async_download_id should be\na UUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"attributes\": {\n      \"status\": \"pending\",\n      \"errors\": [\n        {\n          \"code\": \"parse_error\",\n          \"detail\": \"Could not decode JSON object\"\n        },\n        {\n          \"code\": \"parse_error\",\n          \"detail\": \"Could not decode JSON object\"\n        }\n      ],\n      \"datetime_created\": \"2017-09-22T21:38:31.472Z\",\n      \"datetime_modified\": \"1984-07-23T04:20:58.193Z\"\n    },\n    \"id\": \"4abfc726-6a27-4c33-9d99-e5254c8df748\",\n    \"links\": {\n      \"self\": \"/team_activity_reports_async_downloads/4abfc726-6a27-4c33-9d99-e5254c8df748\"\n    },\n    \"relationships\": {\n      \"team\": {\n        \"data\": {\n          \"type\": \"teams\",\n          \"id\": \"o:organization_slug:t:team_slug\"\n        },\n        \"links\": {\n          \"related\": \"/teams/o:organization_slug:t:team_slug\"\n        }\n      },\n      \"language\": {\n        \"data\": {\n          \"type\": \"languages\",\n          \"id\": \"l:en_US\"\n        },\n        \"links\": {\n          \"related\": \"/languages/l:en_US\"\n        }\n      },\n      \"user\": {\n        \"data\": {\n          \"type\": \"users\",\n          \"id\": \"u:user_1\"\n        },\n        \"links\": {\n          \"related\": \"/users/u:user_1\"\n        }\n      }\n    },\n    \"type\": \"team_activity_reports_async_downloads\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b28ae467-0b62-4766-8f63-ba97af7d68b3",
+              "name": "See other",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_activity_reports_async_downloads",
+                    ":team_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_activity_reports_async_download_id",
+                      "description": "(Required) Format of the team_activity_reports_async_download_id should be\na UUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "See Other",
+              "code": 303,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The location of the file.",
+                  "key": "Location",
+                  "value": "https://storage.svc.transifex.net/files/663a7a83-cb15-4c72-a37d-125dfb8432a6-file?auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZXMiOiJkb3dubG9hZCIsIm1ldGFkYXRhIjpudWxsLCJmaWxlX2lkcyI6IjY2M2E3YTgzLWNiMTUtNGM3Mi1hMzdkLTEyNWRmYjg0MzJhNi1maWxlIiwiZXhwIjoxNTg0NzE3NTkzLCJwcm92aWRlciI6InR4YyJ9.IHgLS4gtL0A6YZd-2zKkrg__geitcvs9DV8LcE8-1io"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b356e54-9445-4fa7-8c01-ad6dd34c26a9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_activity_reports_async_downloads",
+                    ":team_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_activity_reports_async_download_id",
+                      "description": "(Required) Format of the team_activity_reports_async_download_id should be\na UUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    },\n    {\n      \"code\": \"unauthorized\",\n      \"detail\": \"Please verify your credentials\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3933f2f9-b34f-4ae4-8427-ec416a5c9072",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_activity_reports_async_downloads",
+                    ":team_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_activity_reports_async_download_id",
+                      "description": "(Required) Format of the team_activity_reports_async_download_id should be\na UUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": \"string\"\n    },\n    {\n      \"code\": \"forbidden\",\n      \"detail\": \"You do not have permissions to perform this action\",\n      \"status\": \"403\",\n      \"title\": \"Operation not allowed\",\n      \"key_0\": 2345\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "477c06f7-a8c9-4fbe-9e7f-c055c657fb98",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_activity_reports_async_downloads",
+                    ":team_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_activity_reports_async_download_id",
+                      "description": "(Required) Format of the team_activity_reports_async_download_id should be\na UUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    },\n    {\n      \"code\": \"not found\",\n      \"detail\": \"Object not found. It may have been deleted or not been created yet\",\n      \"status\": \"404\",\n      \"title\": \"Object not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cace9827-c7d4-4d33-acab-c3480c341c8b",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_activity_reports_async_downloads",
+                    ":team_activity_reports_async_download_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_activity_reports_async_download_id",
+                      "description": "(Required) Format of the team_activity_reports_async_download_id should be\na UUID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    },\n    {\n      \"code\": \"server error\",\n      \"detail\": \"Something went wrong, please try again\",\n      \"status\": \"500\",\n      \"title\": \"Something went wrong\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://rest.api.transifex.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b9f3b777-e192-4eaf-8fcb-a56ab5e9261c",
+    "name": "Transifex Activity Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "<br/>\n<br/>\n\n# Introduction\n\nThis API is based on **{json:api}**.\n\n{json:api} is a specification that follows shared conventions and standards. This specification enables API discoverability and partial\nself-descriptiveness through conventions. The Json Api specification exposes resources and their relationships representations with\nunique uris and all CRUD operations are performed on those endpoints. With it's simplified approach it assists the API uniformity.\n\nRead more: https://jsonapi.org/\n\nAdditionally, this API is defined using OpenAPI (ex Swagger). This means that you can easily:\n* Generate clients in your preferred: https://swagger.io/tools/swagger-codegen/\n* Download the specification file (see above) and use it in clients like Postman etc\n\n<br />\n<br />\n\n# Pagination\n\nAll list endpoints include pagination to guarantee performant responses. Those endpoints will return `next` and `previous` links in the\nresponse payload (`links` section). The client does not have to construct any pagination specific URLs or headers, just follow those\nlinks.\n\nPage size is fixed to 150 items per page.\n\n<br />\n<br />\n\n# Content Negotiation\n\nThe basic media type for the API is `application/vnd.api+json`. If you want to execute a request that includes data (`POST`, `PATCH`, `DELETE`)\nyou should include this media type in the `Content-Type` header. The only case where a different `Content-Type` header will be accepted is for\nendpoints that can accept file like objects where the media type used should be `multipart/form-data`.\n\nThe base media type this API responds is `application/vnd.api+json`. To retrieve the data in this media type you should include it in the `Accept`\nheader. The only case where the server will return another media type is for endpoint that return file like objects.\nIn this case the media type used should be `*/*` and the server will prioritize the negotiation to the media type dictated from the file.\nNote that `application/vnd.api+json` will be also available for accept header in these cases and will return a JSON serialized representation of the file.\n\nRead more here: https://jsonapi.org/format/#content-negotiation\n\n# File Uploads\n\nThere are three different methods for uploading file content to Transifex:\n* Using Content-Type `application/vnd.api+json` the content must\n    be JSON serializable.\n    - For content that is directly JSON serializable you can dump the content\n    of the file directly and set the `content_encoding` attribute  to `text`.\n    - For any content, even if it's not JSON serializable (eg .xlsx, .idml or .docx file extensions),\n    you can encode the file using the `base64` encoding and set the `content_encoding` attribute to `base64`.\n* Using Content-Type `multipart/form-data` the content can be any raw file, and can\n    be send without further processing.\n\n# Asynchronous Processing\n\nAsynchronous operations are triggered via a POST request. The response status in such cases is 202 Accepted, with a link in the Content-Location header.\nTo check the status of the operation, a client can send a request to the location given earlier.\nAn optional `callback_url` can be provided when the asynchronous operation is triggered. If such url is provided, upon completion\na HTTP POST request is executed containing all information required to identify the specific operation:\n\nExample request:\n```\nPOST callback_url HTTP/1.1\nContent-Type: application/json\n\n{\n  \"data\": {\n    \"type\": resource_strings_async_downloads\",\n    \"id\": \"xxxxxxxxx\",\n    \"attributes\": {\n      \"location\": \"https://rest.api.transifex.com/resource_strings_async_downloads/xxxxxxxxx\",\n      \"status\": \"succeeded\"\n    }\n  }\n}\n```\n\n# Restrictions\n\nThe following Plan based restrictions apply:\n* [Activity Reports](#tag/Activity-Reports) are available to Premium and up\n* [XLIFF export](#tag/Resource-Translations/paths/~1resource_translations_async_downloads/post) is available to Premium and up.\n* [Screenshots](#tag/Context-Screenshots) are available to Premium and up\n\n# Rate Limit\n\nTo maintain optimal performance and availability of the API, we limit the request rate to 500\nrequests/min or 30,000 requests / 5 minutes / IP. Polling endpoints like\n`resource_translations_async_downloads/{resource_translations_async_download_id}` and\n`resource_strings_async_downloads/{resource_strings_async_download_id}` have a rate limit of 1,200 requests/min.\nOnce past the respective limit, requests will be throttled and you will get a 429 Throttled response.\n\n\nExample response:\n```\n{\n  \"errors\": [\n    {\n      \"code\": \"Throttled\",\n      \"detail\": \"Request was throttled. Expected available in 60 seconds.\",\n      \"status\": \"429\",\n      \"title\": \"Throttled\"\n    }\n  ]\n}\n```\n\n# Authentication\n<!-- ReDoc-Inject: <security-definitions> -->\n\n\nContact Support:\n Name: Transifex Support\n Email: support@transifex.com",
+      "type": "text/plain"
+    }
+  }
+}

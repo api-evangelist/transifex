@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Transifex Activity Reports Glossaries API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Glossaries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List glossaries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/glossaries",
+            "params": [
+              {
+                "name": "filter[organization]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by an organization"
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              },
+              {
+                "name": "filter[slug]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the list of glossaries that belong to a single organization."
+        },
+        {
+          "info": {
+            "name": "Get glossary details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/glossaries/:glossary_id",
+            "params": [
+              {
+                "name": "glossary_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:g:glossary_slug`."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the details of a specific glossary."
+        },
+        {
+          "info": {
+            "name": "Create a glossary file download action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/glossaries_async_downloads",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "The response represents the glossary file download job. Check the job's\nstatus and download the file itself once that is completed.\n\nThe downloaded file will be in CSV format containing glossary terms, their\ntranslations, and optionally translation comments.\n\nIf no language relationship is provided, the CSV will include all glossary\nlanguages the authenticated user can view.\n"
+        },
+        {
+          "info": {
+            "name": "Get glossary file download status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/glossaries_async_downloads/:glossaries_async_download_id",
+            "params": [
+              {
+                "name": "glossaries_async_download_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the glossaries_async_download_id should be a UUID."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "With this endpoint, you can inquire about the status of a glossary download job.\n\n- If the value of the 'status' attribute is 'pending' or 'processing', you\n  should check this endpoint again later.\n- If the 'status' is 'failed', the glossary file has failed to be compiled.\n- In case the download job has been successful, you will receive a \"303 - See\n  Other\" response and you can follow its `Location` to\n  [download the file](#tag/File-Downloads/paths/get)\n  that have been extracted from your fi"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

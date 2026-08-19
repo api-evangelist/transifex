@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Transifex Activity Reports Translation Memory API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Translation Memory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a tmx file download action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/tmx_async_downloads",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The response represents the file download job. Check the job's status\nand download the file itself once that is completed.\n"
+        },
+        {
+          "info": {
+            "name": "Get tmx file download status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/tmx_async_downloads/:tmx_async_download_id",
+            "params": [
+              {
+                "name": "tmx_async_download_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the tmx_async_download_id should be a UUID."
+              }
+            ]
+          },
+          "docs": "With this endpoint, you can inquire about the status of an tmx file download job.\n\n- If the value of the 'status' attribute is 'pending' or 'processing', you\n  should check this endpoint again later.\n- If the 'status' is 'failed', the translation has failed to be compiled.\n- In case the upload job has been successful, you will receive a \"303 - See\n  Other\" response and you can follow its `Location` to download the file.\n  The download link will be valid for 30 days.\n"
+        },
+        {
+          "info": {
+            "name": "Create new TMX file upload.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/tmx_async_uploads",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "callback_url",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "content",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "language_id",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "override",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "project_id",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload a new TMX file for a project.\nThe response represents the file upload job. Check the job's status to determine it's completion.\n"
+        },
+        {
+          "info": {
+            "name": "Get a TMX async upload status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/tmx_async_uploads/:tmx_async_upload_id",
+            "params": [
+              {
+                "name": "tmx_async_upload_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of the tmx_async_upload_id should be a UUID."
+              }
+            ]
+          },
+          "docs": "With this endpoint, you can inquire about the status of an tmx file upload job.\n\n- If the value of the 'status' attribute is 'pending' or 'processing', you\n  should check this endpoint again later.\n- If the 'status' is 'failed', the upload has failed to be parsed or validated.\n- In case the upload job has been successful, you will receive a 'succeeded'\n  value for the 'status' attribute.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

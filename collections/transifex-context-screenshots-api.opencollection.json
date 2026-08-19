@@ -1,0 +1,270 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Transifex Activity Reports Context Screenshots API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Context Screenshots",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get project context screenshot map collection.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/context_screenshot_maps",
+            "params": [
+              {
+                "name": "filter[project]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a project"
+              },
+              {
+                "name": "filter[resource]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a resource"
+              },
+              {
+                "name": "filter[resource_string]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[context_screenshot]",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve maps related to a specific context screenshot"
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the context screenshots maps for a project. You can further narrow down the list using the available filters."
+        },
+        {
+          "info": {
+            "name": "Upload a new context screenshot map to a resource_string.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/context_screenshot_maps",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upload screenshot map."
+        },
+        {
+          "info": {
+            "name": "Get context screenshot map.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/context_screenshot_maps/:context_screenshot_map_id",
+            "params": [
+              {
+                "name": "context_screenshot_map_id",
+                "value": "o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:r:resource_slug:m:4abfc726-6a27-4c33-9d99-e5254c8df748",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get details for a context screenshot map."
+        },
+        {
+          "info": {
+            "name": "Delete screenshot map.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://rest.api.transifex.com/context_screenshot_maps/:context_screenshot_map_id",
+            "params": [
+              {
+                "name": "context_screenshot_map_id",
+                "value": "o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748:r:resource_slug:m:4abfc726-6a27-4c33-9d99-e5254c8df748",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a context screenshot map."
+        },
+        {
+          "info": {
+            "name": "Get project context screenshot collection.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/context_screenshots",
+            "params": [
+              {
+                "name": "filter[project]",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by a project"
+              },
+              {
+                "name": "page[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "The cursor used for pagination. The value of the cursor must be retrieved from pagination links included in previous responses; you should not attempt to write them on your own.\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the context screenshots for a project."
+        },
+        {
+          "info": {
+            "name": "Get context screenshot.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rest.api.transifex.com/context_screenshots/:context_screenshot_id",
+            "params": [
+              {
+                "name": "context_screenshot_id",
+                "value": "o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get details for a context screenshot."
+        },
+        {
+          "info": {
+            "name": "Update context screenshot.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://rest.api.transifex.com/context_screenshots/:context_screenshot_id",
+            "params": [
+              {
+                "name": "context_screenshot_id",
+                "value": "o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update details of a context screenshot."
+        },
+        {
+          "info": {
+            "name": "Delete screenshot.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://rest.api.transifex.com/context_screenshots/:context_screenshot_id",
+            "params": [
+              {
+                "name": "context_screenshot_id",
+                "value": "o:organization_slug:p:project_slug:s:4abfc726-6a27-4c33-9d99-e5254c8df748",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a project context screenshot."
+        },
+        {
+          "info": {
+            "name": "Upload a new context screenshot file to a project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rest.api.transifex.com/context_screenshots/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Format of composite id should be `o:organization_slug:p:project_slug`."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "content",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "name",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upload screenshot."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
