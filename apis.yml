@@ -33,6 +33,14 @@ tags:
 - Localization
 - Translation
 - i18n
+- L10n
+- Language
+- Content Management
+- Workflow-Automation
+tags_raw:
+- Localization
+- Translation
+- i18n
 - l10n
 - Language
 - Content Management
@@ -92,6 +100,8 @@ apis:
   humanURL: https://developers.transifex.com/reference/
   baseURL: https://rest.api.transifex.com
   tags:
+  - Glossary
+  tags_raw:
   - Glossaries
   properties:
   - type: OpenAPI
@@ -140,6 +150,8 @@ apis:
   humanURL: https://developers.transifex.com/reference/
   baseURL: https://rest.api.transifex.com
   tags:
+  - Language
+  tags_raw:
   - Languages
   properties:
   - type: OpenAPI
@@ -166,6 +178,8 @@ apis:
   humanURL: https://developers.transifex.com/reference/
   baseURL: https://rest.api.transifex.com
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
@@ -221,6 +235,8 @@ apis:
   humanURL: https://developers.transifex.com/reference/
   baseURL: https://rest.api.transifex.com
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -384,6 +400,8 @@ apis:
   humanURL: https://developers.transifex.com/reference/
   baseURL: https://rest.api.transifex.com
   tags:
+  - Task
+  tags_raw:
   - Tasks
   properties:
   - type: OpenAPI
@@ -432,6 +450,8 @@ apis:
   humanURL: https://developers.transifex.com/reference/
   baseURL: https://rest.api.transifex.com
   tags:
+  - Team
+  tags_raw:
   - Teams
   properties:
   - type: OpenAPI
@@ -480,6 +500,8 @@ apis:
   humanURL: https://developers.transifex.com/reference/
   baseURL: https://rest.api.transifex.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
