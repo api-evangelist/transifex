@@ -1,13 +1,12 @@
 aid: transifex
 name: Transifex
-description: 'Transifex is a cloud-based localization management platform that enables
-  development and content teams to translate software, websites, mobile apps, and
-  digital content at scale. The Transifex REST API v3 provides programmatic access
-  to manage translation projects, resources, language teams, and translation memory.
-  Developers can automate localization workflows, push and pull source strings, trigger
-  translation jobs, and integrate continuous localization into CI/CD pipelines. The
-  platform supports OAuth 2.0 and bearer token authentication, with SDKs available
-  for Python, JavaScript, Swift, Java, and a Go-based CLI tool.
+description: 'Transifex is a cloud-based localization management platform that enables development and
+  content teams to translate software, websites, mobile apps, and digital content at scale. The Transifex
+  REST API v3 provides programmatic access to manage translation projects, resources, language teams,
+  and translation memory. Developers can automate localization workflows, push and pull source strings,
+  trigger translation jobs, and integrate continuous localization into CI/CD pipelines. The platform supports
+  OAuth 2.0 and bearer token authentication, with SDKs available for Python, JavaScript, Swift, Java,
+  and a Go-based CLI tool.
 
   '
 type: Index
@@ -40,7 +39,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/transifex.png
 url: https://raw.githubusercontent.com/api-evangelist/transifex/refs/heads/main/apis.yml
 created: '2026-06-13'
-modified: '2026-06-13'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 tags:
 - Localization
@@ -50,6 +49,7 @@ tags:
 - Language
 - Content Management
 - Workflow-Automation
+- Internationalization
 tags_raw:
 - Localization
 - Translation
@@ -58,6 +58,7 @@ tags_raw:
 - Language
 - Content Management
 - Workflow Automation
+- Internationalization
 apis:
 - aid: transifex:transifex-activity-reports-api
   name: Transifex Activity Reports API
@@ -185,8 +186,7 @@ apis:
     url: graphql/transifex-graphql.md
 - aid: transifex:transifex-organizations-api
   name: Transifex Organizations API
-  description: >-
-    Represents Transifex's organizations. Every user can be a member of one or multiple organizations.
+  description: Represents Transifex's organizations. Every user can be a member of one or multiple organizations.
     Only the organizations the authenticated user belongs to will appear here.
   humanURL: https://developers.transifex.com/reference/
   baseURL: https://rest.api.transifex.com
@@ -213,14 +213,13 @@ apis:
     url: graphql/transifex-graphql.md
 - aid: transifex:transifex-project-webhooks-api
   name: Transifex Project Webhooks API
-  description: >-
-    Project Webhooks lets you specify actions which will trigger some notification event. When that event
-    occurs, Transfex application will make a HTTP request to the URL configured for the webhook (callback_url).
-    The request is done as a HTTP POST request.
+  description: 'Project Webhooks lets you specify actions which will trigger some notification event.
+    When that event occurs, Transfex application will make a HTTP request to the URL configured for the
+    webhook (callback_url). The request is done as a HTTP POST request.
 
     For example a callback url will be triggered whenever a target language of a resource has fully been
     translated, enabling the client to implement a custom workflow to pull translations as soon as they
-    are ready, without having to constantly check Transifex for updates.
+    are ready, without having to constantly check Transifex for updates.'
   humanURL: https://developers.transifex.com/reference/
   baseURL: https://rest.api.transifex.com
   tags:
@@ -270,23 +269,12 @@ apis:
     url: graphql/transifex-graphql.md
 - aid: transifex:transifex-resource-string-comments-api
   name: Transifex Resource String Comments API
-  description: >-
-    Represents comments on resource strings. These are the same comments exposed in the Transifex Editor
-    under the "Comments" tab.
-
-
-    A comment can also be flagged as an **issue**. In this case, some extra functionality is available
-      * You can change an issue's status
-      * You can change it's category
-      * You can assign a priority
-
-    Categories can be configured per organization. To configure the available categories for your organization,
-    contact
-
-    <a href="https://www.transifex.com/contact/">Transifex Support</a>.
-
-
-    For further details & examples, take a look below.
+  description: "Represents comments on resource strings. These are the same comments exposed in the Transifex\
+    \ Editor under the \"Comments\" tab.\n\nA comment can also be flagged as an **issue**. In this case,\
+    \ some extra functionality is available\n  * You can change an issue's status\n  * You can change\
+    \ it's category\n  * You can assign a priority\n\nCategories can be configured per organization. To\
+    \ configure the available categories for your organization, contact\n<a href=\"https://www.transifex.com/contact/\"\
+    >Transifex Support</a>.\n\nFor further details & examples, take a look below."
   humanURL: https://developers.transifex.com/reference/
   baseURL: https://rest.api.transifex.com
   tags:
@@ -358,8 +346,8 @@ apis:
     url: graphql/transifex-graphql.md
 - aid: transifex:transifex-resources-api
   name: Transifex Resources API
-  description: >-
-    Represents a resource that holds source strings. Resources belong to a specific project in Transifex.
+  description: Represents a resource that holds source strings. Resources belong to a specific project
+    in Transifex.
   humanURL: https://developers.transifex.com/reference/
   baseURL: https://rest.api.transifex.com
   tags:
@@ -407,9 +395,8 @@ apis:
     url: graphql/transifex-graphql.md
 - aid: transifex:transifex-tasks-api
   name: Transifex Tasks API
-  description: >-
-    Tasks are work items that can be assigned to users within a project. They help organize and track
-    translation work.
+  description: Tasks are work items that can be assigned to users within a project. They help organize
+    and track translation work.
   humanURL: https://developers.transifex.com/reference/
   baseURL: https://rest.api.transifex.com
   tags:
