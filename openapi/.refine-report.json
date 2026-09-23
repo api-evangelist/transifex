@@ -1,24 +1,7 @@
 {
   "provider": "transifex",
   "sources": [
-    "transifex-activity-reports-api-openapi.yml",
-    "transifex-context-screenshots-api-openapi.yml",
-    "transifex-glossaries-api-openapi.yml",
-    "transifex-i18n-formats-api-openapi.yml",
-    "transifex-languages-api-openapi.yml",
-    "transifex-organizations-api-openapi.yml",
-    "transifex-project-webhooks-api-openapi.yml",
-    "transifex-projects-api-openapi.yml",
-    "transifex-resource-string-comments-api-openapi.yml",
-    "transifex-resource-strings-api-openapi.yml",
-    "transifex-resource-translations-api-openapi.yml",
-    "transifex-resources-api-openapi.yml",
-    "transifex-statistics-api-openapi.yml",
-    "transifex-tasks-api-openapi.yml",
-    "transifex-team-memberships-api-openapi.yml",
-    "transifex-teams-api-openapi.yml",
-    "transifex-translation-memory-api-openapi.yml",
-    "transifex-users-api-openapi.yml"
+    "_original/transifex-transifex-api-openapi.yml"
   ],
   "outputs": [
     "transifex-activity-reports-api-openapi.yml",
@@ -43,6 +26,36 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "transifex-transifex-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "transifex-transifex-api-openapi.yml: declared missing tag: Activity Reports",
+    "transifex-transifex-api-openapi.yml: declared missing tag: Context Screenshots",
+    "transifex-transifex-api-openapi.yml: declared missing tag: Resource Translations",
+    "transifex-transifex-api-openapi.yml: declared missing tag: Statistics",
+    "transifex-transifex-api-openapi.yml: declared missing tag: Team Memberships",
+    "transifex-transifex-api-openapi.yml: declared missing tag: Teams",
+    "transifex-transifex-api-openapi.yml: declared missing tag: Translation Memory",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "transifex-activity-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "transifex-context-screenshots-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "transifex-glossaries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "transifex-i18n-formats-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "transifex-languages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "transifex-organizations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "transifex-project-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "transifex-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "transifex-resource-string-comments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "transifex-resource-strings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "transifex-resource-translations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "transifex-resources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "transifex-statistics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "transifex-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "transifex-team-memberships-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "transifex-teams-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "transifex-translation-memory-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "transifex-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,10 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: support@transifex.com
     name: Transifex Support
-  description: "<br/>\n<br/>\n\n# Introduction\n\nThis API is based on **{json:api}**.\n\n{json:api} is a specification that follows shared conventions and standards. This specification enables API discoverability and partial\nself-descriptiveness through conventions. The Json Api specification exposes resources and their relationships representations with\nunique uris and all CRUD operations are performed on those endpoints. With it's simplified approach it assists the API uniformity.\n\nRead more: https://jsonapi.org/\n\nAdditionally, this API is defined using OpenAPI (ex Swagger). This means that you can easily:\n* Generate clients in your preferred: https://swagger.io/tools/swagger-codegen/\n* Download the specification file (see above) and use it in clients like Postman etc\n\n<br />\n<br />\n\n# Pagination\n\nAll list endpoints include pagination to guarantee performant responses. Those endpoints will return `next` and `previous` links in the\nresponse payload (`links` section). The client does not have to construct any pagination specific URLs or headers, just follow those\nlinks.\n\nPage size is fixed to 150 items per page.\n\n<br />\n<br />\n\n# Content Negotiation\n\nThe basic media type for the API is `application/vnd.api+json`. If you want to execute a request that includes data (`POST`, `PATCH`, `DELETE`)\nyou should include this media type in the `Content-Type` header. The only case where a different `Content-Type` header will be accepted is for\nendpoints that can accept file like objects where the media type used should be `multipart/form-data`.\n\nThe base media type this API responds is `application/vnd.api+json`. To retrieve the data in this media type you should include it in the `Accept`\nheader. The only case where the server will return another media type is for endpoint that return file like objects.\nIn this case the media type used should be `*/*` and the server will prioritize the negotiation to the media type dictated from the file.\nNote that `application/vnd.api+json` will be also available for accept header in these cases and will return a JSON serialized representation of the file.\n\nRead more here: https://jsonapi.org/format/#content-negotiation\n\n# File Uploads\n\nThere are three different methods for uploading file content to Transifex:\n* Using Content-Type `application/vnd.api+json` the content must\n    be JSON serializable.\n    - For content that is directly JSON serializable you can dump the content\n    of the file directly and set the `content_encoding` attribute  to `text`.\n    - For any content, even if it's not JSON serializable (eg .xlsx, .idml or .docx file extensions),\n    you can encode the file using the `base64` encoding and set the `content_encoding` attribute to `base64`.\n* Using Content-Type `multipart/form-data` the content can be any raw file, and can\n    be send without further processing.\n\n# Asynchronous Processing\n\nAsynchronous operations are triggered via a POST request. The response status in such cases is 202 Accepted, with a link in the Content-Location header.\nTo check the status of the operation, a client can send a request to the location given earlier.\nAn optional `callback_url` can be provided when the asynchronous operation is triggered. If such url is provided, upon completion\na HTTP POST request is executed containing all information required to identify the specific operation:\n\nExample request:\n```\nPOST callback_url HTTP/1.1\nContent-Type: application/json\n\n{\n  \"data\": {\n    \"type\": resource_strings_async_downloads\",\n    \"id\": \"xxxxxxxxx\",\n    \"attributes\": {\n      \"location\": \"https://rest.api.transifex.com/resource_strings_async_downloads/xxxxxxxxx\",\n      \"status\": \"succeeded\"\n    }\n  }\n}\n```\n\n# Restrictions\n\nThe following Plan based restrictions apply:\n* [Activity Reports](#tag/Activity-Reports) are available to Premium and up\n* [XLIFF export](#tag/Resource-Translations/paths/~1resource_translations_async_downloads/post) is available to Premium and up.\n* [Screenshots](#tag/Context-Screenshots) are available to Premium and up\n\n# Rate Limit\n\nTo maintain optimal performance and availability of the API, we limit the request rate to 500\nrequests/min or 30,000 requests / 5 minutes / IP. Polling endpoints like\n`resource_translations_async_downloads/{resource_translations_async_download_id}` and\n`resource_strings_async_downloads/{resource_strings_async_download_id}` have a rate limit of 1,200 requests/min.\nOnce past the respective limit, requests will be throttled and you will get a 429 Throttled response.\n\n\nExample response:\n```\n{\n  \"errors\": [\n    {\n      \"code\": \"Throttled\",\n      \"detail\": \"Request was throttled. Expected available in 60 seconds.\",\n      \"status\": \"429\",\n      \"title\": \"Throttled\"\n    }\n  ]\n}\n```\n\n# Authentication\n<!-- ReDoc-Inject: <security-definitions> -->\n"
-  title: Transifex Activity Reports Resources API
+  description: '# Introduction
+
+
+    This API is based on **{json:api}**.'
+  title: Transifex Resources API
   version: '3.0'
   x-logo:
     altText: Transifex logo
@@ -20,9 +23,7 @@ tags:
 paths:
   /resource_async_merges:
     post:
-      description: 'Merge git based branch
-
-        '
+      description: Merge git based branch
       requestBody:
         content:
           application/vnd.api+json:
@@ -45,8 +46,9 @@ paths:
 
                             '
                           format: uri
-                          nullable: true
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                         conflict_resolution:
                           description: Conflict resolution option.
                           enum:
@@ -125,8 +127,9 @@ paths:
                           date_completed:
                             example: XXXX-XX-XXTXX:XX:XXZ
                             format: date-time
-                            nullable: true
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           date_created:
                             example: XXXX-XX-XXTXX:XX:XXZ
                             format: date-time
@@ -435,6 +438,8 @@ paths:
       summary: Create new resources merge
       tags:
       - Resources
+      operationId: postResourceAsyncMerges
+      x-operation-id-source: derived
   /resource_async_merges_{resource_async_merge_id}:
     parameters:
     - description: Format of the resource_async_merge_id should be a UUID.
@@ -446,7 +451,16 @@ paths:
         pattern: ^([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$
         type: string
     get:
-      description: "With this endpoint, you can inquire about the status of a resource merge job.\n\n- If the value of the 'status' attribute is 'pending' or 'processing', you\n  should check this endpoint again later.\n- If the 'status' is 'failed', the merge has failed to complete.\n- In case the upload job has been successful, you will receive a \"200\"\n"
+      description: 'With this endpoint, you can inquire about the status of a resource merge job.
+
+
+        - If the value of the ''status'' attribute is ''pending'' or ''processing'', you
+
+        should check this endpoint again later.
+
+        - If the ''status'' is ''failed'', the merge has failed to complete.
+
+        - In case the upload job has been successful, you will receive a "200"'
       responses:
         '200':
           content:
@@ -469,8 +483,9 @@ paths:
                           date_completed:
                             example: XXXX-XX-XXTXX:XX:XXZ
                             format: date-time
-                            nullable: true
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           date_created:
                             example: XXXX-XX-XXTXX:XX:XXZ
                             format: date-time
@@ -704,6 +719,8 @@ paths:
       summary: Get resource merge status
       tags:
       - Resources
+      operationId: getResourceAsyncMerges{resourceAsyncMergeId}
+      x-operation-id-source: derived
   /resources:
     get:
       description: Get a list of all resources (in a specific project).
@@ -774,12 +791,13 @@ paths:
                               description: Any options that determine how the resource will be parsed and compiled
                               example:
                                 allow_duplicate_strings: true
-                              nullable: true
                               properties:
                                 allow_duplicate_strings:
                                   description: If true, identical strings found in the resource will be parsed as separate strings; otherwise, identical strings will be considered as instances of the same string. Available in "HTML" i18n type resources.
                                   type: boolean
-                              type: object
+                              type:
+                              - object
+                              - 'null'
                             i18n_version:
                               description: File format type version.
                               example: 1
@@ -787,8 +805,9 @@ paths:
                             mp4_url:
                               description: A (public) url to provide an MP4 video file for subtitles translation
                               example: https://some.host.net/some_mp4_url
-                              nullable: true
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                             name:
                               description: Name of the resource
                               example: Resource Name
@@ -796,8 +815,9 @@ paths:
                             ogg_url:
                               description: A (public) url to provide an OGG video file for subtitles translation
                               example: https://some.host.net/some_ogg_url
-                              nullable: true
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                             priority:
                               enum:
                               - normal
@@ -816,8 +836,9 @@ paths:
                             webm_url:
                               description: A (public) url to provide a WEMB video file for subtitles translation
                               example: https://some.host.net/some_webm_url
-                              nullable: true
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                             word_count:
                               description: Number of words in the resource content.
                               example: 0
@@ -825,8 +846,9 @@ paths:
                             youtube_url:
                               description: A (public) YouTube url to provide a video file for subtitles translation
                               example: https://www.youtube.com/
-                              nullable: true
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - slug
                           - name
@@ -945,13 +967,15 @@ paths:
                       next:
                         description: Resource results cursor link.
                         example: /resources?filter[project]=o:organization_slug:p:project_slug&page[cursor]=XXX
-                        nullable: true
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                       previous:
                         description: Resource results cursor link.
                         example: /resources?filter[project]=o:organization_slug:p:project_slug&page[cursor]=XXX
-                        nullable: true
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                       self:
                         description: Resource results cursor link.
                         example: /resources?filter[project]=o:organization_slug:p:project_slug
@@ -1119,6 +1143,8 @@ paths:
       tags:
       - Resources
       x-released: true
+      operationId: getResources
+      x-operation-id-source: derived
     post:
       description: 'Making a POST request to this endpoint creates a resource without content.
 
@@ -1126,11 +1152,9 @@ paths:
 
         resource creation succeeded afterwards. In order to upload content, see the
 
-        [/resource_strings_async_uploads](#tag/Resource-Strings/paths/~1resource_strings_async_uploads/post)
+        /resource_strings_async_uploads
 
-        endpoint.
-
-        '
+        endpoint.'
       requestBody:
         content:
           application/vnd.api+json:
@@ -1161,17 +1185,19 @@ paths:
                           description: Any options that determine how the resource will be parsed and compiled
                           example:
                             allow_duplicate_strings: true
-                          nullable: true
                           properties:
                             allow_duplicate_strings:
                               description: If true, identical strings found in the resource will be parsed as separate strings; otherwise, identical strings will be considered as instances of the same string. Available in "HTML" i18n type resources.
                               type: boolean
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                         mp4_url:
                           description: A (public) url to provide an MP4 video file for subtitles translation
                           example: https://some.host.net/some_mp4_url
-                          nullable: true
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                         name:
                           description: Name of the resource
                           example: Resource Name
@@ -1179,8 +1205,9 @@ paths:
                         ogg_url:
                           description: A (public) url to provide an OGG video file for subtitles translation
                           example: https://some.host.net/some_ogg_url
-                          nullable: true
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                         priority:
                           enum:
                           - normal
@@ -1195,13 +1222,15 @@ paths:
                         webm_url:
                           description: A (public) url to provide a WEMB video file for subtitles translation
                           example: https://some.host.net/some_webm_url
-                          nullable: true
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                         youtube_url:
                           description: A (public) YouTube url to provide a video file for subtitles translation
                           example: https://www.youtube.com/
-                          nullable: true
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                       required:
                       - name
                       type: object
@@ -1212,7 +1241,6 @@ paths:
                         base:
                           additionalProperties: false
                           description: The base `resource` that this `resource` is a branch of.
-                          nullable: true
                           properties:
                             data:
                               additionalProperties: false
@@ -1231,7 +1259,9 @@ paths:
                               - type
                               - id
                               type: object
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                         i18n_format:
                           additionalProperties: false
                           description: The `i18n_format` of the resource to create.
@@ -1333,12 +1363,13 @@ paths:
                             description: Any options that determine how the resource will be parsed and compiled
                             example:
                               allow_duplicate_strings: true
-                            nullable: true
                             properties:
                               allow_duplicate_strings:
                                 description: If true, identical strings found in the resource will be parsed as separate strings; otherwise, identical strings will be considered as instances of the same string. Available in "HTML" i18n type resources.
                                 type: boolean
-                            type: object
+                            type:
+                            - object
+                            - 'null'
                           i18n_version:
                             description: File format type version.
                             example: 1
@@ -1346,8 +1377,9 @@ paths:
                           mp4_url:
                             description: A (public) url to provide an MP4 video file for subtitles translation
                             example: https://some.host.net/some_mp4_url
-                            nullable: true
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           name:
                             description: Name of the resource
                             example: Resource Name
@@ -1355,8 +1387,9 @@ paths:
                           ogg_url:
                             description: A (public) url to provide an OGG video file for subtitles translation
                             example: https://some.host.net/some_ogg_url
-                            nullable: true
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           priority:
                             enum:
                             - normal
@@ -1375,8 +1408,9 @@ paths:
                           webm_url:
                             description: A (public) url to provide a WEMB video file for subtitles translation
                             example: https://some.host.net/some_webm_url
-                            nullable: true
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           word_count:
                             description: Number of words in the resource content.
                             example: 0
@@ -1384,8 +1418,9 @@ paths:
                           youtube_url:
                             description: A (public) YouTube url to provide a video file for subtitles translation
                             example: https://www.youtube.com/
-                            nullable: true
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - slug
                         - name
@@ -1685,6 +1720,8 @@ paths:
       tags:
       - Resources
       x-released: true
+      operationId: postResources
+      x-operation-id-source: derived
   /resources/{resource_id}:
     parameters:
     - description: Format of composite id should be `o:organization_slug:p:project_slug:r:resource_slug`.
@@ -1810,6 +1847,8 @@ paths:
       tags:
       - Resources
       x-released: true
+      operationId: deleteResourcesByResourceId
+      x-operation-id-source: derived
     get:
       description: Get details of a specific resource.
       responses:
@@ -1849,12 +1888,13 @@ paths:
                             description: Any options that determine how the resource will be parsed and compiled
                             example:
                               allow_duplicate_strings: true
-                            nullable: true
                             properties:
                               allow_duplicate_strings:
                                 description: If true, identical strings found in the resource will be parsed as separate strings; otherwise, identical strings will be considered as instances of the same string. Available in "HTML" i18n type resources.
                                 type: boolean
-                            type: object
+                            type:
+                            - object
+                            - 'null'
                           i18n_version:
                             description: File format type version.
                             example: 1
@@ -1862,8 +1902,9 @@ paths:
                           mp4_url:
                             description: A (public) url to provide an MP4 video file for subtitles translation
                             example: https://some.host.net/some_mp4_url
-                            nullable: true
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           name:
                             description: Name of the resource
                             example: Resource Name
@@ -1871,8 +1912,9 @@ paths:
                           ogg_url:
                             description: A (public) url to provide an OGG video file for subtitles translation
                             example: https://some.host.net/some_ogg_url
-                            nullable: true
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           priority:
                             enum:
                             - normal
@@ -1891,8 +1933,9 @@ paths:
                           webm_url:
                             description: A (public) url to provide a WEMB video file for subtitles translation
                             example: https://some.host.net/some_webm_url
-                            nullable: true
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           word_count:
                             description: Number of words in the resource content.
                             example: 0
@@ -1900,8 +1943,9 @@ paths:
                           youtube_url:
                             description: A (public) YouTube url to provide a video file for subtitles translation
                             example: https://www.youtube.com/
-                            nullable: true
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - slug
                         - name
@@ -2125,6 +2169,8 @@ paths:
       tags:
       - Resources
       x-released: true
+      operationId: getResourcesByResourceId
+      x-operation-id-source: derived
     patch:
       description: Update details of a resource.
       requestBody:
@@ -2157,8 +2203,9 @@ paths:
                         mp4_url:
                           description: A (public) url to provide an MP4 video file for subtitles translation
                           example: https://some.host.net/some_mp4_url
-                          nullable: true
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                         name:
                           description: Name of the resource
                           example: Resource Name
@@ -2166,8 +2213,9 @@ paths:
                         ogg_url:
                           description: A (public) url to provide an OGG video file for subtitles translation
                           example: https://some.host.net/some_ogg_url
-                          nullable: true
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                         priority:
                           enum:
                           - normal
@@ -2178,13 +2226,15 @@ paths:
                         webm_url:
                           description: A (public) url to provide a WEMB video file for subtitles translation
                           example: https://some.host.net/some_webm_url
-                          nullable: true
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                         youtube_url:
                           description: A (public) YouTube url to provide a video file for subtitles translation
                           example: https://www.youtube.com/
-                          nullable: true
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                       type: object
                     id:
                       description: Resource identifier.
@@ -2198,7 +2248,6 @@ paths:
                         base:
                           additionalProperties: false
                           description: The base `resource` that this `resource` is a branch of.
-                          nullable: true
                           properties:
                             data:
                               additionalProperties: false
@@ -2217,7 +2266,9 @@ paths:
                               - type
                               - id
                               type: object
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                       type: object
                     type:
                       enum:
@@ -2265,12 +2316,13 @@ paths:
                         description: Any options that determine how the resource will be parsed and compiled
                         example:
                           allow_duplicate_strings: true
-                        nullable: true
                         properties:
                           allow_duplicate_strings:
                             description: If true, identical strings found in the resource will be parsed as separate strings; otherwise, identical strings will be considered as instances of the same string. Available in "HTML" i18n type resources.
                             type: boolean
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                       i18n_version:
                         description: File format type version.
                         example: 1
@@ -2278,8 +2330,9 @@ paths:
                       mp4_url:
                         description: A (public) url to provide an MP4 video file for subtitles translation
                         example: https://some.host.net/some_mp4_url
-                        nullable: true
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                       name:
                         description: Name of the resource
                         example: Resource Name
@@ -2287,8 +2340,9 @@ paths:
                       ogg_url:
                         description: A (public) url to provide an OGG video file for subtitles translation
                         example: https://some.host.net/some_ogg_url
-                        nullable: true
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                       priority:
                         enum:
                         - normal
@@ -2307,8 +2361,9 @@ paths:
                       webm_url:
                         description: A (public) url to provide a WEMB video file for subtitles translation
                         example: https://some.host.net/some_webm_url
-                        nullable: true
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                       word_count:
                         description: Number of words in the resource content.
                         example: 0
@@ -2316,8 +2371,9 @@ paths:
                       youtube_url:
                         description: A (public) YouTube url to provide a video file for subtitles translation
                         example: https://www.youtube.com/
-                        nullable: true
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                     required:
                     - slug
                     - name
@@ -2607,6 +2663,8 @@ paths:
       tags:
       - Resources
       x-released: true
+      operationId: patchResourcesByResourceId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

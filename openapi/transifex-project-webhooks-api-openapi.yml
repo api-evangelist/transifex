@@ -1,10 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: support@transifex.com
     name: Transifex Support
-  description: "<br/>\n<br/>\n\n# Introduction\n\nThis API is based on **{json:api}**.\n\n{json:api} is a specification that follows shared conventions and standards. This specification enables API discoverability and partial\nself-descriptiveness through conventions. The Json Api specification exposes resources and their relationships representations with\nunique uris and all CRUD operations are performed on those endpoints. With it's simplified approach it assists the API uniformity.\n\nRead more: https://jsonapi.org/\n\nAdditionally, this API is defined using OpenAPI (ex Swagger). This means that you can easily:\n* Generate clients in your preferred: https://swagger.io/tools/swagger-codegen/\n* Download the specification file (see above) and use it in clients like Postman etc\n\n<br />\n<br />\n\n# Pagination\n\nAll list endpoints include pagination to guarantee performant responses. Those endpoints will return `next` and `previous` links in the\nresponse payload (`links` section). The client does not have to construct any pagination specific URLs or headers, just follow those\nlinks.\n\nPage size is fixed to 150 items per page.\n\n<br />\n<br />\n\n# Content Negotiation\n\nThe basic media type for the API is `application/vnd.api+json`. If you want to execute a request that includes data (`POST`, `PATCH`, `DELETE`)\nyou should include this media type in the `Content-Type` header. The only case where a different `Content-Type` header will be accepted is for\nendpoints that can accept file like objects where the media type used should be `multipart/form-data`.\n\nThe base media type this API responds is `application/vnd.api+json`. To retrieve the data in this media type you should include it in the `Accept`\nheader. The only case where the server will return another media type is for endpoint that return file like objects.\nIn this case the media type used should be `*/*` and the server will prioritize the negotiation to the media type dictated from the file.\nNote that `application/vnd.api+json` will be also available for accept header in these cases and will return a JSON serialized representation of the file.\n\nRead more here: https://jsonapi.org/format/#content-negotiation\n\n# File Uploads\n\nThere are three different methods for uploading file content to Transifex:\n* Using Content-Type `application/vnd.api+json` the content must\n    be JSON serializable.\n    - For content that is directly JSON serializable you can dump the content\n    of the file directly and set the `content_encoding` attribute  to `text`.\n    - For any content, even if it's not JSON serializable (eg .xlsx, .idml or .docx file extensions),\n    you can encode the file using the `base64` encoding and set the `content_encoding` attribute to `base64`.\n* Using Content-Type `multipart/form-data` the content can be any raw file, and can\n    be send without further processing.\n\n# Asynchronous Processing\n\nAsynchronous operations are triggered via a POST request. The response status in such cases is 202 Accepted, with a link in the Content-Location header.\nTo check the status of the operation, a client can send a request to the location given earlier.\nAn optional `callback_url` can be provided when the asynchronous operation is triggered. If such url is provided, upon completion\na HTTP POST request is executed containing all information required to identify the specific operation:\n\nExample request:\n```\nPOST callback_url HTTP/1.1\nContent-Type: application/json\n\n{\n  \"data\": {\n    \"type\": resource_strings_async_downloads\",\n    \"id\": \"xxxxxxxxx\",\n    \"attributes\": {\n      \"location\": \"https://rest.api.transifex.com/resource_strings_async_downloads/xxxxxxxxx\",\n      \"status\": \"succeeded\"\n    }\n  }\n}\n```\n\n# Restrictions\n\nThe following Plan based restrictions apply:\n* [Activity Reports](#tag/Activity-Reports) are available to Premium and up\n* [XLIFF export](#tag/Resource-Translations/paths/~1resource_translations_async_downloads/post) is available to Premium and up.\n* [Screenshots](#tag/Context-Screenshots) are available to Premium and up\n\n# Rate Limit\n\nTo maintain optimal performance and availability of the API, we limit the request rate to 500\nrequests/min or 30,000 requests / 5 minutes / IP. Polling endpoints like\n`resource_translations_async_downloads/{resource_translations_async_download_id}` and\n`resource_strings_async_downloads/{resource_strings_async_download_id}` have a rate limit of 1,200 requests/min.\nOnce past the respective limit, requests will be throttled and you will get a 429 Throttled response.\n\n\nExample response:\n```\n{\n  \"errors\": [\n    {\n      \"code\": \"Throttled\",\n      \"detail\": \"Request was throttled. Expected available in 60 seconds.\",\n      \"status\": \"429\",\n      \"title\": \"Throttled\"\n    }\n  ]\n}\n```\n\n# Authentication\n<!-- ReDoc-Inject: <security-definitions> -->\n"
-  title: Transifex Activity Reports Project Webhooks API
+  description: '# Introduction
+
+
+    This API is based on **{json:api}**.'
+  title: Transifex Project Webhooks API
   version: '3.0'
   x-logo:
     altText: Transifex logo
@@ -15,11 +18,7 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- description: 'Project Webhooks lets you specify actions which will trigger some notification event. When that event occurs, Transfex application will make a HTTP request to the URL configured for the webhook (callback_url). The request is done as a HTTP POST request.
-
-    For example a callback url will be triggered whenever a target language of a resource has fully been translated, enabling the client to implement a custom workflow to pull translations as soon as they are ready, without having to constantly check Transifex for updates.
-
-    '
+- description: Project Webhooks lets you specify actions which will trigger some notification event.
   name: Project Webhooks
 paths:
   /project_webhooks:
@@ -76,13 +75,15 @@ paths:
                             datetime_created:
                               example: XXXX-XX-XXTXX:XX:XXZ
                               format: date-time
-                              nullable: true
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                             datetime_modified:
                               example: XXXX-XX-XXTXX:XX:XXZ
                               format: date-time
-                              nullable: true
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                             event_type:
                               description: 'The event that when occurred will trigger the webhook.
 
@@ -216,13 +217,15 @@ paths:
                       next:
                         description: Project Webhook cursor link.
                         example: /project_webhooks/?filter[organization]=o:organization_slug&filter[organization]=o:organization_slug:p:project_slug&page[cursor]=4abfc7266a274c339d99e5254c8df748
-                        nullable: true
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                       previous:
                         description: Project Webhook cursor link.
                         example: /project_webhooks/?filter[organization]=o:organization_slug&filter[organization]=o:organization_slug:p:project_slug&page[cursor]=4abfc7266a274c339d99e5254c8df748
-                        nullable: true
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                       self:
                         description: Project Webhook details link.
                         example: /project_webhooks/?filter[organization]=o:organization_slug&filter[organization]=o:organization_slug:p:project_slug
@@ -342,10 +345,12 @@ paths:
           description: Internal Error
       security:
       - bearerAuth: []
-      summary: List project webhooks.
+      summary: List project webhooks
       tags:
       - Project Webhooks
       x-released: true
+      operationId: getProjectWebhooks
+      x-operation-id-source: derived
     post:
       description: Create a new webhook. This needs to be associated with a project.
       requestBody:
@@ -487,13 +492,15 @@ paths:
                           datetime_created:
                             example: XXXX-XX-XXTXX:XX:XXZ
                             format: date-time
-                            nullable: true
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           datetime_modified:
                             example: XXXX-XX-XXTXX:XX:XXZ
                             format: date-time
-                            nullable: true
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           event_type:
                             description: 'The event that when occurred will trigger the webhook.
 
@@ -776,10 +783,12 @@ paths:
           description: Internal Error
       security:
       - bearerAuth: []
-      summary: Create project webhook.
+      summary: Create project webhook
       tags:
       - Project Webhooks
       x-released: true
+      operationId: postProjectWebhooks
+      x-operation-id-source: derived
   /project_webhooks/{webhook_id}:
     parameters:
     - description: Format of composite id should be `o:organization_slug:p:project_slug:w:4abfc726-6a27-4c33-9d99-e5254c8df748.
@@ -876,10 +885,12 @@ paths:
           description: Internal Error
       security:
       - bearerAuth: []
-      summary: Delete project webhook.
+      summary: Delete project webhook
       tags:
       - Project Webhooks
       x-released: true
+      operationId: deleteProjectWebhooksByWebhookId
+      x-operation-id-source: derived
     get:
       description: Get the details of the project webhook specified by the required path parameter `webhook_id`.
       responses:
@@ -905,13 +916,15 @@ paths:
                           datetime_created:
                             example: XXXX-XX-XXTXX:XX:XXZ
                             format: date-time
-                            nullable: true
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           datetime_modified:
                             example: XXXX-XX-XXTXX:XX:XXZ
                             format: date-time
-                            nullable: true
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           event_type:
                             description: 'The event that when occurred will trigger the webhook.
 
@@ -1120,10 +1133,12 @@ paths:
           description: Internal Error
       security:
       - bearerAuth: []
-      summary: Get project webhooks details.
+      summary: Get project webhooks details
       tags:
       - Project Webhooks
       x-released: true
+      operationId: getProjectWebhooksByWebhookId
+      x-operation-id-source: derived
     patch:
       description: update a project webhook. You can for example modify its status.
       requestBody:
@@ -1237,13 +1252,15 @@ paths:
                           datetime_created:
                             example: XXXX-XX-XXTXX:XX:XXZ
                             format: date-time
-                            nullable: true
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           datetime_modified:
                             example: XXXX-XX-XXTXX:XX:XXZ
                             format: date-time
-                            nullable: true
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           event_type:
                             description: 'The event that when occurred will trigger the webhook.
 
@@ -1521,10 +1538,12 @@ paths:
           description: Internal Error
       security:
       - bearerAuth: []
-      summary: Update project webhook.
+      summary: Update project webhook
       tags:
       - Project Webhooks
       x-released: true
+      operationId: patchProjectWebhooksByWebhookId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:
