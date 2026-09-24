@@ -48,7 +48,7 @@ tags:
 - L10n
 - Language
 - Content Management
-- Workflow-Automation
+- Workflow Automation
 - Internationalization
 tags_raw:
 - Localization
@@ -59,6 +59,7 @@ tags_raw:
 - Content Management
 - Workflow Automation
 - Internationalization
+- Workflow-Automation
 apis:
 - aid: transifex:transifex-activity-reports-api
   name: Transifex Activity Reports API
@@ -82,8 +83,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 - aid: transifex:transifex-context-screenshots-api
   name: Transifex Context Screenshots API
   description: The Context Screenshots API from Transifex — 5 operation(s) for context screenshots.
@@ -106,8 +105,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 - aid: transifex:transifex-glossaries-api
   name: Transifex Glossaries API
   description: Glossaries
@@ -132,8 +129,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 - aid: transifex:transifex-i18n-formats-api
   name: Transifex I18n Formats API
   description: Internationalization formats supported by Transifex.
@@ -156,8 +151,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 - aid: transifex:transifex-languages-api
   name: Transifex Languages API
   description: Languages objects represent each available language in Transifex.
@@ -182,8 +175,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 - aid: transifex:transifex-organizations-api
   name: Transifex Organizations API
   description: Represents Transifex's organizations. Every user can be a member of one or multiple organizations.
@@ -209,8 +200,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 - aid: transifex:transifex-project-webhooks-api
   name: Transifex Project Webhooks API
   description: 'Project Webhooks lets you specify actions which will trigger some notification event.
@@ -239,8 +228,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 - aid: transifex:transifex-projects-api
   name: Transifex Projects API
   description: Represents projects, as used within Transifex. Each project belongs to an organization.
@@ -265,8 +252,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 - aid: transifex:transifex-resource-string-comments-api
   name: Transifex Resource String Comments API
   description: "Represents comments on resource strings. These are the same comments exposed in the Transifex\
@@ -294,8 +279,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 - aid: transifex:transifex-resource-strings-api
   name: Transifex Resource Strings API
   description: Resource Strings
@@ -318,8 +301,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 - aid: transifex:transifex-resource-translations-api
   name: Transifex Resource Translations API
   description: The Resource Translations API from Transifex — 7 operation(s) for resource translations.
@@ -342,8 +323,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 - aid: transifex:transifex-resources-api
   name: Transifex Resources API
   description: Represents a resource that holds source strings. Resources belong to a specific project
@@ -367,8 +346,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 - aid: transifex:transifex-statistics-api
   name: Transifex Statistics API
   description: The Statistics API from Transifex — 2 operation(s) for statistics.
@@ -391,8 +368,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 - aid: transifex:transifex-tasks-api
   name: Transifex Tasks API
   description: Tasks are work items that can be assigned to users within a project. They help organize
@@ -418,8 +393,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 - aid: transifex:transifex-team-memberships-api
   name: Transifex Team Memberships API
   description: The Team Memberships API from Transifex — 2 operation(s) for team memberships.
@@ -442,8 +415,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 - aid: transifex:transifex-teams-api
   name: Transifex Teams API
   description: The Teams API from Transifex — 4 operation(s) for teams.
@@ -468,8 +439,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 - aid: transifex:transifex-translation-memory-api
   name: Transifex Translation Memory API
   description: The Translation Memory API from Transifex — 4 operation(s) for translation memory.
@@ -492,8 +461,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 - aid: transifex:transifex-users-api
   name: Transifex Users API
   description: Represents Transifex's users.
@@ -518,8 +485,6 @@ apis:
     url: https://developers.transifex.com/reference/api-authentication
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
-  - type: GraphQL
-    url: graphql/transifex-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/transifex-agentic-access.yml
