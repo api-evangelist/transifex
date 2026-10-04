@@ -486,6 +486,9 @@ apis:
   - type: RateLimits
     url: https://developers.transifex.com/reference/rate-limit
 common:
+- type: CapabilityMap
+  url: capabilities/transifex-capability-edges.yml
+  name: Transifex Business Capability Map
 - type: AgenticAccess
   url: agentic-access/transifex-agentic-access.yml
 - type: DomainSecurity
