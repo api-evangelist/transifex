@@ -79,3 +79,16 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: transifex-slack-own
+  label: Slack (own)
+  partner: slack
+  partner_name: Slack (own)
+  category: Slack app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://slack.com/marketplace/AH36R4126-transifex
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
