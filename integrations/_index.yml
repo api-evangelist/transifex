@@ -92,3 +92,143 @@
     builder: Pipedream repo (component)
   status: not-a-workflow
   arazzo: null
+- slug: transifex-contentful
+  label: Contentful
+  partner: contentful
+  partner_name: Contentful
+  category: Transifex integration
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  evidence: https://www.transifex.com/integrations/contentful-integration/
+  source: edge
+  relationship: platform-app
+  contract_reference:
+    register: Transifex integrations (transifex.com/integrations + llms.txt)
+    spec_file: null
+    role: transifex-app-builder-unstated
+    registered_name: null
+    matched_domain: contentful.com
+    matched_by: domain+name-among-holders
+    listings: 1
+    sample_apps:
+    - Contentful
+    signal_note: 'the listing does not state who built the connector: direction unknown, kept out of position shares'
+    detected_by: sweep-localization.py
+    detected: '2026-10-20'
+    identity_source: wikidata Q18348837 'Contentful' P856 https://www.contentful.com (wikidata P856, labelled provenance
+      step; Kin 2026-10-15 decision 1)
+  status: not-a-workflow
+  arazzo: null
+- slug: transifex-figma-plugin
+  label: Figma Plugin
+  partner: figma
+  partner_name: Figma Plugin
+  category: Transifex integration
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  evidence: https://www.transifex.com/integrations/figma/
+  source: edge
+  relationship: platform-app
+  contract_reference:
+    register: Transifex integrations (transifex.com/integrations + llms.txt)
+    spec_file: null
+    role: transifex-app-builder-unstated
+    registered_name: null
+    matched_domain: figma.com
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Figma Plugin
+    signal_note: 'the listing does not state who built the connector: direction unknown, kept out of position shares'
+    detected_by: sweep-localization.py
+    detected: '2026-10-20'
+    identity_source: wikidata Q96186334 'Figma' P856 https://www.figma.com (wikidata P856, labelled provenance step;
+      Kin 2026-10-15 decision 1)
+  status: not-a-workflow
+  arazzo: null
+- slug: transifex-sketch-plugin
+  label: Sketch Plugin
+  partner: sketch
+  partner_name: Sketch Plugin
+  category: Transifex integration
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  evidence: https://www.transifex.com/integrations/sketch/
+  source: edge
+  relationship: platform-app
+  contract_reference:
+    register: Transifex integrations (transifex.com/integrations + llms.txt)
+    spec_file: null
+    role: transifex-app-builder-unstated
+    registered_name: null
+    matched_domain: sketch.com
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Sketch Plugin
+    signal_note: 'the listing does not state who built the connector: direction unknown, kept out of position shares'
+    detected_by: sweep-localization.py
+    detected: '2026-10-20'
+    identity_source: wikidata Q22808097 'Sketch' P856 https://www.sketch.com (wikidata P856, labelled provenance
+      step; Kin 2026-10-15 decision 1)
+  status: not-a-workflow
+  arazzo: null
+- slug: transifex-webflow
+  label: Webflow
+  partner: webflow
+  partner_name: Webflow
+  category: Transifex integration
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  evidence: https://www.transifex.com/integrations/webflow/
+  source: edge
+  relationship: platform-app
+  contract_reference:
+    register: Transifex integrations (transifex.com/integrations + llms.txt)
+    spec_file: null
+    role: transifex-app-builder-unstated
+    registered_name: null
+    matched_domain: webflow.com
+    matched_by: domain+name-among-holders
+    listings: 1
+    sample_apps:
+    - Webflow
+    signal_note: 'the listing does not state who built the connector: direction unknown, kept out of position shares'
+    detected_by: sweep-localization.py
+    detected: '2026-10-20'
+    identity_source: wikidata Q20160951 'Webflow' P856 https://webflow.com (wikidata P856, labelled provenance step;
+      Kin 2026-10-15 decision 1)
+  status: not-a-workflow
+  arazzo: null
+- slug: transifex-wordpress
+  label: WordPress
+  partner: wordpress
+  partner_name: WordPress
+  category: Transifex integration
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  evidence: https://www.transifex.com/integrations/wordpress/
+  source: edge
+  relationship: platform-app
+  contract_reference:
+    register: Transifex integrations (transifex.com/integrations + llms.txt)
+    spec_file: null
+    role: transifex-app-builder-unstated
+    registered_name: null
+    matched_domain: wordpress.org
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - WordPress
+    signal_note: 'the listing does not state who built the connector: direction unknown, kept out of position shares'
+    detected_by: sweep-localization.py
+    detected: '2026-10-20'
+    identity_source: wikidata Q13166 'WordPress' P856 https://wordpress.org (wikidata P856, labelled provenance
+      step; Kin 2026-10-15 decision 1)
+  status: not-a-workflow
+  arazzo: null
