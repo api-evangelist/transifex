@@ -1,55 +1,5 @@
 generated: '2026-10-15'
 edges:
-- partner_name: Contentful (own)
-  partner: contentful
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://www.contentful.com/marketplace/transifex/
-  mirror_of: contentful/integrations/contentful-integration-edges.yml
-  apps:
-  - Transifex
-  listing_count: 1
-  detected: '2026-10-15'
-  detected_by: mirror-platform-listings.py
-- partner_name: Sanity (own)
-  partner: sanity
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://www.sanity.io/technology-partners/transifex
-  mirror_of: sanity/integrations/sanity-integration-edges.yml
-  apps:
-  - Transifex
-  listing_count: 1
-  detected: '2026-10-15'
-  detected_by: mirror-platform-listings.py
-  category: Sanity technology partner
-- partner_name: Slack (own)
-  partner: slack
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://slack.com/marketplace/AH36R4126-transifex
-  mirror_of: slack/integrations/slack-integration-edges.yml
-  apps:
-  - Transifex
-  listing_count: 1
-  detected: '2026-10-18'
-  detected_by: mirror-platform-listings.py
-  category: Slack app
 - partner_name: Zapier
   partner: zapier
   partner_match: aggregator
@@ -269,6 +219,73 @@ edges:
       Kin 2026-10-15 decision 1)
   detected_by: sweep-localization.py
   detected: '2026-10-20'
+- partner_name: Contentful (own)
+  partner: contentful
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.contentful.com/marketplace/transifex/
+  mirror_of: contentful/integrations/contentful-integration-edges.yml
+  apps:
+  - Transifex
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+- partner_name: Sanity (own)
+  partner: sanity
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.sanity.io/technology-partners/transifex
+  mirror_of: sanity/integrations/sanity-integration-edges.yml
+  apps:
+  - Transifex
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: Sanity technology partner
+- partner_name: Slack (own)
+  partner: slack
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://slack.com/marketplace/AH36R4126-transifex
+  mirror_of: slack/integrations/slack-integration-edges.yml
+  apps:
+  - Transifex
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Slack app
+- partner_name: Atlassian (own)
+  partner: atlassian
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.atlassian.com/vendors/1217027/transifex
+  mirror_of: atlassian/integrations/atlassian-integration-edges.yml
+  apps:
+  - Transifex Integration for Bitbucket
+  listing_count: 1
+  detected: '2026-10-21'
+  detected_by: mirror-platform-listings.py
+  category: Workflow
 method: searched
 checked:
 - contentful/integrations/contentful-integration-edges.yml
@@ -281,6 +298,7 @@ checked:
 - https://zapier.com/api/v4/apps/
 - sanity/integrations/sanity-integration-edges.yml
 - slack/integrations/slack-integration-edges.yml
+- atlassian/integrations/atlassian-integration-edges.yml
 source:
 - https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
 - https://zapier.com/api/v4/apps/
